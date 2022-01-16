@@ -17,8 +17,8 @@ class CreateWarehousesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('lga');
-            $table->string('state');
+            $table->foreignId('lga_id');
+            $table->foreignId('state_id');
             $table->string('zipcode')->nullable();
             $table->string('street')->nullable();
             $table->string('longitude')->nullable();

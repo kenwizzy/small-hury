@@ -9,9 +9,21 @@ class Warehouse extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['created_at', 'updated_at'];
+
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function lga()
+    {
+        return $this->belongsTo(Lga::class);
     }
 
     public function products()

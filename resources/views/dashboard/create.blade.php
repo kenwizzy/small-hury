@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
- @section('content')
+@section('content')
 
 
 <div class="content-body">
@@ -8,27 +8,30 @@
             <div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-style1 mg-b-10">
-                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Add Product</li>
                     </ol>
                 </nav>
                 <h4 class="mg-b-0 tx-spacing--1">Create New Product</h4>
             </div>
 
-            {{-- <div class="d-md-block">
-                <a href="" class="btn btn-primary"><i class="fas fa-users"></i> Admin List</a>
-            </div> --}}
+            @if (session('success'))
+            @section('script')
+            <script>
+                Notiflix.Notify.Success('{{ session("success") }}', {
+                    timeout: 4000,
+                }, );
+            </script>
+            @endsection
+            @endif
         </div>
-
-        {{-- @include('layouts.partials._messages') --}}
-
         <div class="row row-xs">
             <div class="col-lg-12 col-xl-12">
                 <form method="POST" action="{{route('create_product')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-12">
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="product_name">Product Name</label>
                                 <input type="text" class="form-control @error('product_name') is-invalid @enderror" id="product_name" name="product_name" value="{{ old('product_name') }}" autocomplete="off">
                                 @error('product_name')
@@ -38,9 +41,19 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
+                                <label for="real_price">Internal Reference Number</label>
+                                <input type="text" class="form-control @error('int_ref') is-invalid @enderror" id="int_ref" name="int_ref">
+                                @error('int_ref')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-3">
                                 <label for="last_name">Original Price</label>
-                                <input type="number" class="form-control @error('original_price') is-invalid @enderror" id="original_price" name="original_price" value="{{ old('original_price') }}" autocomplete="off">
+                                <input type="number" class="form-control @error('original_price') is-invalid @enderror" id="original_price" name="original_price" value="{{ old('original_price') }}">
                                 @error('original_price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -48,9 +61,9 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="real_price">Real Price</label>
-                                <input type="number" class="form-control @error('real_price') is-invalid @enderror" id="real_price" name="real_price" value="{{ old('real_price') }}" autocomplete="off">
+                                <input type="number" class="form-control @error('real_price') is-invalid @enderror" id="real_price" name="real_price" readonly>
                                 @error('real_price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -58,8 +71,58 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="form-row">
                             <div class="form-group col-md-4">
+                                <label for="on_sale">Apply Discount</label>
+                                <select class="custom-select @error('discount') is-invalid @enderror" id="disc">
+                                    <option>Select Option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                                @error('discount')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="on_sale">Select Discount</label>
+                                <select class="custom-select @error('discount') is-invalid @enderror" id="discount">
+                                    <option>Select Discount</option>
+                                    @foreach ($discounts as $dis)
+                                    <option value="{{$dis->value}}" {{old('discount') == $dis->id ? 'selected' : ''}}> {{$dis->value}}%</option>
+                                    @endforeach
+                                </select>
+                                @error('discount')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="on_sale">Warehouse</label>
+                                <select class="custom-select @error('store') is-invalid @enderror" id="store" name="store">
+                                    <option>Select Warehouse</option>
+                                    @if($warehouses->count() > 0)
+                                    <option value="all">All Warehouses</option>
+
+                                    @foreach ($warehouses as $store)
+                                    <option value="{{$store->id}}">{{$store->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                                @error('store')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
                                 <label for="inputEmail4">Default Image</label>
                                 <input type="file" class="form-control @error('default_image') is-invalid @enderror" id="default_image" name="default_image" value="{{ old('default_image') }}" autocomplete="off">
                                 @error('default_image')
@@ -69,60 +132,45 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-4">
-                                <label for="inputEmail4">Secondary Images</label>
-                                <input type="file" class="form-control @error('secondary_image') is-invalid @enderror" id="secondary_image" name="" value="{{ old('secondary_image') }}" autocomplete="off">
-                                @error('secondary_image')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label for="middle_name">Select Category</label>
-                                <select class="form-control" name="product_category" autocomplete="off">
-                                   <option value="">Select Category</option>
-                                   @foreach ($categories as $cat)
-                        <option value="{{$cat->id}}" {{old('cat_id') == $cat->id ? 'selected' : ''}}> {{Str::title($cat->name)}}</option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                            {{-- <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="phone_number">Quantity</label>
-                                <input type="number" maxlength="11" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" name="phone_number" value="{{ old('phone_number') }}" autocomplete="off">
-                                @error('phone_number')
+                                <input type="number" maxlength="11" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{ old('quantity') }}" autocomplete="off">
+                                @error('quantity')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div> --}}
-                            {{-- <div class="form-group col-md-4">
-                                <label for="role_id">Availability</label>
-                                <select class="custom-select @error('role_id') is-invalid @enderror" id="designation" name="role_id">
-                                    <option selected value="0">In Stock</option>
-                                    <option selected value="0">Out of Stock</option>
-                                    @foreach ($roles as $role)
-                                    <option value="{{$role->id}}" {{old('role_id') == $role->id ? 'selected' : ''}}> {{Str::title($role->name)}}</option>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="middle_name">Select Category</label>
+                                <select class="form-control" id="cat_id" name="product_category" autocomplete="off">
+                                    <option value="">Select Category</option>
+                                    @foreach ($categories as $cat)
+                                    <option value="{{$cat->id}}" {{old('cat_id') == $cat->id ? 'selected' : ''}}> {{Str::title($cat->name)}}</option>
                                     @endforeach
 
                                 </select>
-                                @error('role_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div> --}}
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="on_sale">On Sale</label>
-                                <select class="custom-select @error('on_sales') is-invalid @enderror" id="on_sale" name="on_sales">
-                                    <option value="1">Yes</option>
-                                    <option value="0">No</option>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="middle_name">Select Sub Category</label>
+                                <select class="form-control"id="subcat_id" name="sub_category" autocomplete="off">
+                                    <option value="">Select Sub Category</option>
                                 </select>
-                                @error('on_sales')
+                            </div>
+
+                        </div>
+                        <div class="form-row default">
+                            <div class="form-group col-md-4">
+                                <label for="on_sale">Attribute</label>
+                                <select class="custom-select @error('attr_id') is-invalid @enderror" id="attr_id" name="attribute[]">
+                                    <option>Select</option>
+                                    @foreach($attributes as $attribute)
+                                    <option value="{{$attribute->id}}">{{$attribute->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('attr_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -130,34 +178,37 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="password">Attributes</label>
-                                <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" name="" placeholder="Attributes">
-                                {{-- <small id="passwordHelpBlock" class="form-text text-muted">
-                                    Password must be 8 characters at least.
-                                    <a href="" class="random-password"> Generate random password </a>
-                                </small> --}}
-                                @error('password')
+                                <label for="password">Attribute Values</label>
+                                <select class="form-control @error('attribute_value') is-invalid @enderror" id="attr_val" name="attribute_value[]">
+                                    <option value=''>Select Values</option>
+                                </select>
+                                @error('attribute_value')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="confirm_password">Sales Expiry</label>
-                                <input type="date" class="form-control @error('expiry') is-invalid @enderror" id="expiry" name="expiry">
-                                @error('expiry')
+                                <label for="inputEmail4">Attribute Image</label>
+                                <input type="file" class="form-control @error('attribute_image') is-invalid @enderror" id="default_image" name="attribute_image[]">
+                                @error('attribute_image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-row">
 
+                        <div id="more"></div><br>
+                        <div class="form-group col-md-4">
+                            <button type="button" id="checkMe" class="btn btn-primary btn-sm">Add more</button>
+                        </div>
+
+                        <div class="form-row">
                             <div class="form-group col-md-12" style="margin:auto;">
                                 <label for="confirm_password">Product Description</label>
-                                <textarea class="form-control @error('desc') is-invalid @enderror" name="desc"></textarea>
-                                @error('desc')
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="description"></textarea>
+                                @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -175,8 +226,134 @@
             </div>
         </div>
     </div>
+    @endsection
 
+    @section('script')
+    <script>
+        $(document).ready(function() {
 
+            let count = 0;
 
- @endsection
+            assignName(count);
 
+            function assignName(count) {
+
+               $(document).on("change", ".do", function() {
+                    let attr = $(this).val();
+                    axios.get('{{url("get_attr_values")}}/' + attr)
+                        .then(response => {
+                            let attr_values = response.data;
+                            //console.log(attr_values);
+                            $("#attr_value"+count).html(attr_values);
+                        });
+                        count++;
+                });
+
+            }
+            $('#disc').on('change', function() {
+                var disc = $(this).val();
+                if (disc == 0) {
+                    $('#discount').attr('disabled', true);
+                    var originalPrice = $('#original_price').val();
+                    $('#real_price').val(originalPrice);
+
+                } else {
+                    $('#discount').attr('disabled', false);
+                }
+            });
+
+            $('#discount').on('change', function() {
+                var percentageDiscount = $(this).val() / 100;
+                $('#real_price').val($('#original_price').val() * (1 - percentageDiscount));
+            });
+
+            //####### FOR DEFAULT ATTRIBUTE #######
+            $('#attr_id').on('change', function() {
+                let attr_id = $(this).val();
+                axios.get('{{url("get_attr_values")}}/' + attr_id)
+                    .then(response => {
+                        let attr_values_data = response.data;
+                        console.log(attr_values_data);
+                        $("#attr_val").html(attr_values_data);
+                    });
+            });
+
+            //####### FOR CATEGORY & SUB CATEGORY #######
+            $('#cat_id').on('change', function() {
+                let cat_id = $(this).val();
+                axios.get('{{url("get_subcategory_values")}}/' + cat_id)
+                    .then(response => {
+                        let sub_category_data = response.data;
+                        if(sub_category_data == ''){
+                            $('#subcat_id').attr('disabled', true);
+                        }else{
+                            $('#subcat_id').attr('disabled', false);
+                            $("#subcat_id").html(sub_category_data);
+
+                        }
+                    });
+            });
+
+            $("#checkMe").click(function() {
+
+                count++;
+
+                $('#more').append(`
+                <div class="container_create" id="added${count}">
+                      <div class="container_fields">
+                                <div class="fields">
+                                    <label for="on_sale">Attribute</label>
+                                    <select class="form-control do @error('attribute') is-invalid @enderror" id="attribute${count}" name="attribute[]">
+                                        <option>Select</option>
+                                        @foreach($attributes as $attribute)
+                                        <option value="{{$attribute->id}}">{{$attribute->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('attribute')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="fields">
+                                    <label for="password">Attribute Values</label>
+                                    <select class="form-control @error('attribute_value') is-invalid @enderror" id="attr_value${count}" name="attribute_value[]">
+                                        <option>Select Values</option>
+                                    </select>
+                                    @error('attribute_value')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="fields">
+                                    <label for="inputEmail4">Attribute Image</label>
+                                    <input type="file" class="form-control @error('attribute_image') is-invalid @enderror" id="attr_image" name="attribute_image[]">
+                                    @error('attribute_image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <button type="button" id="remove${count}" class="close change" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                `);
+
+            });
+
+                $(document).on("click", ".close" , function() {
+                var button_id = $(this).attr("id");
+               $('#added' + count).remove();
+               count--;
+
+            });
+
+        });
+
+    </script>
+
+    @endsection

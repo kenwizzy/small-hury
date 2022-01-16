@@ -16,9 +16,11 @@ class CreateDeliveryDetailsTable extends Migration
         Schema::create('delivery_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')
-            ->constrained('orders')->onDelete('cascade');
+                ->constrained('orders')->onDelete('cascade');
             $table->string('delivery_contact');
             $table->string('delivery_address');
+            $table->double('longitude', 5, 5)->nullable();
+            $table->double('latitude', 5, 5)->nullable();
             $table->string('delivery_phone');
             $table->string('delivery_note');
             $table->string('delivery_reference');

@@ -16,13 +16,13 @@ class CreateProductImagesTable extends Migration
         Schema::create('product_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')
-            ->constrained('products')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
-            $table->foreignId('attribute_value_id')
-                ->constrained('attribute_values')
+                ->constrained('products')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->foreignId('attribute_value_id')->default(1)
+                ->constrained('attribute_values');
+            // ->onDelete('cascade')
+            // ->onUpdate('cascade');
             $table->string('image_url');
             $table->tinyInteger('status')->unsigned()->default(1);
             $table->boolean('default');

@@ -20,12 +20,14 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->foreignId('category_id')
                 ->constrained('categories')->onUpdate('cascade');
+                $table->foreignId('sub_category_id')
+                ->constrained('categories')->onUpdate('cascade');
             $table->string('slug');
             $table->decimal('real_price', 15, 2);
             $table->decimal('original_price', 15, 2)->nullable();
             $table->tinyInteger('status')->unsigned()->default(1);
-            $table->timestamp('sales_expiry');
-            $table->tinyInteger('on_sales');
+            $table->timestamp('sales_expiry')->nullable();
+            $table->tinyInteger('on_sales')->default(1);
             $table->timestamps();
         });
     }

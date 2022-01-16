@@ -76,7 +76,7 @@
                                         <td class="tx-medium">12-12-2021</td>
                                         <td class=" text-center">
                                             <div class="dropdown-file"> <a href="" class="dropdown-link"
-                                                    data-toggle="dropdown"><i data-feather="more-vertical"></i></a>
+                                                    data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a href="{{url('dashboard/products/details')}}" class="dropdown-item details"><i class="far fa-clipboard"></i> Details </a>
                                 <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Next Page </a>

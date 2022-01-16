@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +18,23 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('login', [AuthController::class, 'login']);
+//Route::middleware(['auth:sanctum'])->group(function ($router) {
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::group([
+        'middleware' => 'auth:sanctum'
+    ], function ($router) {
+
+    Route::get('/user', [UserController::class, 'getUser']);
+    Route::get('/products', [ProductController::class, 'getProducts']);
+    Route::get('/categories', [CategoryController::class, 'getCategories']);
+    Route::get('/category/{id}', [CategoryController::class, 'show']);
+    Route::get('/product/{id}', [ProductController::class, 'show']);
+
 });
+
+Route::fallback(function(){
+    return response()->json([
+        'message' => 'Page Not Found. Please check your url and try again.'], 404);
+});
+

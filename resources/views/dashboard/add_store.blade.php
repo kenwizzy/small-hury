@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
- @section('content')
+@section('content')
 
 
 <div class="content-body">
@@ -15,17 +15,16 @@
                 <h4 class="mg-b-0 tx-spacing--1">Create New Store</h4>
             </div>
         </div>
-
         <div class="row row-xs">
             <div class="col-lg-12 col-xl-12">
-                <form method="POST" action="">
+                <form method="POST" action="{{route('submit_store')}}">
                     @csrf
                     <div class="col-md-12">
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="first_name">Store Name</label>
-                                <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="" autocomplete="off">
-                                @error('first_name')
+                                <input type="text" class="form-control @error('store_name') is-invalid @enderror" id="store_name" name="store_name" value="{{ old('store_name') }}" autocomplete="off">
+                                @error('store_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -34,32 +33,29 @@
 
                             <div class="form-group col-md-4">
                                 <label for="middle_name">State</label>
-                                <select class="form-control" name="middle_name" autocomplete="off" placeholder="">
-                                   <option>Select State</option>
-                                   <option>Abia</option>
-                                   <option>Lagos</option>
-                                   <option>Akure</option>
+                                <select class="form-control" id="state" name="state" autocomplete="off">
+                                    <option value="">Select State</option>
+                                    @foreach($states as $state)
+                                    <option value="{{$state->id}}">{{$state->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="middle_name">LGA</label>
-                                <select class="form-control" name="middle_name" autocomplete="off" placeholder="">
-                                   <option>Select LGA</option>
-                                   <option>Mushin</option>
-                                   <option>Ikate</option>
-                                   <option>Ukwe</option>
+                                <select class="form-control" id="lga" name="lga" autocomplete="off" placeholder="">
+                                    <option value=''>Select LGA</option>
                                 </select>
                             </div>
 
                         </div>
-                        </div>
-                        <div class="col-md-12">
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label for="first_name">Address</label>
-                                <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="" autocomplete="off">
-                                @error('first_name')
+                                <label for="street">Street</label>
+                                <input type="text" class="form-control @error('street') is-invalid @enderror" id="street" name="street" value="{{ old('street') }}" autocomplete="off">
+                                @error('street')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -67,22 +63,18 @@
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="password">Zip code</label>
-                                <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Attributes">
-                                {{-- <small id="passwordHelpBlock" class="form-text text-muted">
-                                    Password must be 8 characters at least.
-                                    <a href="" class="random-password"> Generate random password </a>
-                                </small> --}}
-                                @error('password')
+                                <label for="Zip">Zip code</label>
+                                <input type="text" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip">
+                                @error('zip')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="confirm_password">Longitude</label>
-                                <input type="text" class="form-control @error('expiry') is-invalid @enderror" id="expiry" name="expiry">
-                                @error('expiry')
+                                <label for="longitude">Longitude</label>
+                                <input type="text" class="form-control @error('longitude') is-invalid @enderror" id="longitude" name="longitude">
+                                @error('longitude')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -92,8 +84,8 @@
 
                             <div class="form-group col-md-3">
                                 <label for="first_name">Laditude</label>
-                                <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="" autocomplete="off">
-                                @error('first_name')
+                                <input type="text" class="form-control @error('latitude') is-invalid @enderror" id="latitude" name="latitude" value="{{ old('latitude') }}" autocomplete="off">
+                                @error('latitude')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -112,7 +104,26 @@
         </div>
     </div>
 
+    @endsection
 
+    @section('script')
+    <script>
+        $(document).ready(function() {
 
- @endsection
+            $('#state').on('change', function() {
+                let state_id = $(this).val();
+                axios.get('{{ url("get_state_lgas") }}/' + state_id)
+                    .then(response => {
+                        let lga_data = response.data;
+                        //console.log(me);
+                        $("#lga").html(lga_data);
+                    });
 
+            });
+
+        });
+
+        //});
+    </script>
+
+    @endsection

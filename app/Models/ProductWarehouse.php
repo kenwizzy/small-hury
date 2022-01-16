@@ -9,4 +9,6 @@ class ProductWarehouse extends Model
 {
     use HasFactory;
     protected $tableName = 'product_warehouses';
+
+    protected $fillable = ['product_id','warehouse_id','total_quantity'];
 }

@@ -17,12 +17,14 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            // $table->foreignId('parent_id')
-            //     ->default(0)->constrained('categories');
+            $table->foreignId('parent_id')
+              ->default(0);
             $table->string("cat_img_url")->nullable()
                 ->comment('This is the image that will displayed for a particular category');
             $table->tinyInteger('status')->unsigned()->default(1);
             $table->timestamps();
+
+            //$table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

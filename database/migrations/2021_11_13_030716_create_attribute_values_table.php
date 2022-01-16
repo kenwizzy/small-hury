@@ -18,9 +18,9 @@ class CreateAttributeValuesTable extends Migration
             $table->foreignId('attribute_id')
                 ->constrained('attributes')
                 ->onDelete('cascade');
-            $table->string('name');
+            $table->string('attribute_val_name');
             $table->tinyInteger("status")->unsigned()->default(1);
-            $table->timestamp('created_at')->default(now());
+            $table->timestamps();
         });
     }
 

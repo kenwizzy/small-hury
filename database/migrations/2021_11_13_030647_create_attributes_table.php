@@ -15,12 +15,11 @@ class CreateAttributesTable extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products');
             $table->string('name');
             $table->tinyInteger('status')->unsigned()->default(1);
-            $table->foreignId('parent_id')
-                    ->default(0)->constrained('attributes');
-            $table->timestamp('created_at')->default(now());
+            // $table->foreignId('parent_id')
+            //         ->default(0)->constrained('attributes');
+            $table->timestamps();
         });
     }
 
