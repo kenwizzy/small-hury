@@ -17,7 +17,7 @@ class AttributeController extends Controller
     public function index()
     {
         return view('dashboard.attributes', [
-            'attributes' => Attribute::all()
+            'attributes' => Attribute::where('id', '<>', 1)->get()
         ]);
     }
 
@@ -38,7 +38,7 @@ class AttributeController extends Controller
         $res = json_decode($values);
         $data = "<option>Select Value</option>";
         foreach ($values as $lga) {
-            $data.= "<option value='" . $lga->id . "'>$lga->attribute_val_name</option>";
+            $data .= "<option value='" . $lga->id . "'>$lga->attribute_val_name</option>";
         }
 
         echo $data;
@@ -58,7 +58,7 @@ class AttributeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('errors', $validator->errors());
+            return redirect()->back()->withErrors($validator->errors());
         }
 
         $data = explode(",", $request->values);

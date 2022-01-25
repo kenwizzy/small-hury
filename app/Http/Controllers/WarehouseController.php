@@ -40,8 +40,9 @@ class WarehouseController extends Controller
         $lgas = Lga::where('state_id', $id)->get();
 
         $res = json_decode($lgas);
+        echo "<option value=''>Select LGA</option>";
         foreach ($lgas as $lga) {
-            echo "<option value=''>Select LGA</option><option value='" . $lga->id . "'>$lga->name</option>";
+            echo "<option value='" . $lga->id . "'>$lga->name</option>";
         }
     }
 

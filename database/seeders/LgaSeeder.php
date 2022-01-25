@@ -28,22 +28,22 @@ class LgaSeeder extends Seeder
             'state_id' => '1'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Arochukwu',
             'state_id' => '1'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bende',
             'state_id' => '1'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ikwuano',
             'state_id' => '1'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Isiala-Ngwa North',
             'state_id' => '1'
         ]);
@@ -110,57 +110,57 @@ class LgaSeeder extends Seeder
 
         //Adamawa
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Demsa',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Fufore',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ganaye',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gireri',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gombi',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Guyuk',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Hong',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Jada',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Lamurde',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Madagali',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Maiha',
             'state_id' => '2'
         ]);
@@ -200,17 +200,17 @@ class LgaSeeder extends Seeder
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Toungo',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Yola North',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Yola South',
             'state_id' => '2'
         ]);
@@ -221,52 +221,52 @@ class LgaSeeder extends Seeder
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Eastern Obolo',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Eket',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Esit Eket',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Essien Udim',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Etim Ekpo',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Etinan',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ibeno',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ibesikpo Asutan',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ibiono Ibom',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ika',
             'state_id' => '3'
         ]);
@@ -306,17 +306,17 @@ class LgaSeeder extends Seeder
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nsit Atai',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nsit Ibom',
             'state_id' => '3'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nsit Ubium',
             'state_id' => '3'
         ]);
@@ -371,52 +371,52 @@ class LgaSeeder extends Seeder
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Anambra East',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Anambra West',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Anaocha',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Awka North',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Awka South',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ayamelum',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dunukofia',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ekwusigo',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Idemili North',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Idemili South',
             'state_id' => '4'
         ]);
@@ -456,17 +456,17 @@ class LgaSeeder extends Seeder
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Onumba N',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Onumba South',
             'state_id' => '4'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Oyi',
             'state_id' => '4'
         ]);
@@ -477,52 +477,52 @@ class LgaSeeder extends Seeder
             'state_id' => '5'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bauchi',
             'state_id' => '5'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bogoro',
             'state_id' => '5'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Damban',
             'state_id' => '5'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Darazo',
             'state_id' => '5'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dass',
             'state_id' => '5'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ganjuwa',
             'state_id' => '5'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Giade',
             'state_id' => '5'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Itas/Gadau',
             'state_id' => '5'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Jama"are',
             'state_id' => '5'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Katagum',
             'state_id' => '5'
         ]);
@@ -573,37 +573,37 @@ class LgaSeeder extends Seeder
             'state_id' => '6'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ekeremor',
             'state_id' => '6'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kolokuma/Opokuma',
             'state_id' => '6'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nembe',
             'state_id' => '6'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ogbia',
             'state_id' => '6'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sagbama',
             'state_id' => '6'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Southern Jaw',
             'state_id' => '6'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Yenegoa',
             'state_id' => '6'
         ]);
@@ -614,72 +614,72 @@ class LgaSeeder extends Seeder
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Agatu',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Apa',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Buruku',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gboko',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Guma',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gwer East',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gwer West',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Katsina-Ala',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Konshisha',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kwande',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Logo',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Markurdi',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Obi',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ogbadipo',
             'state_id' => '7'
         ]);
@@ -689,37 +689,37 @@ class LgaSeeder extends Seeder
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Okpokwu',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ohimini',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Oturkpo',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Tarka',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ukum',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ushongo',
             'state_id' => '7'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Vandeikya',
             'state_id' => '7'
         ]);
@@ -730,52 +730,52 @@ class LgaSeeder extends Seeder
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Askira/Uba',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bama',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bayo',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Biu',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Chibok',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Damboa',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dikwa',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gubio',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Guzamala',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gwoza',
             'state_id' => '8'
         ]);
@@ -815,41 +815,41 @@ class LgaSeeder extends Seeder
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Mafa',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Magumeri',
             'state_id' => '8'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Maiduguri',
             'state_id' => '8'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Marte',
             'state_id' => '8'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Mobbar',
             'state_id' => '8'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Monguno',
             'state_id' => '8'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ngala',
             'state_id' => '8'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nganzai',
             'state_id' => '8'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Shani',
             'state_id' => '8'
         ]);
@@ -860,52 +860,52 @@ class LgaSeeder extends Seeder
             'state_id' => '9'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Odukpani',
             'state_id' => '9'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Akamkpa',
             'state_id' => '9'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Biase',
             'state_id' => '9'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Abi',
             'state_id' => '9'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ikom',
             'state_id' => '9'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Yarkur',
             'state_id' => '9'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Odubra',
             'state_id' => '9'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Boki',
             'state_id' => '9'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ogoja',
             'state_id' => '9'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Yala',
             'state_id' => '9'
         ]);
@@ -951,52 +951,52 @@ class LgaSeeder extends Seeder
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Aniocha',
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Aniocha-South',
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ika South',
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ika North-East',
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ndokwa West',
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ndokwa East',
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Isoko South',
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Isoko North',
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bomadi',
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Burutu',
             'state_id' => '10'
         ]);
@@ -1036,7 +1036,7 @@ class LgaSeeder extends Seeder
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Warri South',
             'state_id' => '10'
         ]);
@@ -1051,7 +1051,7 @@ class LgaSeeder extends Seeder
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Warri Central',
             'state_id' => '10'
         ]);
@@ -1066,7 +1066,7 @@ class LgaSeeder extends Seeder
             'state_id' => '10'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Patani',
             'state_id' => '10'
         ]);
@@ -1077,52 +1077,52 @@ class LgaSeeder extends Seeder
             'state_id' => '11'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Afikpo North',
             'state_id' => '11'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Onicha',
             'state_id' => '11'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ohaozara',
             'state_id' => '11'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Abakaliki',
             'state_id' => '11'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ishielu',
             'state_id' => '11'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'lkwo',
             'state_id' => '11'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ezza',
             'state_id' => '11'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ezza South',
             'state_id' => '11'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ohaukwu',
             'state_id' => '11'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ebonyi',
             'state_id' => '11'
         ]);
@@ -1234,52 +1234,52 @@ class LgaSeeder extends Seeder
             'state_id' => '13'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ekiti-East',
             'state_id' => '13'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ekiti-West',
             'state_id' => '13'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Emure/Ise/Orun',
             'state_id' => '13'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ekiti South-West',
             'state_id' => '13'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ikare',
             'state_id' => '13'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Irepodun',
             'state_id' => '13'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ijero',
             'state_id' => '13'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ido/Osi',
             'state_id' => '13'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Oye',
             'state_id' => '13'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ikole',
             'state_id' => '13'
         ]);
@@ -1320,52 +1320,52 @@ class LgaSeeder extends Seeder
             'state_id' => '14'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Igbo-Eze South',
             'state_id' => '14'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Enugu North',
             'state_id' => '14'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nkanu',
             'state_id' => '14'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Udi',
             'state_id' => '14'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Oji-River',
             'state_id' => '14'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ezeagu',
             'state_id' => '14'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'IgboEze North',
             'state_id' => '14'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Isi-Uzo',
             'state_id' => '14'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nsukka',
             'state_id' => '14'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Igbo-Ekiti',
             'state_id' => '14'
         ]);
@@ -1401,52 +1401,52 @@ class LgaSeeder extends Seeder
             'state_id' => '15'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Balanga',
             'state_id' => '15'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Billiri',
             'state_id' => '15'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dukku',
             'state_id' => '15'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kaltungo',
             'state_id' => '15'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kwami',
             'state_id' => '15'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Shomgom',
             'state_id' => '15'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Funakaye',
             'state_id' => '15'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gombe',
             'state_id' => '15'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nafada/Bajoga',
             'state_id' => '15'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Yamaltu/Delta',
             'state_id' => '15'
         ]);
@@ -1457,52 +1457,52 @@ class LgaSeeder extends Seeder
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ahiazu-Mbaise',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ehime-Mbano',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ezinihitte',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ideato North',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ideato South',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ihitte/Uboma',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ikeduru',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Isiala Mbano',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Isu',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Mbaitoli',
             'state_id' => '16'
         ]);
@@ -1542,17 +1542,17 @@ class LgaSeeder extends Seeder
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Okigwe',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Orlu',
             'state_id' => '16'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Orsu',
             'state_id' => '16'
         ]);
@@ -1578,57 +1578,57 @@ class LgaSeeder extends Seeder
         ]);
 
         // Jigawa
-       DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' =>  'Auyo',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' =>  'Babura',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Birni kudu',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Birniwa',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Buji',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dutse',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gagarawa',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Garki',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gumel',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Guri',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gwaram',
             'state_id' => '17'
         ]);
@@ -1664,37 +1664,37 @@ class LgaSeeder extends Seeder
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'kiyawa',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Maigatari',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Malam Madori',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Miga',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ringim',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Roni',
             'state_id' => '17'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sule-Tankarkar',
             'state_id' => '17'
         ]);
@@ -1715,17 +1715,17 @@ class LgaSeeder extends Seeder
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Chikun',
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Giwa',
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Igabi',
             'state_id' => '18'
         ]);
@@ -1760,37 +1760,37 @@ class LgaSeeder extends Seeder
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kagarko',
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kajuru',
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kaura',
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' =>  'Kauru',
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kubua',
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kudan',
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Lere',
             'state_id' => '18'
         ]);
@@ -1805,12 +1805,12 @@ class LgaSeeder extends Seeder
             'state_id' => '18'
         ]);
 
-          DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sanga',
             'state_id' => '18'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Soba',
             'state_id' => '18'
         ]);
@@ -1831,12 +1831,12 @@ class LgaSeeder extends Seeder
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Albasu',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bagwai',
             'state_id' => '19'
         ]);
@@ -1871,37 +1871,37 @@ class LgaSeeder extends Seeder
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dawakin tofa',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Doguwa',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Fagge',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gabasawa',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Garko',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Garum',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Mallam',
             'state_id' => '19'
         ]);
@@ -1916,12 +1916,12 @@ class LgaSeeder extends Seeder
             'state_id' => '19'
         ]);
 
-          DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gwale',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gwarzo',
             'state_id' => '19'
         ]);
@@ -1941,12 +1941,12 @@ class LgaSeeder extends Seeder
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kibiya',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kiru',
             'state_id' => '19'
         ]);
@@ -1981,37 +1981,37 @@ class LgaSeeder extends Seeder
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nasarawa',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Rano',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Rimin Gado',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Rogo',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Shano',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sumaila',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Takali',
             'state_id' => '19'
         ]);
@@ -2026,7 +2026,7 @@ class LgaSeeder extends Seeder
             'state_id' => '19'
         ]);
 
-          DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Tsanyawa',
             'state_id' => '19'
         ]);
@@ -2041,12 +2041,12 @@ class LgaSeeder extends Seeder
             'state_id' => '19'
         ]);
 
-          DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Warawa',
             'state_id' => '19'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Wudil',
             'state_id' => '19'
         ]);
@@ -2057,52 +2057,52 @@ class LgaSeeder extends Seeder
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Batagarawa',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Batsari',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Baure',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bindawa',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Charanchi',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dandume',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Danja',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dan Musa',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Daura',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dutsi',
             'state_id' => '20'
         ]);
@@ -2142,22 +2142,22 @@ class LgaSeeder extends Seeder
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kankara',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kankia',
             'state_id' => '20'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Katsina',
             'state_id' => '20'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kurfi',
             'state_id' => '20'
         ]);
@@ -2167,51 +2167,51 @@ class LgaSeeder extends Seeder
             'state_id' => '20'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Mai Adua',
             'state_id' => '20'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Malumfashi',
             'state_id' => '20'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Mani',
             'state_id' => '20'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Mashi',
             'state_id' => '20'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Matazuu',
             'state_id' => '20'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Musawa',
             'state_id' => '20'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Rimi',
             'state_id' => '20'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sabuwa',
             'state_id' => '20'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Safana',
             'state_id' => '20'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sandamu',
             'state_id' => '20'
         ]);
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Zango',
             'state_id' => '20'
         ]);
@@ -2222,52 +2222,52 @@ class LgaSeeder extends Seeder
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Arewa-Dandi',
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Argungu',
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Augie',
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bagudo',
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Birnin Kebbi',
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bunza',
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dandi',
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Fakai',
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gwandu',
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Jega',
             'state_id' => '21'
         ]);
@@ -2292,7 +2292,7 @@ class LgaSeeder extends Seeder
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sakaba',
             'state_id' => '21'
         ]);
@@ -2307,7 +2307,7 @@ class LgaSeeder extends Seeder
             'state_id' => '21'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Wasagu/Danko',
             'state_id' => '21'
         ]);
@@ -2328,52 +2328,52 @@ class LgaSeeder extends Seeder
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ajaokuta',
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ankpa',
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bassa',
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dekina',
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ibaji',
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Idah',
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Igalamela-Odolu',
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ijumu',
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kabba/Bunu',
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kogi',
             'state_id' => '22'
         ]);
@@ -2398,7 +2398,7 @@ class LgaSeeder extends Seeder
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Okehi',
             'state_id' => '22'
         ]);
@@ -2413,7 +2413,7 @@ class LgaSeeder extends Seeder
             'state_id' => '22'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Omala',
             'state_id' => '22'
         ]);
@@ -2434,52 +2434,52 @@ class LgaSeeder extends Seeder
             'state_id' => '23'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Baruten',
             'state_id' => '23'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Edu',
             'state_id' => '23'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ekiti',
             'state_id' => '23'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ifelodun',
             'state_id' => '23'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ilorin East',
             'state_id' => '23'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ilorin West',
             'state_id' => '23'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Irepodun',
             'state_id' => '23'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Isin',
             'state_id' => '23'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kaiama',
             'state_id' => '23'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Moro',
             'state_id' => '23'
         ]);
@@ -2510,52 +2510,52 @@ class LgaSeeder extends Seeder
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ajeromi-Ifelodun',
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Alimosho',
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Amuwo-Odofin',
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Apapa',
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Badagry',
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Epe',
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Eti-Osa',
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ibeju/Lekki',
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ifako-Ijaye',
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ikeja',
             'state_id' => '24'
         ]);
@@ -2595,12 +2595,12 @@ class LgaSeeder extends Seeder
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Shomolu',
             'state_id' => '24'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Surulere',
             'state_id' => '24'
         ]);
@@ -2611,52 +2611,52 @@ class LgaSeeder extends Seeder
             'state_id' => '25'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Awe',
             'state_id' => '25'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Doma',
             'state_id' => '25'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Karu',
             'state_id' => '25'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Keana',
             'state_id' => '25'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Keffi',
             'state_id' => '25'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kokona',
             'state_id' => '25'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Lafia',
             'state_id' => '25'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nasarawa',
             'state_id' => '25'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Nasarawa-Eggon',
             'state_id' => '25'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Obi',
             'state_id' => '25'
         ]);
@@ -2677,22 +2677,22 @@ class LgaSeeder extends Seeder
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Agwara ',
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bida',
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Borgu',
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bosso',
             'state_id' => '26'
         ]);
@@ -2702,27 +2702,27 @@ class LgaSeeder extends Seeder
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Edati',
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gbako',
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gurara ',
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Katcha',
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kontagora',
             'state_id' => '26'
         ]);
@@ -2762,12 +2762,12 @@ class LgaSeeder extends Seeder
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Pailoro',
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Rafi',
             'state_id' => '26'
         ]);
@@ -2782,17 +2782,17 @@ class LgaSeeder extends Seeder
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Suleja ',
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Tafa',
             'state_id' => '26'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Wushishi',
             'state_id' => '26'
         ]);
@@ -2803,97 +2803,97 @@ class LgaSeeder extends Seeder
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Abeokuta South',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ado-Odo/Ota',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Egbado North',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Egbado South',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ewekoro',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ifo',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ijebu East',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ijebu North',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ijebu North East',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ijebu Ode',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ikenne',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Imeko-Afon',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ipokia',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Obafemi-Owode',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ogun Watrside',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Odeda',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Odogbolu',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Remo North',
             'state_id' => '27'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Shagamu',
             'state_id' => '27'
         ]);
@@ -2905,52 +2905,52 @@ class LgaSeeder extends Seeder
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Akoko North West ',
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Akoko South Akure East',
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Akoko South West',
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Akure North ',
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Akure South',
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ese-Odo ',
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Idanre',
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ifedore ',
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ilaje ',
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ile-Oluji ',
             'state_id' => '28'
         ]);
@@ -2990,7 +2990,7 @@ class LgaSeeder extends Seeder
             'state_id' => '28'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Owo',
             'state_id' => '28'
         ]);
@@ -3257,108 +3257,108 @@ class LgaSeeder extends Seeder
             'state_id' => '30'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Olorunsogo',
             'state_id' => '30'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Oluyole',
             'state_id' => '30'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ona-Ara',
             'state_id' => '30'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Orelope',
             'state_id' => '30'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ori Ire',
             'state_id' => '30'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Oyo East',
             'state_id' => '30'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Oyo West',
             'state_id' => '30'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Saki East',
             'state_id' => '30'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Saki West',
             'state_id' => '30'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Surulere',
             'state_id' => '30'
         ]);
 
         //Plateau
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Barikin Ladi',
             'state_id' => '31'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bassa',
             'state_id' => '31'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bokkos',
             'state_id' => '31'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Jos East',
             'state_id' => '2'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Jos North',
             'state_id' => '31'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Jos South',
             'state_id' => '31'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kanam',
             'state_id' => '31'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kanke',
             'state_id' => '31'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Langtang North',
             'state_id' => '31'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Langtang South',
             'state_id' => '31'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Mangu',
             'state_id' => '31'
         ]);
@@ -3399,47 +3399,47 @@ class LgaSeeder extends Seeder
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ahoada East',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ahoada West',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Akuku Toru',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Adoni',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bonny',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Degema',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Emohua',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Eleme',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Etche',
             'state_id' => '32'
         ]);
@@ -3479,31 +3479,31 @@ class LgaSeeder extends Seeder
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Okrika',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Omumma',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Opobo/Nkoro',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Oyigbo',
             'state_id' => '32'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Port-Harcourt',
             'state_id' => '32'
         ]);
-          DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Tai',
             'state_id' => '32'
         ]);
@@ -3519,107 +3519,107 @@ class LgaSeeder extends Seeder
             'state_id' => '33'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Dange-shnsi',
             'state_id' => '33'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gada',
             'state_id' => '33'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Goronyo',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gudu',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gawabawa',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Illela',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Isa',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kware',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kebba',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Rabah',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sabon birni',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Shagari',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Silame',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sokoto North',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sokoto South',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Tambuwal',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Tqngaza',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Tureta',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Wamako',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Wurno',
             'state_id' => '33'
         ]);
 
-		DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Yabo',
             'state_id' => '33'
         ]);
@@ -3630,52 +3630,52 @@ class LgaSeeder extends Seeder
             'state_id' => '34'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bali',
             'state_id' => '34'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Donga',
             'state_id' => '34'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gashaka',
             'state_id' => '34'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Cassol',
             'state_id' => '34'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Ibi',
             'state_id' => '34'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Jalingo',
             'state_id' => '34'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Karin-Lamido',
             'state_id' => '34'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kurmi',
             'state_id' => '34'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Lau',
             'state_id' => '34'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Sardauna',
             'state_id' => '34'
         ]);
@@ -3711,52 +3711,52 @@ class LgaSeeder extends Seeder
             'state_id' => '35'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bursari',
             'state_id' => '35'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Damaturu',
             'state_id' => '35'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Fika',
             'state_id' => '35'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Fune',
             'state_id' => '35'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Geidam',
             'state_id' => '35'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gujba',
             'state_id' => '35'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gulani',
             'state_id' => '35'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Jakusko',
             'state_id' => '35'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Karasuwa',
             'state_id' => '35'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Karawa',
             'state_id' => '35'
         ]);
@@ -3797,52 +3797,52 @@ class LgaSeeder extends Seeder
             'state_id' => '36'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bakura',
             'state_id' => '36'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Birnin Magaji',
             'state_id' => '36'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bukkuyum',
             'state_id' => '36'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bungudu',
             'state_id' => '36'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gummi',
             'state_id' => '36'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Gusau',
             'state_id' => '36'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kaura',
             'state_id' => '36'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Namoda',
             'state_id' => '36'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Maradun',
             'state_id' => '36'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Maru',
             'state_id' => '36'
         ]);
@@ -3873,28 +3873,53 @@ class LgaSeeder extends Seeder
             'state_id' => '37'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kuje',
             'state_id' => '37'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Abaji',
             'state_id' => '37'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Abuja Municipal',
             'state_id' => '37'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Bwari',
             'state_id' => '37'
         ]);
 
-         DB::table('lgas')->insert([
+        DB::table('lgas')->insert([
             'name' => 'Kwali',
+            'state_id' => '37'
+        ]);
+
+        DB::table('lgas')->insert([
+            'name' => 'Utako',
+            'state_id' => '37'
+        ]);
+
+        DB::table('lgas')->insert([
+            'name' => 'Maitama',
+            'state_id' => '37'
+        ]);
+
+        DB::table('lgas')->insert([
+            'name' => 'Gwarimpa',
+            'state_id' => '37'
+        ]);
+
+        DB::table('lgas')->insert([
+            'name' => 'Wuse',
+            'state_id' => '37'
+        ]);
+
+        DB::table('lgas')->insert([
+            'name' => 'Kubwa',
             'state_id' => '37'
         ]);
     }

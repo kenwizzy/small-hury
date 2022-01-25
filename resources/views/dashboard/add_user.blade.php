@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
- @section('content')
+@section('content')
 
 
 <div class="content-body">
@@ -16,15 +16,25 @@
             </div>
         </div>
 
+        @if (session('success'))
+        @section('script')
+        <script>
+            Notiflix.Notify.Success('{{ session("success") }}', {
+                timeout: 6000,
+            }, );
+        </script>
+        @endsection
+        @endif
+
         <div class="row row-xs">
             <div class="col-lg-12 col-xl-12">
-                <form method="POST" action="">
+                <form method="POST" action="{{route('create_user')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="col-md-12">
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="first_name">First Name</label>
-                                <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="" autocomplete="off">
+                                <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="" name="first_name" autocomplete="off">
                                 @error('first_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -34,8 +44,8 @@
 
                             <div class="form-group col-md-4">
                                 <label for="first_name">Middle Name</label>
-                                <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="" autocomplete="off">
-                                @error('first_name')
+                                <input type="text" class="form-control @error('middle_name') is-invalid @enderror" id="" name="middle_name" autocomplete="off">
+                                @error('middle_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -44,42 +54,22 @@
 
                             <div class="form-group col-md-4">
                                 <label for="first_name">Last Name</label>
-                                <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="" autocomplete="off">
-                                @error('first_name')
+                                <input type="text" class="form-control @error('last_name') is-invalid @enderror" id="" name="last_name" autocomplete="off">
+                                @error('last_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
 
-                            {{-- <div class="form-group col-md-4">
-                                <label for="middle_name">State</label>
-                                <select class="form-control" name="middle_name" autocomplete="off" placeholder="">
-                                   <option>Select State</option>
-                                   <option>Abia</option>
-                                   <option>Lagos</option>
-                                   <option>Akure</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label for="middle_name">LGA</label>
-                                <select class="form-control" name="middle_name" autocomplete="off" placeholder="">
-                                   <option>Select LGA</option>
-                                   <option>Mushin</option>
-                                   <option>Ikate</option>
-                                   <option>Ukwe</option>
-                                </select>
-                            </div> --}}
-
                         </div>
-                        </div>
-                        <div class="col-md-12">
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="first_name">Email Address</label>
-                                <input type="email" class="form-control @error('first_name') is-invalid @enderror" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="" autocomplete="off">
-                                @error('first_name')
+                                <label for="email">Email Address</label>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="" name="email" utocomplete="off">
+                                @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -88,8 +78,8 @@
 
                             <div class="form-group col-md-4">
                                 <label for="first_name">Phone Number</label>
-                                <input type="number" class="form-control @error('first_name') is-invalid @enderror" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="" autocomplete="off">
-                                @error('first_name')
+                                <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="" name="phone" autocomplete="off">
+                                @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -97,20 +87,25 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="middle_name">User Role</label>
-                                <select class="form-control" name="middle_name" autocomplete="off" placeholder="">
-                                   <option>Select Role</option>
-                                   <option>Admin</option>
-                                   <option>Store Manager</option>
-                                   <option>Biker</option>
+                                <label for="User Role">User Role</label>
+                                <select class="form-control @error('role') is-invalid @enderror" name="role" autocomplete="off">
+                                    <option>Select Role</option>
+                                    @foreach($roles as $role)
+                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                    @endforeach
                                 </select>
+                                @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 
                     </div>
 
                     <div class="col-md-12 mt-4">
-                        <button type="submit" class="btn btn-primary">Add Store</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
 
                 </form>
@@ -120,5 +115,4 @@
 
 
 
- @endsection
-
+    @endsection

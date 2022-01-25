@@ -23,18 +23,21 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
-    public function subCat(){
-        return $this->belongsTo(Category::class,'sub_category_id');
+    public function subCat()
+    {
+        return $this->belongsTo(Category::class, 'sub_category_id');
     }
 
-    public function defaultImages(){
-        return $this->hasMany(ProductImage::class)->where('product_id',$this->id)
-               ->where('default', 1);
+    public function defaultImages()
+    {
+        return $this->hasMany(ProductImage::class)->where('product_id', $this->id)
+            ->where('default', 1);
     }
 
-    public function DefaultImage(){
-        return $this->hasOne(ProductImage::class)->where('product_id',$this->id)
-               ->where('default', 1);
+    public function DefaultImage()
+    {
+        return $this->hasOne(ProductImage::class)->where('product_id', $this->id)
+            ->where('default', 1);
     }
 
     // public function attributes(){
@@ -42,14 +45,16 @@ class Product extends Model
     //            ->where('default', 0);
     // }
 
-    public function attribute(){
-     $data = $this->output();
+    public function attribute()
+    {
+        $data = $this->output();
         foreach ($data as $result) {
-            echo '<strong>'.$result->name.'</strong>:'.$result->attribute_val_name.'<br>';
+            echo '<strong>' . $result->name . '</strong>:' . $result->attribute_val_name . '<br>';
         }
     }
 
-    public function totalItems(){
+    public function totalItems()
+    {
         return ProductWarehouse::where([
             'product_id' => $this->id,
         ])->sum('total_quantity');
@@ -69,22 +74,23 @@ class Product extends Model
         ])->get();
     }
 
-    public function apiAttribute(){
+    public function apiAttribute()
+    {
         return $data = $this->output();
-
-        }
+    }
 
     public function user()
     {
         return $this->belongsTo(User::class, 'added_by');
     }
 
-    private function output(){
-       return DB::table('product_images')->select('name','attribute_val_name')
-        ->join('attribute_values','attribute_values.id', 'product_images.attribute_value_id')
-       ->join('attributes', 'attribute_values.attribute_id', '=', 'attributes.id')
-        ->where('attributes.id', '!=', 1)
-         ->where('product_id', $this->id)
-         ->where('default', 0)->get();
+    private function output()
+    {
+        return DB::table('product_images')->select('name', 'attribute_val_name')
+            ->join('attribute_values', 'attribute_values.id', 'product_images.attribute_value_id')
+            ->join('attributes', 'attribute_values.attribute_id', '=', 'attributes.id')
+            ->where('attributes.id', '!=', 1)
+            ->where('product_id', $this->id)
+            ->where('default', 0)->get();
     }
 }

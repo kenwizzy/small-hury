@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Discount;
-use App\Models\Warehouse;
 use App\Models\Attribute;
-use App\Models\ProductImage;
-use App\Models\ProductWarehouse;
+use App\Models\Warehouse;
 use Illuminate\Support\Str;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use App\Models\ProductWarehouse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -27,7 +28,7 @@ class ProductController extends Controller
             'quantity' => 'required|numeric',
             'default_image' => 'required|mimes:jpeg,jpg,png',
             'product_category' => 'required|numeric',
-            'sub_category' => 'required|numeric',
+            'sub_category' => 'numeric|nullable',
             'attribute_image.*' => 'mimes:jpeg,jpg,png',
             'attribute_value.*' => 'string|required',
             'attribute.*' => 'required|numeric',
@@ -37,8 +38,6 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());
         }
-
-        //dd($request->all());
 
         if ($request->hasFile('default_image')) {
             $filen = $request->default_image->getClientOriginalName();
@@ -56,6 +55,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->category_id = $request->product_category;
         $product->sub_category_id = $request->sub_category;
+        $product->added_by = Auth::id();
         $product->slug = Str::slug($request->product_name);
         $product->real_price = $request->real_price;
         $product->original_price = $request->original_price;
@@ -69,7 +69,7 @@ class ProductController extends Controller
         ]);
 
         // //INSERT PRODUCT OTHER IMAGES
-        for($i = 0; $i < sizeof($request->attribute); $i++){
+        for ($i = 0; $i < sizeof($request->attribute); $i++) {
 
             $fileImages = $request->attribute_image[$i]->getClientOriginalName();
             $filenam = time() . '.' . $fileImages;
@@ -83,42 +83,43 @@ class ProductController extends Controller
                 'attribute_value_id' => $request->attribute_value[$i]
             ]);
 
-        // ######## PRODUCT ATTRIBUTES HERE (not sure if needed) #########
+            // ######## PRODUCT ATTRIBUTES HERE (not sure if needed) #########
 
         }
 
-        if($request->store == 'all'){
-            foreach($stores as $shop){
+        if ($request->store == 'all') {
+            foreach ($stores as $shop) {
                 ProductWarehouse::create([
                     'product_id' => $product->id,
-                    'warehouse_id' =>$shop->id,
+                    'warehouse_id' => $shop->id,
                     'total_quantity' => $request->quantity
                 ]);
             }
-        }else{
+        } else {
             ProductWarehouse::create([
-            'product_id' => $product->id,
-            'warehouse_id' =>$request->store,
-            'total_quantity' => $request->quantity
-        ]);
+                'product_id' => $product->id,
+                'warehouse_id' => $request->store,
+                'total_quantity' => $request->quantity
+            ]);
         }
 
-        return redirect('dashboard/products')->withSuccess('Product' . $request->product_name . ' added successfully');
+        return redirect('dashboard/products')->withSuccess('Product ' . $request->product_name . ' added successfully');
     }
 
     public function create()
     {
         return view('dashboard.create', [
-            'categories' => Category::where('parent_id',0)->get(),
+            'categories' => Category::where('parent_id', 0)->get(),
             'discounts' => Discount::all(),
             'warehouses' => Warehouse::all(),
-            'attributes' => Attribute::where('id','<>',1)->get()
+            'attributes' => Attribute::where('id', '<>', 1)->get()
         ]);
     }
 
-    public function allProducts(){
-        return view('dashboard/products',[
-          'products' => Product::all()
+    public function allProducts()
+    {
+        return view('dashboard/products', [
+            'products' => Product::all()
         ]);
     }
 }

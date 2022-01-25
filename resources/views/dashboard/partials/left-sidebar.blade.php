@@ -31,7 +31,8 @@
           <li class="nav-item"><a href="" class="nav-link"><i data-feather="help-circle"></i> <span>Help Center</span></a></li> --}}
 
         <li class="nav-item"><a class="nav-link" onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><i data-feather="log-out"></i><span>Sign Out</span></a></li>
+          document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><i data-feather="log-out"></i><span>Sign Out</span></a>
+        </li>
         <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
           @csrf
         </form>
