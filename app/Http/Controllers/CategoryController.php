@@ -60,17 +60,17 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->cat_name);
         $category->cat_img_url = asset('assets/images/categories/' . $filename);
         $category->save();
-    if (!empty($request->sub_cat_name)) {
-        foreach ($request->sub_cat_name as $subCategory) {
-            $subcategory = new Category();
+        if (!empty($request->sub_cat_name)) {
+            foreach ($request->sub_cat_name as $subCategory) {
+                $subcategory = new Category();
 
-            $subcategory->name = $subCategory;
-            $subcategory->slug = Str::slug($subCategory);
-            $subcategory->parent_id = $category->id;
-            $subcategory->cat_img_url = null;
-            $subcategory->save();
+                $subcategory->name = $subCategory;
+                $subcategory->slug = Str::slug($subCategory);
+                $subcategory->parent_id = $category->id;
+                $subcategory->cat_img_url = null;
+                $subcategory->save();
+            }
         }
-    }
         return redirect('dashboard/categories')->withSuccess('Category added successfully');
     }
 
@@ -89,7 +89,7 @@ class CategoryController extends Controller
     {
         $values = Category::where('parent_id', $id)->get();
 
-        $res = json_decode($values);
+        //$res = json_decode($values);
         foreach ($values as $sub) {
             echo "<option value='" . $sub->id . "'>$sub->name</option>";
         }
@@ -135,13 +135,15 @@ class CategoryController extends Controller
 
         if ($request->hasFile('image')) {
             $filename = $request->image->getClientOriginalName();
-            $request->image->move('assets/img', $filename);
+            $request->image->move('assets/images/categories', $filename);
         }
+
+        $categorymageUrl = asset('assets/images/categories/' . $filename);
 
         $updateCategory = Category::where('id', $id)->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'cat_img_url' => $filename
+            'cat_img_url' => $categorymageUrl
         ]);
 
         return redirect('dashboard/categories')->withSuccess('Category updated successfully');

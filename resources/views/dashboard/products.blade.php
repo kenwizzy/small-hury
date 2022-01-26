@@ -20,13 +20,13 @@
         <div class="row row-xs">
             <div class="col-12 justify-content-center text-center align-items-center">
                 <a href="{{route('dashboard.create')}}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add New Product</a>
-              </div>
+            </div>
             @if (session('success'))
             @section('script')
             <script>
-              Notiflix.Notify.Success('{{ session("success") }}', {
-                timeout: 6000,
-              }, );
+                Notiflix.Notify.Success('{{ session("success") }}', {
+                    timeout: 6000,
+                }, );
             </script>
             @endsection
             @endif
@@ -76,17 +76,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                             @php $sn = 1; @endphp
+                                @php $sn = 1; @endphp
                                 @foreach ($products as $product)
                                 <tr>
                                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                                     <td class="tx-medium">{{$product->name}}</td>
                                     <td class="tx-medium">{{$product->category->name}}</td>
-                                    <td class="tx-medium">{{$product->subCat->name}}</td>
                                     <td class="tx-medium">
-                                    @foreach($product->defaultImages as $image)
+                                        @if($product->subCat == null)
+
+                                        @else
+                                        {{$product->subCat->name}}
+                                        @endif
+                                    </td>
+                                    <td class="tx-medium">
+                                        @foreach($product->defaultImages as $image)
                                         <img width="70" height="70" src="{{$image->image_url}}">
-                                    @endforeach
+                                        @endforeach
                                     </td>
                                     <td class="text-left">#{{number_format($product->real_price,2)}}</td>
                                     <td class="text-left">{{$product->totalItems()}}</td>

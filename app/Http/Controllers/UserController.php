@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Role;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -26,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('dashboard.add_user');
+        $roles = Role::all();
+        return view('dashboard.add_user', compact('roles'));
     }
 
     /**
@@ -37,7 +41,39 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string',
+            'middle_name' => 'nullable|string',
+            'last_name' => 'required|string',
+            'email' => 'email|required|unique:users',
+            'phone' => 'numeric|required',
+            'role' => 'numeric|required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+        $data = [];
+        $pass = $request->first_name . '@' . random_int(1000, 9999);
+        $user = new User();
+        $user->first_name = $request->first_name;
+        $user->middle_name = $request->middle_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($pass);
+        $user->phone = $request->phone;
+        $user->role_id = $request->role;
+        // $user->save();
+        $data['first_name'] = $request->first_name;
+        $data['middle_name'] = $request->middle_name;
+        $data['last_name'] = $request->last_name;
+        $data['email'] = $request->email;
+        $data['password'] = $pass;
+        $data['link'] = url('/');
+        $data['role'] = $user->role->name;
+        Mail::to($user->email)->send(new \App\Mail\RegistrationMail($data));
+        $user->save();
+        return redirect()->back()->withSuccess('User created successfully');
     }
 
     /**

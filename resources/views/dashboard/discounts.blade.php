@@ -6,6 +6,16 @@
 <div class="content-body">
     <div class="container pd-x-0">
         <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
+
+            @if (session('success'))
+            @section('script')
+            <script>
+                Notiflix.Notify.Success('{{ session("success") }}', {
+                    timeout: 6000,
+                }, );
+            </script>
+            @endsection
+            @endif
             <div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-style1 mg-b-10">
@@ -64,10 +74,15 @@
                                     <td class="tx-medium">{{$discount->user->first_name}} ({{$discount->user->role->name}})</td>
                                     <td class="tx-medium">{{ Carbon\Carbon::parse($discount->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
                                     <td class=" text-center">
-                                        <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i data-feather="more-vertical"></i></a>
+                                        <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Edit </a>
-                                                <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Delete </a>
+                                                <a href="{{route('dashboard.edit_discount', $discount->id)}}" class="dropdown-item details"><i class="far fa-clipboard"></i> Edit </a>
+                                                <a onclick="event.preventDefault(); confirm('Are you sure you want to delete this discount?');
+          document.getElementById('delete-form').submit();" href="{{route('delete_discount', $discount->id)}}" class="dropdown-item details"><i class="far fa-clipboard"></i> Delete </a>
+                                                <form id="delete-form" action="{{route('delete_discount', $discount->id)}}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
                                             </div>
                                         </div>
                                     </td>

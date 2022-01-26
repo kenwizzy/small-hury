@@ -33,7 +33,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="product_name">Product Name</label>
-                                <input type="text" class="form-control @error('product_name') is-invalid @enderror" id="product_name" name="product_name" value="{{ old('product_name') }}" autocomplete="off">
+                                <input type="text" class="form-control @error('product_name') is-invalid @enderror" id="product_name" name="product_name">
                                 @error('product_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -53,7 +53,7 @@
 
                             <div class="form-group col-md-3">
                                 <label for="last_name">Original Price</label>
-                                <input type="number" class="form-control @error('original_price') is-invalid @enderror" id="original_price" name="original_price" value="{{ old('original_price') }}">
+                                <input type="number" class="form-control @error('original_price') is-invalid @enderror" id="original_price" name="original_price">
                                 @error('original_price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -92,7 +92,7 @@
                                 <select class="custom-select @error('discount') is-invalid @enderror" id="discount">
                                     <option>Select Discount</option>
                                     @foreach ($discounts as $dis)
-                                    <option value="{{$dis->value}}" {{old('discount') == $dis->id ? 'selected' : ''}}> {{$dis->value}}%</option>
+                                    <option value="{{$dis->value}}"> {{$dis->value}}%</option>
                                     @endforeach
                                 </select>
                                 @error('discount')
@@ -108,7 +108,6 @@
                                     <option>Select Warehouse</option>
                                     @if($warehouses->count() > 0)
                                     <option value="all">All Warehouses</option>
-
                                     @foreach ($warehouses as $store)
                                     <option value="{{$store->id}}">{{$store->name}}</option>
                                     @endforeach
@@ -124,7 +123,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="inputEmail4">Default Image</label>
-                                <input type="file" class="form-control @error('default_image') is-invalid @enderror" id="default_image" name="default_image" value="{{ old('default_image') }}" autocomplete="off">
+                                <input type="file" class="form-control @error('default_image') is-invalid @enderror" id="default_image" name="default_image">
                                 @error('default_image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -134,7 +133,7 @@
 
                             <div class="form-group col-md-3">
                                 <label for="phone_number">Quantity</label>
-                                <input type="number" maxlength="11" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{ old('quantity') }}" autocomplete="off">
+                                <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity">
                                 @error('quantity')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -147,15 +146,14 @@
                                 <select class="form-control" id="cat_id" name="product_category" autocomplete="off">
                                     <option value="">Select Category</option>
                                     @foreach ($categories as $cat)
-                                    <option value="{{$cat->id}}" {{old('cat_id') == $cat->id ? 'selected' : ''}}> {{Str::title($cat->name)}}</option>
+                                    <option value="{{$cat->id}}">{{Str::title($cat->name)}}</option>
                                     @endforeach
-
                                 </select>
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="middle_name">Select Sub Category</label>
-                                <select class="form-control"id="subcat_id" name="sub_category" autocomplete="off">
+                                <select class="form-control" id="subcat_id" name="sub_category">
                                     <option value="">Select Sub Category</option>
                                 </select>
                             </div>
@@ -170,7 +168,7 @@
                                     <option value="{{$attribute->id}}">{{$attribute->name}}</option>
                                     @endforeach
                                 </select>
-                                @error('attr_id')
+                                @error('attribute')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -238,15 +236,15 @@
 
             function assignName(count) {
 
-               $(document).on("change", ".do", function() {
+                $(document).on("change", ".do", function() {
                     let attr = $(this).val();
                     axios.get('{{url("get_attr_values")}}/' + attr)
                         .then(response => {
                             let attr_values = response.data;
                             //console.log(attr_values);
-                            $("#attr_value"+count).html(attr_values);
+                            $("#attr_value" + count).html(attr_values);
                         });
-                        count++;
+                    count++;
                 });
 
             }
@@ -284,12 +282,12 @@
                 axios.get('{{url("get_subcategory_values")}}/' + cat_id)
                     .then(response => {
                         let sub_category_data = response.data;
-                        if(sub_category_data == ''){
-                            $('#subcat_id').attr('disabled', true);
-                        }else{
-                            $('#subcat_id').attr('disabled', false);
+                        if (sub_category_data == '') {
+                            $('#subcat_id').attr('readonly', true);
+                            $("#subcat_id").html('');
+                        } else {
+                            $('#subcat_id').attr('readonly', false);
                             $("#subcat_id").html(sub_category_data);
-
                         }
                     });
             });
@@ -345,15 +343,14 @@
 
             });
 
-                $(document).on("click", ".close" , function() {
+            $(document).on("click", ".close", function() {
                 var button_id = $(this).attr("id");
-               $('#added' + count).remove();
-               count--;
+                $('#added' + count).remove();
+                count--;
 
             });
 
         });
-
     </script>
 
     @endsection
