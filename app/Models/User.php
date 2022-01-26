@@ -17,11 +17,7 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -31,8 +27,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at'
     ];
-
+    public const USER_METHOD = [
+      "FACEBOOK" => 1,
+      "GOOGLE" => 2,
+      "BASIC_AUTH" => 3
+    ];
+    public const SUPER_ADMIN = 1;
+    public const ADMIN = 2;
+    public const WAREHOUSE_MANAGER = 3;
+    public const CUSTOMER = 5;
+    public const BIKER = 4;
     /**
      * The attributes that should be cast.
      *

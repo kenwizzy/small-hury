@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Discount;
-use App\Models\Warehouse;
 use App\Models\Attribute;
-use App\Models\ProductImage;
-use App\Models\ProductWarehouse;
+use App\Models\Warehouse;
 use Illuminate\Support\Str;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use App\Models\ProductWarehouse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -48,60 +50,60 @@ class ProductController extends Controller
 
         $stores = Warehouse::all();
         $defaultImageUrl = asset('assets/images/products/' . $filename);
+        DB::transaction(function () use ($request,$defaultImageUrl,$stores) {
+            // //INSERT PRODUCT
+            $product = new Product();
+            $product->name = $request->product_name;
+            $product->internal_ref = $request->int_ref;
+            $product->description = $request->description;
+            $product->category_id = $request->product_category;
+            $product->added_by = Auth::id();
+            $product->sub_category_id = $request->sub_category;
+            $product->slug = Str::slug($request->product_name);
+            $product->real_price = $request->real_price;
+            $product->original_price = $request->original_price;
+            $product->save();
 
-        // //INSERT PRODUCT
-        $product = new Product();
-        $product->name = $request->product_name;
-        $product->internal_ref = $request->int_ref;
-        $product->description = $request->description;
-        $product->category_id = $request->product_category;
-        $product->sub_category_id = $request->sub_category;
-        $product->slug = Str::slug($request->product_name);
-        $product->real_price = $request->real_price;
-        $product->original_price = $request->original_price;
-        $product->save();
-
-        // //INSERT PRODUCT DEFAULT IMAGE
-        ProductImage::create([
+            // //INSERT PRODUCT DEFAULT IMAGE
+            ProductImage::create([
             'product_id' => $product->id,
             'image_url' => $defaultImageUrl,
             'default' => 1
         ]);
 
-        // //INSERT PRODUCT OTHER IMAGES
-        for($i = 0; $i < sizeof($request->attribute); $i++){
+            // //INSERT PRODUCT OTHER IMAGES
+            for ($i = 0; $i < sizeof($request->attribute); $i++) {
+                $fileImages = $request->attribute_image[$i]->getClientOriginalName();
+                $filenam = time() . '.' . $fileImages;
+                $request->attribute_image[$i]->move('assets/images/products/', $filenam);
+                $fileImagesUrl = asset('assets/images/products/' . $filenam);
 
-            $fileImages = $request->attribute_image[$i]->getClientOriginalName();
-            $filenam = time() . '.' . $fileImages;
-            $request->attribute_image[$i]->move('assets/images/products/', $filenam);
-            $fileImagesUrl = asset('assets/images/products/' . $filenam);
-
-            ProductImage::create([
+                ProductImage::create([
                 'product_id' => $product->id,
                 'image_url' => $fileImagesUrl,
                 'default' => 0,
                 'attribute_value_id' => $request->attribute_value[$i]
             ]);
 
-        // ######## PRODUCT ATTRIBUTES HERE (not sure if needed) #########
 
-        }
+            }
 
-        if($request->store == 'all'){
-            foreach($stores as $shop){
-                ProductWarehouse::create([
+            if ($request->store == 'all') {
+                foreach ($stores as $shop) {
+                    ProductWarehouse::create([
                     'product_id' => $product->id,
                     'warehouse_id' =>$shop->id,
                     'total_quantity' => $request->quantity
                 ]);
-            }
-        }else{
-            ProductWarehouse::create([
+                }
+            } else {
+                ProductWarehouse::create([
             'product_id' => $product->id,
             'warehouse_id' =>$request->store,
             'total_quantity' => $request->quantity
         ]);
-        }
+            }
+        });
 
         return redirect('dashboard/products')->withSuccess('Product' . $request->product_name . ' added successfully');
     }

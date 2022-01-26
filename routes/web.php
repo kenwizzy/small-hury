@@ -43,8 +43,9 @@ Route::get('/get_attr_values/{id}', [AttributeController::class, 'FetchAttribute
 Route::get('/get_subcategory_values/{id}', [CategoryController::class, 'FetchSubCategoryValues']);
 Route::post('submit_store', [WarehouseController::class, 'store'])->name('submit_store');
 Route::get('dashboard/stores', [WarehouseController::class, 'index'])->name('dashboard.stores');
-Route::view('dashboard/add_user', 'dashboard.add_user')->name('dashboard.add_user');
-Route::view('dashboard/users', 'dashboard.users')->name('dashboard.users');
+Route::get('dashboard/add_user', [UserController::class,'create'])->name('create_user');
+Route::post('create_user', [UserController::class,'store'])->name('dashboard.add_user');
+Route::get('dashboard/users', [UserController::class,'index'])->name('dashboard.users');
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');

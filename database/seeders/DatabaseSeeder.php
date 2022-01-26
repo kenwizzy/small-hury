@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             StateSeeder::class,
             LgaSeeder::class,
+            WarehouseSeeder::class
 
         ]);
 
@@ -47,22 +48,22 @@ class DatabaseSeeder extends Seeder
 
         $attribuleValue = new AttributeValue();
         $attribuleValue->attribute_id = 1;
-        $attribuleValue->name = 'default';
+        $attribuleValue->attribute_val_name = 'default';
         $attribuleValue->save();
 
         $attribuleValue1 = new AttributeValue();
         $attribuleValue1->attribute_id = $attribute1->id;
-        $attribuleValue1->name = 'small';
+        $attribuleValue1->attribute_val_name = 'small';
         $attribuleValue1->save();
 
         $attribuleValue2 = new AttributeValue();
         $attribuleValue2->attribute_id = $attribute1->id;
-        $attribuleValue2->name = 'medium';
+        $attribuleValue2->attribute_val_name = 'medium';
         $attribuleValue2->save();
 
         $attribuleValue3 = new AttributeValue();
         $attribuleValue3->attribute_id = $attribute1->id;
-        $attribuleValue3->name = 'large';
+        $attribuleValue3->attribute_val_name = 'large';
         $attribuleValue3->save();
 
         $discount = new Discount();

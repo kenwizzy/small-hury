@@ -18,7 +18,7 @@
 
         <div class="row row-xs">
             <div class="col-lg-12 col-xl-12">
-                <form method="POST" action="">
+                <form method="POST" action="{{route('create_user')}}">
                     @csrf
                     <div class="col-md-12">
                         <div class="form-row">

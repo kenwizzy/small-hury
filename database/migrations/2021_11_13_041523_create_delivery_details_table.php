@@ -18,12 +18,12 @@ class CreateDeliveryDetailsTable extends Migration
             $table->foreignId('order_id')
                 ->constrained('orders')->onDelete('cascade');
             $table->string('delivery_contact');
-            $table->string('delivery_address');
-            $table->double('longitude', 5, 5)->nullable();
-            $table->double('latitude', 5, 5)->nullable();
-            $table->string('delivery_phone');
-            $table->string('delivery_note');
-            $table->string('delivery_reference');
+            $table->foreignId('address_id')
+                ->constrained('addresses')->onDelete('cascade');
+
+            $table->string('delivery_phone')->nullable();
+            $table->string('delivery_note')->nullable();
+            $table->string('delivery_reference')->nullable();
             $table->foreignId('warehouse_id')
                 ->nullable()->constrained('warehouses');
             $table->foreignId('status')->constrained('order_status');
