@@ -18,12 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
-<<<<<<< HEAD
             $table->string('image_url')->default('default-user.png');
-            $table->unsignedBigInteger('phone');
-=======
+            // $table->unsignedBigInteger('phone');
             $table->unsignedBigInteger('phone')->nullable();
->>>>>>> 34aca89bfe505d06d75dbca523184f822888d2cb
             $table->string('email')->unique();
             $table->string('token')->nullable();
             $table->timestamp('email_verified_at')->nullable();

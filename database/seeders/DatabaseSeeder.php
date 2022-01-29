@@ -18,19 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-        $this->call([
-            RoleSeeder::class,
-            CategorySeeder::class,
-            StateSeeder::class,
-            LgaSeeder::class,
-            WarehouseSeeder::class,
-            DeliveryCostSeeder::class,
-            OrderStatusSeeder::class,
-            DeliveryTypeSeeder::class,
-            OrderProcessSeeder::class
-        ]);
-
         $user = new User();
         $user->first_name = 'Wizzy';
         $user->middle_name = 'smith';
@@ -83,5 +70,17 @@ class DatabaseSeeder extends Seeder
         $discount2->value = 15;
         $discount2->user_id = 1;
         $discount2->save();
+
+        $this->call([
+            RoleSeeder::class,
+            CategorySeeder::class,
+            StateSeeder::class,
+            LgaSeeder::class,
+            WarehouseSeeder::class,
+            DeliveryCostSeeder::class,
+            OrderStatusSeeder::class,
+            DeliveryTypeSeeder::class,
+            OrderProcessSeeder::class
+        ]);
     }
 }
