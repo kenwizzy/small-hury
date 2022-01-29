@@ -54,7 +54,7 @@ class ProductController extends BaseController
                 $quantity = $user->cart->product_quantity($item);
                 $product['incart'] = $quantity;
             }else
-            $product['incart'] = 0;
+                $product['incart'] = 0;
         return $this->sendResponse($product, 'Product fetched successfully.');
         // }
     }

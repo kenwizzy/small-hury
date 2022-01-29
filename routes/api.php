@@ -11,6 +11,7 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\DeliveryCostController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\WareHouseController;
+use App\Http\Controllers\API\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,7 @@ Route::group([
 ], function ($router) {
 
     Route::get('/user', [UserController::class, 'getUser']);
+    Route::patch('update-user',[UserController::class,'update']);
     //Route::get('/products', [ProductController::class, 'getProducts']);
     Route::get('/categories', [CategoryController::class, 'getCategories']);
     Route::get('/categories-parent',[CategoryController::class,'getParent']);
@@ -55,7 +57,7 @@ Route::group([
     //For managing wishing of products
     Route::patch('/wish-product/{id}',[ProductController::class,'wishProduct']);
     Route::delete('/wish-product/{id}',[ProductController::class,'removeWished']);
-
+    Route::get('/wishlists',[UserController::class,'getWishlists']);
 
     //For adding Items to cart
     Route::prefix('cart')->group(function(){
