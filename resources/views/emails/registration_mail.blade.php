@@ -13,7 +13,8 @@
     <p><strong>Email address:</strong> {{$data['email']}}</p>
     <p><strong>Password:</strong> {{$data['password']}}</p><br>
     <p>Kindly click <a href'{{$data['link']}}'>here</a> to login to your account</p>
-    <p>Thank you</p>
+    <p>Thank you</p><br>
+    <p>Small Hurry Team</p>
 </body>
 
 </html>

@@ -69,8 +69,13 @@
                                     <td class=" text-center">
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Edit </a>
-                                                <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Delete </a>
+                                                <a href="{{route('dashboard.edit_attribute', $attr->id)}}" class="dropdown-item details text-success"><i class="far fa-clipboard"></i> Edit </a>
+                                                <a onclick="event.preventDefault(); confirm('Are you sure you want to delete this attribute?');
+          document.getElementById('delete-form').submit();" href="{{route('delete_attribute', $attr->id)}}" class="dropdown-item text-danger"><i class="fas fa-trash-alt"></i> Delete </a>
+                                                <form id="delete-form" action="{{route('delete_attribute', $attr->id)}}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
                                             </div>
                                         </div>
                                     </td>

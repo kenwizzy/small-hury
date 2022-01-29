@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Models\Warehouse;
-use App\Models\State;
 use App\Models\Lga;
+use App\Models\User;
+use App\Models\State;
+use App\Models\Warehouse;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class WarehouseController extends Controller
 {
@@ -31,6 +33,13 @@ class WarehouseController extends Controller
     public function create()
     {
         return view('dashboard.add_store', [
+            'users' => User::where('role_id', 3)->get(),
+            // 'users' => DB::table('users')
+            //     ->join('warehouses', 'users.id', 'manager')
+            //     //->join('attributes', 'attribute_values.attribute_id', '=', 'attributes.id')
+            //     ->where('users.role_id', 3)
+            //     //->where('users.id', '<>', 'manager')
+            //     ->get(),
             'states' => State::all()
         ]);
     }
@@ -56,6 +65,7 @@ class WarehouseController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'store_name'     => 'required|string',
+            'manager' => 'required|numeric|unique:warehouses',
             'state' => 'required|numeric',
             'lga' => 'required|numeric',
             'street' => 'required|string',
@@ -71,6 +81,7 @@ class WarehouseController extends Controller
 
         Warehouse::create([
             'name' => $request->store_name,
+            'manager' => $request->manager,
             'state_id' => $request->state,
             'lga_id' => $request->lga,
             'slug' => Str::slug($request->store_name),
@@ -89,9 +100,11 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Warehouse $warehouse)
     {
-        //
+        return view('dashboard/store_details', [
+            'warehouse' => $warehouse
+        ]);
     }
 
     /**

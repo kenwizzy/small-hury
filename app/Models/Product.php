@@ -28,11 +28,11 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'sub_category_id');
     }
 
-    public function defaultImages()
-    {
-        return $this->hasMany(ProductImage::class)->where('product_id', $this->id)
-            ->where('default', 1);
-    }
+    // public function defaultImages()
+    // {
+    //     return $this->hasMany(ProductImage::class)->where('product_id', $this->id)
+    //         ->where('default', 1);
+    // }
 
     public function DefaultImage()
     {

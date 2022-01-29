@@ -90,9 +90,9 @@
                                         @endif
                                     </td>
                                     <td class="tx-medium">
-                                        @foreach($product->defaultImages as $image)
-                                        <img width="70" height="70" src="{{$image->image_url}}">
-                                        @endforeach
+                                        {{-- @foreach($product->defaultImages as $image)--}}
+                                        <img width="70" height="70" src="{{$product->DefaultImage->image_url}}">
+                                        {{--@endforeach --}}
                                     </td>
                                     <td class="text-left">#{{number_format($product->real_price,2)}}</td>
                                     <td class="text-left">{{$product->totalItems()}}</td>
@@ -103,9 +103,10 @@
                                     <td class="text-center">
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="{{url('dashboard/products/details')}}" class="dropdown-item details"><i class="far fa-clipboard"></i> Details </a>
-                                                <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Next Page </a>
-                                                <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Edit </a>
+                                                <a href="{{route('dashboard/product_details', $product->id)}}" class="dropdown-item moove"><i class="far fa-clipboard"></i> Details </a>
+                                                <!-- <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Next Page </a> -->
+                                                <a href="{{route('dashboard/edit_product', $product->id)}}" class="dropdown-item text-success"><i class="far fa-edit"></i> Edit </a>
+                                                <a href="{{url('dashboard/delete_product', $product->id)}}" class="dropdown-item text-danger"><i class="far fa-trash-alt"></i> Delete </a>
                                             </div>
                                         </div>
                                     </td>
