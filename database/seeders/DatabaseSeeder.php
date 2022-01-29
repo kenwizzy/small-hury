@@ -24,8 +24,11 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             StateSeeder::class,
             LgaSeeder::class,
-            WarehouseSeeder::class
-
+            WarehouseSeeder::class,
+            DeliveryCostSeeder::class,
+            OrderStatusSeeder::class,
+            DeliveryTypeSeeder::class,
+            OrderProcessSeeder::class
         ]);
 
         $user = new User();

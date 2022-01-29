@@ -14,7 +14,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->id()->from(1000000);
             $table->foreignId('user_id')->constrained('users');
             $table->decimal('total_products_price', 15, 2);
             $table->decimal('total_shipping_price', 15, 2);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Wishlist;
 
 class ProductController extends BaseController
 {
@@ -30,6 +32,7 @@ class ProductController extends BaseController
     public function show($id)
     {
         $item = Product::findOrFail($id);
+       $wishlist = $item->wishlists()->where('user_id',auth()->user()->id)->first();
         // if ($item == null) {
         //     return $this->sendError('Record not found', $item);
         // } else {
@@ -43,8 +46,37 @@ class ProductController extends BaseController
         $product['sub_category'] = $item->subCat == '' ? 'Unavailable' : $item->subCat->name;
         $product['default_image'] = $item->defaultImage->image_url;
         $product['attributes'] = $item->apiAttribute();
-
+       $product['wishlist'] = $wishlist?true: false;
+            // get the number of items in cart
+            $user = User::find(auth()->user()->id);
+            $quantity = $user->cart->product_quantity($item);
+        $product['incart'] = $quantity;
         return $this->sendResponse($product, 'Product fetched successfully.');
         // }
+    }
+    public function wishProduct($id){
+        $item = Product::findOrFail($id);
+        //check whetther already wishlist this product
+       $wishlist= $item->wishlists()->where('user_id',auth()->user()->id)->first();
+       if($wishlist){
+        return $this->sendError('Product Already wishlisted', $item);
+       }
+        $wished =   Wishlist::create([
+            'user_id' => auth()->user()->id,
+            'product_id' => $item->id,
+        ]);
+        return $this->sendResponse($wished, 'Product successfully wished.');
+    }
+
+    public function removeWished($id){
+        $item = Product::findOrFail($id);
+       $deleted = Wishlist::where([
+            'user_id' => auth()->user()->id,
+            'product_id' => $item->id
+        ])->delete();
+        if(!$deleted){
+            return $this->sendError('Item not wishlisted', $deleted);
+        }
+        return $this->sendResponse($deleted, 'Product successfully removed from Wished');
     }
 }
