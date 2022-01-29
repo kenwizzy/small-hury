@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attribute;
-use App\Models\AttributeValue;
 use Illuminate\Http\Request;
+use App\Models\AttributeValue;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AttributeController extends Controller
@@ -63,6 +64,7 @@ class AttributeController extends Controller
 
         $data = explode(",", $request->values);
 
+        DB::transaction(function () use ($request,$data) {
         $attribute = new Attribute();
         $attribute->name = $request->name;
         $attribute->save();
@@ -73,6 +75,8 @@ class AttributeController extends Controller
                 'attribute_val_name' => $mad
             ]);
         }
+
+    });
 
         return redirect()->back()->withSuccess('Attribute created successfully');
     }

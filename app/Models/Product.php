@@ -13,6 +13,9 @@ class Product extends Model
 
     protected $guarded = ['created_at', 'updated_at'];
 
+
+
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -67,11 +70,7 @@ class Product extends Model
 
     public function carts()
     {
-        return Cart::where([
-            'product_id' => $this->id,
-            'user_id' => Auth::user()->id,
-            'warehouse_id' => $this->pivot->warehouse_id
-        ])->get();
+        return $this->belongsToMany(Cart::class,'cart_products','product_id','cart_id');
     }
 
     public function apiAttribute()
@@ -82,6 +81,10 @@ class Product extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'added_by');
+    }
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
     }
 
     private function output()

@@ -17,14 +17,7 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $fillable = [
-        'first_name',
-        'middlename',
-        'last_name',
-        'email',
-        'password',
-        'phone'
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -34,8 +27,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at'
     ];
-
+    public const USER_METHOD = [
+      "FACEBOOK" => 1,
+      "GOOGLE" => 2,
+      "BASIC_AUTH" => 3
+    ];
+    public const SUPER_ADMIN = 1;
+    public const ADMIN = 2;
+    public const WAREHOUSE_MANAGER = 3;
+    public const CUSTOMER = 5;
+    public const BIKER = 4;
     /**
      * The attributes that should be cast.
      *
@@ -56,29 +60,33 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-    public function add_to_cart(Product $product)
+    public function wishlists()
     {
-        return Cart::create([
-            'product_id' => $product->id,
+        return $this->hasMany(Wishlist::class);
+    }
+    public function add_new_product_to_cart(Product $product,$warehouse_id)
+    {
+        if($this->cart){
+            return $this->cart->add_product($product,$warehouse_id);
+        }
+        $cart = Cart::create([
             'user_id' => $this->id,
-            'product_name' => $product->name,
-            'warehouse_id' => $product->warehouse_id
+
         ]);
+        return  $cart->add_product($product,$warehouse_id);
     }
-    public function increase_product(Product $product, $quantity = 1)
+
+    public function increase_product(Product $product, $warehouse_id,$quantity = 1)
     {
-        return $this->cart()->where('product_id', $product->id)->update([
-            'quantity' => $this->cart->quantity + $quantity
-        ]);
+        return $this->cart->increase_product($product,$warehouse_id,$quantity);
     }
-    public function decrease_product(Product $product, $quantity = 1)
+    public function decrease_product(Product $product,$warehouse_id, $quantity = 1)
     {
-        return $this->cart()->where('product_id', $product->id)->update([
-            'quantity' => $this->cart->quantity - $quantity
-        ]);
+        return $this->cart->decrease_product($product,$warehouse_id,$quantity);
     }
     public function clear_cart()
     {
-        return $this->cart()->delete();
+         return $this->cart()->delete();
+
     }
 }

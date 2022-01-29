@@ -76,7 +76,7 @@ class ProductController extends Controller
             $request->attribute_image[$i]->move('assets/images/products/', $filenam);
             $fileImagesUrl = asset('assets/images/products/' . $filenam);
 
-            ProductImage::create([
+                ProductImage::create([
                 'product_id' => $product->id,
                 'image_url' => $fileImagesUrl,
                 'default' => 0,
@@ -85,7 +85,7 @@ class ProductController extends Controller
 
             // ######## PRODUCT ATTRIBUTES HERE (not sure if needed) #########
 
-        }
+            }
 
         if ($request->store == 'all') {
             foreach ($stores as $shop) {
