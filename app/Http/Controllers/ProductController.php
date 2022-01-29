@@ -122,4 +122,23 @@ class ProductController extends Controller
             'products' => Product::all()
         ]);
     }
+
+
+    public function show(Product $product)
+    {
+        return view('dashboard.product_details', [
+            'product' => $product
+        ]);
+    }
+
+    public function edit(Product $product)
+    {
+        return view('dashboard/edit_product', [
+            'categories' => Category::where('parent_id', 0)->get(),
+            'discounts' => Discount::all(),
+            'warehouses' => Warehouse::all(),
+            'attributes' => Attribute::where('id', '<>', 1)->get(),
+            'product' => $product
+        ]);
+    }
 }

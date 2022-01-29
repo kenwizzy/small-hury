@@ -86,14 +86,16 @@
                                     <td class="tx-medium">{{$store->lga->name}}</td>
                                     <td class="text-left">{{$store->state->name}}</td>
                                     <td class="text-left">10</td>
-                                    <td class="text-left">Oluseyi Olukanya</td>
+                                    <td class="text-left">
+                                        {{$store->user()}}
+                                    </td>
                                     <td class="tx-medium">{{ Carbon\Carbon::parse($store->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
                                     <td class=" text-center">
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="{{url('dashboard/products/details')}}" class="dropdown-item details"><i class="far fa-clipboard"></i> Details </a>
-                                                <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Next Page </a>
-                                                <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Edit </a>
+                                                <a href="{{url('dashboard/store_details',$store->id)}}" class="dropdown-item moove"><i class="far fa-clipboard"></i> Details </a>
+                                                <a href="" class="dropdown-item text-info"><i class="far fa-user"></i> Assign Manager </a>
+                                                <a href="" class="dropdown-item text-success"><i class="far fa-edit"></i> Edit </a>
                                             </div>
                                         </div>
                                     </td>

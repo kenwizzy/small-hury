@@ -45,6 +45,7 @@ class UserController extends Controller
             'first_name' => 'required|string',
             'middle_name' => 'nullable|string',
             'last_name' => 'required|string',
+            'image' => 'required|mimes:jpeg,jpg,png',
             'email' => 'email|required|unique:users',
             'phone' => 'numeric|required',
             'role' => 'numeric|required'
@@ -95,9 +96,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        return view('dashboard.edit_user', [
+            'user' => User::where('id', Auth::id())->first()
+        ]);
     }
 
     /**
@@ -107,9 +110,38 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string',
+            'middle_name' => 'nullable|string',
+            'image' => 'required|mimes:jpeg,jpg,png',
+            'last_name' => 'required|string',
+            'email' => 'email',
+            'phone' => 'numeric|required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        if ($request->hasFile('image')) {
+            $user_image = $request->image->getClientOriginalName();
+            $filename = time() . '.' . $user_image;
+            $request->image->move('assets/images/users/', $filename);
+        }
+
+        $defaultImageUrl = asset('assets/images/users/' . $filename);
+
+        $updateUser = User::where('id', Auth::id())->first();
+        $updateUser->first_name = $request->first_name;
+        $updateUser->middle_name = $request->middle_name;
+        $updateUser->last_name = $request->last_name;
+        $updateUser->email = $request->email;
+        $updateUser->image_url = $defaultImageUrl;
+        $updateUser->phone = $request->phone;
+        $updateUser->save();
+        return redirect('dashboard/view_profile')->withSuccess('User updated successfully');
     }
 
     /**

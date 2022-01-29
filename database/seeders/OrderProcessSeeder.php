@@ -23,17 +23,17 @@ class OrderProcessSeeder extends Seeder
      */
     public function run()
     {
-        try{
+        try {
             DB::beginTransaction();
-           $newOrder = Order::create([
+            $newOrder = Order::create([
                 'user_id' => 1,
-                'total_products_price' => "9500",
+                'total_products_price' => 9500,
                 'total_shipping_price' => 1000,
-                'total_paid' => '10500',
+                'total_paid' => 10500,
                 'status' => Order::AWAITING_FULFILLMENT,
                 'warehouse_id' => 2,
             ]);
-            $date = explode('/','29/02/2022');
+            $date = explode('/', '29/02/2022');
             $day = $date[0];
             $month = $date[1];
             $year = $date[2];
@@ -41,29 +41,30 @@ class OrderProcessSeeder extends Seeder
 
             //For constraint sake, we need a valid Address
             $add = Address::create([
-                "street"=> "No 66 old yaba road",
-                "latitude"=> "3.7",
-                "longitude" =>"7.6",
+                "user_id" => 1,
+                "street" => "No 66 old yaba road",
+                "latitude" => "3.7",
+                "longitude" => "7.6",
                 "state" => "lagos",
-                "city"=>"Yaba",
-                "landmark" =>"Adekunle Bus stop",
-                "name"=> "Office",
-                "default"=>1
+                "city" => "Yaba",
+                "landmark" => "Adekunle Bus stop",
+                "name" => "Office",
+                "default" => 1
             ]);
 
             $delDetailId = DB::table('delivery_details')
-                        ->insertGetId([
-                            'order_id' => $newOrder->id,
-                            'delivery_contact' => '08076884964',
-                            'address_id' => $add->id,
-                            'payment_method' => "CARD",
-                            'delivery_date' => Carbon::create($year,$month,$day,0)->toDateTimeString(),
-                            'time_interval' => "8AM - 12AM",
-                            'delivery_phone' => '08076884964',
-                            'delivery_note' => "Please Call me when coming",
+                ->insertGetId([
+                    'order_id' => $newOrder->id,
+                    'delivery_contact' => '08076884964',
+                    'address_id' => $add->id,
+                    'payment_method' => "CARD",
+                    'delivery_date' => Carbon::create($year, $month, $day, 0)->toDateTimeString(),
+                    'time_interval' => "8AM - 12AM",
+                    'delivery_phone' => '08076884964',
+                    'delivery_note' => "Please Call me when coming",
 
 
-                        ]);
+                ]);
 
             //We all need to create product for it to work
             $stores = Warehouse::all();
@@ -73,7 +74,7 @@ class OrderProcessSeeder extends Seeder
             $product = new Product();
             $product->name = "Ofada Rice";
             $product->internal_ref = "123-567-9";
-            $product->description ="Ofada Rice is good for your health";
+            $product->description = "Ofada Rice is good for your health";
             $product->category_id = "4";
             $product->sub_category_id = 5;
             $product->added_by = 1;
@@ -97,29 +98,29 @@ class OrderProcessSeeder extends Seeder
                 // $request->attribute_image[$i]->move('assets/images/products/', $filenam);
                 $fileImagesUrl = asset('assets/images/products/' . 'meat20.png');
 
-                    ProductImage::create([
+                ProductImage::create([
                     'product_id' => $product->id,
                     'image_url' => $fileImagesUrl,
                     'default' => 0,
-                    'attribute_value_id' => 1
+                    'attribute_value_id' => 2
                 ]);
 
                 // ######## PRODUCT ATTRIBUTES HERE (not sure if needed) #########
 
-                }
+            }
 
 
-                ProductWarehouse::create([
-                    'product_id' => $product->id,
-                    'warehouse_id' => 2,
-                    'total_quantity' => 20
-                ]);
+            ProductWarehouse::create([
+                'product_id' => $product->id,
+                'warehouse_id' => 2,
+                'total_quantity' => 20
+            ]);
 
 
-            $cartItems =[
-                ['name' => $product->name,'quantity' => 2,'id' => $product->id]
+            $cartItems = [
+                ['name' => $product->name, 'quantity' => 2, 'id' => $product->id]
             ];
-            foreach( $cartItems as $cartItem){
+            foreach ($cartItems as $cartItem) {
                 OrderDetail::create([
                     'order_id' => $newOrder->id,
                     'product_id' => $cartItem['id'],
@@ -129,9 +130,8 @@ class OrderProcessSeeder extends Seeder
                 ]);
             }
             DB::commit();
-        }catch(\Exception $err){
+        } catch (\Exception $err) {
             DB::rollBack();
-
         }
     }
 }

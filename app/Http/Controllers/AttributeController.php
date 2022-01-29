@@ -100,7 +100,10 @@ class AttributeController extends Controller
      */
     public function edit(Attribute $attribute)
     {
-        //
+        // dd($attribute);
+        return view('dashboard/edit_attribute', [
+            'attribute' => $attribute
+        ]);
     }
 
     /**
@@ -112,7 +115,26 @@ class AttributeController extends Controller
      */
     public function update(Request $request, Attribute $attribute)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'value.*' => 'required',
+            'name'  => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $disc = Attribute::find($attribute->id);
+        $disc->name = $request->name;
+        $disc->save();
+
+        foreach ($request->value as $attValue) {
+            $output = AttributeValue::find($disc->id);
+            $output->attribute_val_name = $attValue;
+            $output->save();
+        }
+
+        return redirect('dashboard/attributes')->withSuccess('Attribute updated successfully');
     }
 
     /**
@@ -122,7 +144,11 @@ class AttributeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Attribute $attribute)
+
     {
-        //
+        $attr = Attribute::find($attribute->id);
+        AttributeValue::where('attribute_id', $attr->id)->delete();
+        $attr->delete();
+        return redirect()->back()->withSuccess('Attribute deleted successfully');
     }
 }

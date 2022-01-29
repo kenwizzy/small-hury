@@ -18,9 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-
-
         $user = new User();
         $user->first_name = 'Wizzy';
         $user->middle_name = 'smith';

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Warehouse extends Model
 {
@@ -15,6 +16,21 @@ class Warehouse extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function user()
+    {
+        //return $this->belongsTo(User::class, 'user_id');
+        $user = DB::table('users')
+            ->join('warehouses', 'users.id', 'warehouses.user_id')
+            //->join('attributes', 'attribute_values.attribute_id', '=', 'attributes.id')
+            ->where('warehouses.id', $this->id)
+            //->where('users.id', '<>', 'manager')
+            ->get();
+
+        foreach ($user as $res) {
+            echo $res->first_name . ' ' . $res->last_name;
+        }
     }
 
     public function state()

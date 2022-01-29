@@ -21,7 +21,7 @@
                     @csrf
                     <div class="col-md-12">
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="first_name">Store Name</label>
                                 <input type="text" class="form-control @error('store_name') is-invalid @enderror" id="store_name" name="store_name" value="{{ old('store_name') }}" autocomplete="off">
                                 @error('store_name')
@@ -31,7 +31,22 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
+                                <label for="middle_name">Assign Manager</label>
+                                <select class="form-control form-control @error('manager') is-invalid @enderror" name="manager" autocomplete="off">
+                                    <option value="">Select Manager</option>
+                                    @foreach($users as $user)
+                                    <option value="{{$user->id}}">{{$user->first_name.' '.$user->last_name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('manager')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-3">
                                 <label for="middle_name">State</label>
                                 <select class="form-control" id="state" name="state" autocomplete="off">
                                     <option value="">Select State</option>
@@ -41,7 +56,7 @@
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="middle_name">LGA</label>
                                 <select class="form-control" id="lga" name="lga" autocomplete="off" placeholder="">
                                     <option value=''>Select LGA</option>
