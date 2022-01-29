@@ -49,8 +49,12 @@ class ProductController extends BaseController
        $product['wishlist'] = $wishlist?true: false;
             // get the number of items in cart
             $user = User::find(auth()->user()->id);
-            $quantity = $user->cart->product_quantity($item);
-        $product['incart'] = $quantity;
+
+            if($user->cart){
+                $quantity = $user->cart->product_quantity($item);
+                $product['incart'] = $quantity;
+            }
+            $product['incart'] = 0;
         return $this->sendResponse($product, 'Product fetched successfully.');
         // }
     }

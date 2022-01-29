@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -83,6 +84,8 @@ class OrderController extends BaseController
                     'delivery_detail_id' => $delDetailId
                 ]);
             }
+            $user = User::find(Auth::id());
+            $user->clear_cart();
             DB::commit();
         }catch(\Exception $err){
             DB::rollBack();

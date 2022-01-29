@@ -45,8 +45,12 @@ class CategoryController extends BaseController
 
 
             if($product->warehouses->contains($warehouse_id)){
-                $quantity = $user->cart->product_quantity($product);
                 $prod = (object)[];
+                if($user->cart){
+                    $quantity = $user->cart->product_quantity($product);
+                    $prod->incart = $quantity;
+                }
+                $prod->incart = 0;
                 $prod->id = $product->id;
                 $prod->name = $product->name;
                 $prod->description = $product->description;
@@ -56,7 +60,7 @@ class CategoryController extends BaseController
                 $prod->original_price = $product->original_price;
                 $prod->on_sales = $product->on_sales;
                 $prod->default_image = $product->defaultImage->image_url;
-                $prod->incart = $quantity;
+
                 $newProducts["data"][] = $prod;
             }
         }
