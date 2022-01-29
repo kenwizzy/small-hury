@@ -49,8 +49,8 @@ class CategoryController extends BaseController
                 if($user->cart){
                     $quantity = $user->cart->product_quantity($product);
                     $prod->incart = $quantity;
-                }
-                $prod->incart = 0;
+                }else
+                    $prod->incart = 0;
                 $prod->id = $product->id;
                 $prod->name = $product->name;
                 $prod->description = $product->description;
