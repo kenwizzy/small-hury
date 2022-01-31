@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\OrderController;
 
 
 /*
@@ -55,7 +56,8 @@ Route::get('dashboard/add_user', [UserController::class, 'create'])->name('dashb
 Route::get('dashboard/edit_user', [UserController::class, 'edit'])->name('dashboard.edit_user');
 Route::patch('update_user', [UserController::class, 'update'])->name('update_user');
 Route::post('create_user', [UserController::class, 'store'])->name('create_user');
-Route::view('dashboard/users', 'dashboard.users')->name('dashboard.users');
+Route::get('dashboard/users', [UserController::class, 'index'])->name('dashboard.users');
+Route::get('dashboard/orders', [OrderController::class, 'index'])->name('dashboard.orders');
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');

@@ -31,9 +31,9 @@ class User extends Authenticatable
         'updated_at'
     ];
     public const USER_METHOD = [
-      "FACEBOOK" => 1,
-      "GOOGLE" => 2,
-      "BASIC_AUTH" => 3
+        "FACEBOOK" => 1,
+        "GOOGLE" => 2,
+        "BASIC_AUTH" => 3
     ];
     public const SUPER_ADMIN = 1;
     public const ADMIN = 2;
@@ -64,29 +64,35 @@ class User extends Authenticatable
     {
         return $this->hasMany(Wishlist::class);
     }
-    public function add_new_product_to_cart(Product $product,$warehouse_id)
+    public function add_new_product_to_cart(Product $product, $warehouse_id)
     {
-        if($this->cart){
-            return $this->cart->add_product($product,$warehouse_id);
+        if ($this->cart) {
+            return $this->cart->add_product($product, $warehouse_id);
         }
         $cart = Cart::create([
             'user_id' => $this->id,
 
         ]);
-        return  $cart->add_product($product,$warehouse_id);
+        return  $cart->add_product($product, $warehouse_id);
     }
 
-    public function increase_product(Product $product, $warehouse_id,$quantity = 1)
+    public function increase_product(Product $product, $warehouse_id, $quantity = 1)
     {
-        return $this->cart->increase_product($product,$warehouse_id,$quantity);
+        return $this->cart->increase_product($product, $warehouse_id, $quantity);
     }
-    public function decrease_product(Product $product,$warehouse_id, $quantity = 1)
+    public function decrease_product(Product $product, $warehouse_id, $quantity = 1)
     {
-        return $this->cart->decrease_product($product,$warehouse_id,$quantity);
+        return $this->cart->decrease_product($product, $warehouse_id, $quantity);
     }
     public function clear_cart()
     {
-         return $this->cart()->delete();
+        return $this->cart()->delete();
+    }
 
+    public function warehouse()
+    {
+        //return $this->belongsTo(Warehouse::class);
+
+        return Warehouse::where('user_id', $this->id)->first();
     }
 }

@@ -56,6 +56,11 @@ class Product extends Model
         }
     }
 
+    public function attrs()
+    {
+        return $this->output();
+    }
+
     public function totalItems()
     {
         return ProductWarehouse::where([
@@ -70,7 +75,7 @@ class Product extends Model
 
     public function carts()
     {
-        return $this->belongsToMany(Cart::class,'cart_products','product_id','cart_id');
+        return $this->belongsToMany(Cart::class, 'cart_products', 'product_id', 'cart_id');
     }
 
     public function apiAttribute()
@@ -87,9 +92,17 @@ class Product extends Model
         return $this->hasMany(Wishlist::class);
     }
 
+    public function productStoreQty()
+    {
+        return DB::table('product_warehouses')
+            ->join('warehouses', 'product_warehouses.warehouse_id', 'warehouses.id')
+            ->where('product_warehouses.product_id', $this->id)
+            ->where('warehouses.user_id', Auth::id())->first();
+    }
+
     private function output()
     {
-        return DB::table('product_images')->select('name', 'attribute_val_name')
+        return DB::table('product_images')->select('name', 'attribute_val_name', 'image_url')
             ->join('attribute_values', 'attribute_values.id', 'product_images.attribute_value_id')
             ->join('attributes', 'attribute_values.attribute_id', '=', 'attributes.id')
             ->where('attributes.id', '!=', 1)

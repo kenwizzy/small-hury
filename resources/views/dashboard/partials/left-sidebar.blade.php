@@ -8,7 +8,7 @@
 <div class="aside-body">
   <div class="aside-loggedin">
     <div class="d-flex align-items-center justify-content-start">
-      <a href="" class="avatar"><img src="{{Auth::user()->image_url == 'default-user.png'? asset('assets/images/users/'.Auth::user()->image_url): Auth::user()->image_url}}" class="rounded-circle" alt=""></a>
+      <a href="" class="avatar"><img src="{{Auth::user()->image_url == 'default-user.png'? Auth::user()->image_url: Auth::user()->image_url}}" class="rounded-circle" alt=""></a>
       <div class="aside-alert-link">
         {{-- <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a> --}}
         <a href="" class="new" data-toggle="tooltip" title="You have 4 new notifications"><i data-feather="bell"></i></a>
@@ -20,7 +20,7 @@
         <h6 class="tx-semibold mg-b-0">{{Auth::user()->first_name." ".Auth::user()->last_name}}</h6>
         <i data-feather="chevron-down"></i>
       </a>
-      <p class="tx-color-03 tx-12 mg-b-0">{{Auth::user()->role->name}}</p>
+      <p class="tx-color-03 tx-12 mg-b-0">{{Auth::user()->role->id == 3 ? Auth::user()->warehouse()->name :''}} {{Auth::user()->role->name}}</p>
     </div>
     <div class="collapse" id="loggedinMenu">
       <ul class="nav nav-aside mg-b-0">
@@ -59,24 +59,33 @@
       </ul>
     </li>
 
+    {{--Not visible to warehouse--}}
+    @if(Auth::user()->role->id != 3)
     <li class="nav-item with-sub">
-      <a href="" class="nav-link"><i data-feather="life-buoy"></i> <span>Manage Stores</span></a>
+      <a href="" class="nav-link"><i data-feather="life-buoy"></i> <span>Manage Warehouses</span></a>
       <ul>
-        <li><a href="{{url('dashboard/add_store')}}">Add Store</a></li>
-        <li><a href="{{url('dashboard/stores')}}">View Stores</a></li>
+        <li><a href="{{url('dashboard/add_store')}}">Add Warehouse</a></li>
+        <li><a href="{{url('dashboard/stores')}}">View Warehouses</a></li>
       </ul>
     </li>
 
+    @endif
+
+
+    {{--Not visible to warehouse--}}
+    @if(Auth::user()->role->id != 3)
     <li class="nav-item with-sub">
       <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Manage Users</span></a>
       <ul>
-        <li><a href="{{url('dashboard/add_user')}}">Add User</a></li>
-        <li><a href="{{url('dashboard/users')}}">View Users</a></li>
+        <li><a href="{{url('dashboard/add_user')}}">Create User</a></li>
+        <li><a href="{{url('dashboard/users')}}">Manage Users</a></li>
       </ul>
     </li>
+    @endif
 
-    <li class="nav-item"><a href="{{url('dashboard/categories')}}" class="nav-link"><i data-feather="mail"></i> <span>Product Categories</span></a></li>
-    <li class="nav-item"><a href="app-mail.html" class="nav-link"><i data-feather="mail"></i> <span>Orders</span></a></li>
+
+    <li class="nav-item"><a href="{{route('dashboard.categories')}}" class="nav-link"><i data-feather="mail"></i> <span>Product Categories</span></a></li>
+    <li class="nav-item"><a href="{{route('dashboard.orders')}}" class="nav-link"><i data-feather="mail"></i> <span>Orders</span></a></li>
     <li class="nav-item"><a href="app-mail.html" class="nav-link"><i data-feather="mail"></i> <span>Sales Report</span></a></li>
 
 

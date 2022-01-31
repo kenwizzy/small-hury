@@ -105,13 +105,17 @@
                             <div class="form-group col-md-4">
                                 <label for="on_sale">Warehouse</label>
                                 <select class="custom-select @error('store') is-invalid @enderror" id="store" name="store">
-                                    <option>Select Warehouse</option>
-                                    @if($warehouses->count() > 0)
+                                    @if(Auth::user()->role->name == 'Warehouse Manager')
+
+                                    <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
+
+                                    @else
                                     <option value="all">All Warehouses</option>
                                     @foreach ($warehouses as $store)
                                     <option value="{{$store->id}}">{{$store->name}}</option>
                                     @endforeach
                                     @endif
+
                                 </select>
                                 @error('store')
                                 <span class="invalid-feedback" role="alert">

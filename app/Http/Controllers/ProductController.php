@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Models\ProductWarehouse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -76,7 +77,7 @@ class ProductController extends Controller
             $request->attribute_image[$i]->move('assets/images/products/', $filenam);
             $fileImagesUrl = asset('assets/images/products/' . $filenam);
 
-                ProductImage::create([
+            ProductImage::create([
                 'product_id' => $product->id,
                 'image_url' => $fileImagesUrl,
                 'default' => 0,
@@ -85,7 +86,7 @@ class ProductController extends Controller
 
             // ######## PRODUCT ATTRIBUTES HERE (not sure if needed) #########
 
-            }
+        }
 
         if ($request->store == 'all') {
             foreach ($stores as $shop) {
@@ -111,6 +112,7 @@ class ProductController extends Controller
         return view('dashboard.create', [
             'categories' => Category::where('parent_id', 0)->get(),
             'discounts' => Discount::all(),
+            'warehouse' => Warehouse::where('user_id', Auth::id())->first(),
             'warehouses' => Warehouse::all(),
             'attributes' => Attribute::where('id', '<>', 1)->get()
         ]);
@@ -118,27 +120,51 @@ class ProductController extends Controller
 
     public function allProducts()
     {
-        return view('dashboard/products', [
-            'products' => Product::all()
-        ]);
+        Auth::user()->role->name == 'Warehouse Manager' ?
+            $products = $this->productData()->where('warehouses.user_id', Auth::id())->get()
+            : $products = $this->productData()->groupby('products.id', 'products.name', 'categories.name', 'product_images.product_id', 'categories.name', 'product_images.image_url', 'products.real_price', 'products.added_by', 'products.created_at', 'attributes.name', 'attribute_values.attribute_val_name')->get();
+        return view('dashboard/products', compact('products'));
     }
 
 
     public function show(Product $product)
     {
         return view('dashboard.product_details', [
-            'product' => $product
+            'product' => $product,
+            'qty' =>  DB::table('product_warehouses')
+                ->join('warehouses', 'product_warehouses.warehouse_id', 'warehouses.id')
+                ->where('product_warehouses.product_id', $product->id)
+                ->where('warehouses.user_id', Auth::id())->get()
         ]);
     }
 
     public function edit(Product $product)
     {
-        return view('dashboard/edit_product', [
-            'categories' => Category::where('parent_id', 0)->get(),
-            'discounts' => Discount::all(),
-            'warehouses' => Warehouse::all(),
-            'attributes' => Attribute::where('id', '<>', 1)->get(),
-            'product' => $product
-        ]);
+        $warehouse = Warehouse::where('user_id', Auth::id())->first();
+        $warehouses = Warehouse::all();
+        $categories = Category::where('parent_id', 0)->get();
+        $discounts = Discount::all();
+        $attributes = Attribute::where('id', '<>', 1)->get();
+        // $price = DB::table('product_warehouses')
+        //     ->join('warehouses', 'product_warehouses.warehouse_id', 'warehouses.id')
+        //     ->where('product_warehouses.product_id', $product->id)
+        //     ->where('warehouses.user_id', Auth::id())->first();
+
+        return view('dashboard/edit_product', compact('categories', 'discounts', 'attributes', 'warehouse', 'warehouses', 'product'));
+    }
+
+    private function productData()
+    {
+        return DB::table('products')->select('products.id', 'products.name', 'categories.name AS cat_name', 'product_images.product_id', 'categories.name AS sub_cat', 'product_images.image_url', 'products.real_price', 'products.added_by', 'products.created_at', 'attributes.name AS attr_name', 'attribute_values.attribute_val_name')
+            ->join('product_warehouses', 'product_warehouses.product_id', 'products.id')
+            ->join('product_images', 'product_images.product_id', 'products.id')
+            ->join('warehouses', 'product_warehouses.warehouse_id', 'warehouses.id')
+            ->join('categories', 'categories.id', 'products.category_id')
+            ->join('attribute_values', 'attribute_values.id', 'product_images.attribute_value_id')
+            ->join('attributes', 'attribute_values.attribute_id', 'attributes.id')
+            //->where('product_images.attribute_value_id', '<>', '1')
+            ->where('product_images.default', 1)
+            ->where('categories.parent_id', 0);
+        //->where('categories.id', 'categories_parent_id')
     }
 }

@@ -27,7 +27,7 @@
           </div>
 
           <div class="col-md-3">
-            <a href="{{route('dashboard/edit_poduct', $product->id)}}" class="btn btn-primary btn-icon">Edit Product</a>
+            <a href="{{route('dashboard/edit_product', $product->id)}}" class="btn btn-primary btn-icon">Edit Product</a>
             <a href="javascript:void(0)" id="back-btn" class="btn btn-primary btn-icon">Go Back</a>
           </div>
         </div>
@@ -55,9 +55,10 @@
               <td class="">Product Amount</td>
               <td class="">&#8358;{{number_format($product->real_price,2) ?? 'Unavailable'}}</td>
             </tr>
+
             <tr>
               <td class="">Product Quantity</td>
-              <td class="">{{$product->totalItems() ?? 'Unavailable'}}</td>
+              <td class="">{{Auth::user()->role->name == 'Warehouse Manager' ? $product->productStoreQty()->total_quantity : $product->totalItems()}}</td>
             </tr>
             <tr>
               <td class="">Product Attributes</td>
