@@ -17,7 +17,6 @@ class NotificationService {
         $clientToken = bcrypt(env("NOTIFICATION_KEY"));
         $response = Http::retry(3,backOff())
                     ->withToken($clientToken)
-                    ->timeout(120)
                     ->acceptJson()
                     ->post(env('NOTIFICATION_BASE_ENDPOINT',"http://localhost:8080/api/notifications")."/send",[
                         'userId' => $userId,
