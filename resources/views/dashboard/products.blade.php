@@ -43,7 +43,7 @@
                     <div class="card-body pd-y-30">
                         <div class="d-sm-flex">
                             <div class="media">
-
+                                {{--dd($products)--}}
                                 <div class="wd-40 wd-md-50 ht-40 ht-md-50 bg-teal tx-white mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded op-6">
                                     <i data-feather="bar-chart-2"></i>
                                 </div>
@@ -61,18 +61,18 @@
                         <table class="table table-hover mg-b-0 basicExample">
                             <thead class="thead-primary">
                                 <tr>
-                                    <th class="text-center">s/n</th>
+                                    <th class="">s/n</th>
                                     <th>Product Name</th>
                                     <th>Product Category</th>
-                                    <th>Sub Category</th>
+                                    {{--<th>Sub Category</th>--}}
                                     <th>Product Image</th>
-                                    <th class="text-left">Amount</th>
-                                    <th>Product Quantity</th>
-                                    <th>Availability</th>
-                                    <th>Attributes</th>
-                                    <th>Uploaded by</th>
-                                    <th class="text-left">Date Created </th>
-                                    <th class=" text-center">Action</th>
+                                    <th class="">Amount</th>
+                                    {{--<th>Product Quantity</th>--}}
+                                    {{--<th>Availability</th>--}}
+                                    {{--<th>Attributes</th>
+                                    <th>Uploaded by</th>--}}
+                                    <th class="">Date Created </th>
+                                    <th class="">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,24 +81,20 @@
                                 <tr>
                                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                                     <td class="tx-medium">{{$product->name}}</td>
-                                    <td class="tx-medium">{{$product->category->name}}</td>
-                                    <td class="tx-medium">
-                                        @if($product->subCat == null)
+                                    <td class="tx-medium">{{$product->cat_name}}</td>
+                                    {{--<td class="tx-medium">
+                                        @if($product->sub_cat == null)
 
                                         @else
-                                        {{$product->subCat->name}}
-                                        @endif
-                                    </td>
-                                    <td class="tx-medium">
-                                        {{-- @foreach($product->defaultImages as $image)--}}
-                                        <img width="70" height="70" src="{{$product->DefaultImage->image_url}}">
-                                        {{--@endforeach --}}
-                                    </td>
+                                        {{$product->sub_cat}}
+                                    @endif
+                                    </td>--}}
+                                    <td class="tx-medium"><img width="100" src="{{$product->image_url}}"></td>
                                     <td class="text-left">#{{number_format($product->real_price,2)}}</td>
-                                    <td class="text-left">{{$product->totalItems()}}</td>
-                                    <td class="text-left">In Store</td>
-                                    <td class="tx-medium">{{$product->attribute()}}</td>
-                                    <td class="tx-medium">{{$product->user->first_name}} ({{$product->user->role->name}})</td>
+                                    {{--<td class="text-left">$product->totalItems()</td>--}}
+                                    {{--<td class="text-left">In Store</td>--}}
+                                    {{--<td class="tx-medium">{{$product->attribute()}}</td>--}}
+                                    {{--<td class="tx-medium">{{$product->added_by->user->first_name}} ({{$product->added_by->role->name}})</td>--}}
                                     <td class="tx-medium">{{ Carbon\Carbon::parse($product->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
                                     <td class="text-center">
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
@@ -106,7 +102,7 @@
                                                 <a href="{{route('dashboard/product_details', $product->id)}}" class="dropdown-item moove"><i class="far fa-clipboard"></i> Details </a>
                                                 <!-- <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Next Page </a> -->
                                                 <a href="{{route('dashboard/edit_product', $product->id)}}" class="dropdown-item text-success"><i class="far fa-edit"></i> Edit </a>
-                                                <a href="{{url('dashboard/delete_product', $product->id)}}" class="dropdown-item text-danger"><i class="far fa-trash-alt"></i> Delete </a>
+                                                <a href="{{url('dashboard/delete_product', $product->id)}}" class="dropdown-item text-danger"><i class="far fa-trash-alt"></i>Disable Product</a>
                                             </div>
                                         </div>
                                     </td>

@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $user = new User();
-        $user->first_name = 'Wizzy';
-        $user->middle_name = 'smith';
-        $user->last_name = 'Kenny';
+        $user->first_name = 'admin';
+        $user->middle_name = 'John';
+        $user->last_name = 'Doe';
         $user->phone = '09087645233';
-        $user->email = 'wizzi@gmail.com';
+        $user->email = 'admin@admin.com';
         $user->role_id = 1;
         $user->password = Hash::make('password');
         $user->save();

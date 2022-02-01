@@ -19,7 +19,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard/users', [
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -45,9 +47,8 @@ class UserController extends Controller
             'first_name' => 'required|string',
             'middle_name' => 'nullable|string',
             'last_name' => 'required|string',
-            'image' => 'required|mimes:jpeg,jpg,png',
             'email' => 'email|required|unique:users',
-            'phone' => 'numeric|required',
+            'phone' => 'numeric|nullable',
             'role' => 'numeric|required'
         ]);
 
@@ -64,7 +65,6 @@ class UserController extends Controller
         $user->password = Hash::make($pass);
         $user->phone = $request->phone;
         $user->role_id = $request->role;
-        // $user->save();
         $data['first_name'] = $request->first_name;
         $data['middle_name'] = $request->middle_name;
         $data['last_name'] = $request->last_name;

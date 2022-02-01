@@ -11,7 +11,7 @@ class Warehouse extends Model
     use HasFactory;
 
     protected $guarded = ['created_at', 'updated_at'];
-    protected $hidden = ['created_at','updated_at'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function orders()
     {
@@ -31,6 +31,13 @@ class Warehouse extends Model
         foreach ($user as $res) {
             echo $res->first_name . ' ' . $res->last_name;
         }
+    }
+
+    public function totalItems()
+    {
+        return ProductWarehouse::where([
+            'warehouse_id' => $this->id,
+        ])->sum('total_quantity');
     }
 
     public function state()
