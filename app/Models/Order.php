@@ -26,9 +26,9 @@ class Order extends Model
     {
         return $this->belongsTo(Warehouse::class);
     }
-    public function order_detail()
+    public function order_details()
     {
-        return $this->hasOne(OrderDetail::class);
+        return $this->hasMany(OrderDetail::class);
     }
     public function user()
     {

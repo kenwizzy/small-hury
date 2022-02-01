@@ -79,7 +79,8 @@ class AuthController extends BaseController
              'email'=>'string|required',
              'password'=>'nullable|string',
              'userMethod' => 'required',
-             'rememberMe' => 'nullable|boolean'
+             'rememberMe' => 'nullable|boolean',
+             'appToken' => 'string'
          ]);
 
          $user = User::where('email',$fields['email'])->first();
@@ -95,6 +96,8 @@ class AuthController extends BaseController
             $remember = isset($fields['rememberMe']) ? ($fields['rememberMe']== 0 ? false : true ): false;
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password],$remember)){
                 $token = $user->createToken('myapptoken')->plainTextToken;
+                $user->app_token = $fields['appToken'];
+                $user->save();
                 $response = [
                     'user' => $user,
                     'token' => $token
@@ -119,6 +122,8 @@ class AuthController extends BaseController
 
      }
     public function logout(Request $request){
+        $user = User::find(auth()->user()->id);
          auth()->user()->tokens()->delete();
+         return $this->sendResponse($user,"User logout");
      }
 }

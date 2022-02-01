@@ -7,7 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+
+use Illuminate\Http\UploadedFile;
+// use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\File\File;
 
 class UserController extends BaseController
 {
@@ -41,22 +45,14 @@ class UserController extends BaseController
     {
         $fields = $request->validate([
             'name' => 'string|required',
-             'email' => 'email|required',
-             'phone' => 'string|required',
-             'gender'=> 'string|required',
-             'image' => 'nullable|mimes:jpeg,jpg,png',
+            'email' => 'email|required',
+           'phone' => 'string|required',
+           'gender'=> 'string|required',
+           'image' => 'nullable',
         ]);
-        // $validator = Validator::make($request->all(), [
-        //      'name' => 'string|required',
-        //      'email' => 'email|required',
-        //      'phone' => 'string|required',
-        //      'gender'=> 'string|required',
-        //      'image' => 'nullable|mimes:jpeg,jpg,png',
-        // ]);
+        //return  $this->sendResponse(["gender" => $request->input('gender')],"User successfully updated");
 
-        // if ($validator->fails()) {
-        //     return $this->sendError($validator->errors());
-        // }
+
         $user =[];
          $names = explode(' ', $fields['name']);
          $firstname="";
@@ -88,20 +84,44 @@ class UserController extends BaseController
 
         }
         $defaultImageUrl = null;
-        if ($request->hasFile('image')) {
-            $filen = $request->image->getClientOriginalName();
-            $filename = time() . '.' . $filen;
-            $request->image->move('assets/images/products/', $filename);
-            $defaultImageUrl = asset('assets/images/products/' . $filename);
+
+
+        // if ($request->hasFile('image')) {
+        //     $filen = $request->image->getClientOriginalName();
+        //     $filename = time() . '.' . $filen;
+        //     $request->image->move('assets/images/users/', $filename);
+        //     $defaultImageUrl = asset('assets/images/users/' . $filename);
+        // }
+        if($request->input('image') != null){
+            $base64File = $request->input('image');
+            // decode the base64 file
+            $fileData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64File));
+            // save it to temporary dir first.
+            $tmpFilePath = sys_get_temp_dir() . '/' . Str::uuid()->toString();
+            file_put_contents($tmpFilePath, $fileData);
+            // this just to help us get file info.
+            $tmpFile = new File($tmpFilePath);
+
+            $file = new UploadedFile(
+                $tmpFile->getPathname(),
+                $tmpFile->getFilename(),
+                $tmpFile->getMimeType(),
+                0,
+                false // Mark it as test, since the file isn't from real HTTP POST.
+            );
+            $filename = time() . '.' . $user->first_name.$user->last_name. $user->id .".jpg";
+             $file->storePubliclyAs('public/assets/images/users/',$filename);
+
+             $defaultImageUrl = asset('storage/assets/images/users/' .$filename);
         }
         $saved =$user->update([
             'first_name' => $firstname,
             'last_name' => $lastname,
-            'middle_name' => $middlename || $user->middle_name,
+            'middle_name' => $middlename ? $middlename :$user->middle_name,
             'phone' => $fields['phone'],
             'email' => $newEmail,
             'gender' => $fields['gender'],
-            'image_url' => $defaultImageUrl || $user->image_url
+            'image_url' => $defaultImageUrl ? $defaultImageUrl :$user->image_url
         ]);
         if($saved){
          return  $this->sendResponse($user,"User successfully updated");
@@ -110,4 +130,15 @@ class UserController extends BaseController
         else
             return $this->sendError('Unable to save user');
     }
+    public function changePassword(Request $request){
+        $fields = $request->validate([
+            'password' => 'confirmed|string|required'
+        ]);
+        $user = User::find(auth()->user()->id);
+        $user->password = bcrypt($fields['password']);
+        $user->save();
+        return $this->sendResponse($user,"Password changed");
+    }
+
+
 }

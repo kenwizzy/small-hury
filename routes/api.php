@@ -37,7 +37,9 @@ Route::group([
 ], function ($router) {
 
     Route::get('/user', [UserController::class, 'getUser']);
-    Route::patch('update-user',[UserController::class,'update']);
+    Route::post('update-user',[UserController::class,'update']);
+    Route::post('/logout',[AuthController::class,'logout']);
+    Route::post('/change-password',[UserController::class,'changePassword']);
     //Route::get('/products', [ProductController::class, 'getProducts']);
     Route::get('/categories', [CategoryController::class, 'getCategories']);
     Route::get('/categories-parent',[CategoryController::class,'getParent']);
@@ -73,6 +75,8 @@ Route::group([
     Route::prefix('orders')->group(function(){
         Route::get('/',[OrderController::class,'index']);
         Route::post('/store',[OrderController::class,'store']);
+        Route::patch('/cancel/{id}',[OrderController::class,'cancelOrder']);
+        Route::put('/re-order/{id}',[OrderController::class,'reOrder']);
 
     });
 });

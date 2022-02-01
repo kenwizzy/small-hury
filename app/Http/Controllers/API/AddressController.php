@@ -20,11 +20,16 @@ class AddressController extends BaseController
             'city' => 'string|required',
             'landmark' => 'string'
         ]);
+        if($request->input('default') != null && $request->input('default') == 1){
+            Address::where('default',1)
+                    ->update(['default' => 0]);
+
+        }
      $add = Address::create([
          'street' => $fields['street'],
          'latitude' => $fields['latitude'],
          'longitude' => $fields['longitude'],
-         'default' => $fields['default'],
+         'default' => $request->input('default')?$fields['default']:0,
          'country' => $request->input('country',"Nigeria"),
          'state' => $request->input('state',"Abuja"),
          'city' => $request->input('city',"Abuja"),
@@ -85,8 +90,8 @@ class AddressController extends BaseController
            $add->landmark = $landmark != null? $request->input('landmark'): $add->landmark;
            $add->name = $name != null? $request->input("name"): $add->name;
            $add->pincode = $name != null? $pincode: $add->pincode;
-           $ad = $add->save();
-           return $this->sendCreateResponse($ad,"Address was updated successfully");
+            $add->save();
+           return $this->sendCreateResponse($add,"Address was updated successfully");
         }
 
     }
