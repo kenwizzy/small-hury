@@ -6,22 +6,29 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\User;
+use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 // use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\File\File;
 
 class UserController extends BaseController
 {
+    private $notSer;
+    public function __construct(NotificationService $notSer)
+    {
+        $this->notSer = $notSer;
+    }
     public function getUser(Request $request){
         return $this->sendResponse(Auth::user(), 'User fetched successfully.');
     }
 
     public function getWishlists()
     {
-        $user = User::find(Auth::id());
+        $user = User::find(auth()->user()->id);
         $wishlists = $user->wishlists;
         $wished = [];
         foreach($wishlists as $wishlist){
@@ -72,7 +79,7 @@ class UserController extends BaseController
                 ['message' =>
                 "Enter your full name ( at least first name and last name)"],401);
         }
-        $user = User::find(Auth::id());
+        $user = User::find(auth()->user()->id);
         $newEmail = $fields['email'];
         if($user->email != $fields['email']){
             $newUser = User::where('email',$fields['email'])->first();
@@ -138,6 +145,36 @@ class UserController extends BaseController
         $user->password = bcrypt($fields['password']);
         $user->save();
         return $this->sendResponse($user,"Password changed");
+    }
+
+    public function getUnreadNotificationCount(Request $request)
+    {
+
+        $data= $this->notSer->getUserNotificationCount(auth()->user()->id);
+       if($data !== null){
+        return $this->sendResponse(['count' => $data['data']],$data['message']);
+       }
+       else{
+          return $this->sendError("Data could not be fetched",[],419);
+       }
+    }
+
+    public function getNotifications()
+    {
+        $data = $this->notSer->getUserNotifications(auth()->user()->id);
+        if($data !== null){
+            return $this->sendResponse(['notifications'=> $data['data']],$data['message']);
+        }
+        return $this->sendError("Notifications could not be gotton",[],419);
+    }
+
+    public function readNotifications()
+    {
+        $data = $this->notSer->readUserNotifications(auth()->user()->id);
+        if($data !== null){
+            return $this->sendResponse(['notifications'=> $data['data']],$data['message']);
+        }
+        return $this->sendError("Notifications could not be gotton",[],419);
     }
 
 

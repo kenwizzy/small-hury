@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Wishlist;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends BaseController
 {
@@ -72,7 +74,8 @@ class ProductController extends BaseController
         return $this->sendResponse($wished, 'Product successfully wished.');
     }
 
-    public function removeWished($id){
+    public function removeWished($id)
+    {
         $item = Product::findOrFail($id);
        $deleted = Wishlist::where([
             'user_id' => auth()->user()->id,
@@ -82,5 +85,56 @@ class ProductController extends BaseController
             return $this->sendError('Item not wishlisted', $deleted);
         }
         return $this->sendResponse($deleted, 'Product successfully removed from Wished');
+    }
+    public function search(Request $request)
+    {
+        $searchValue = $request->query('search');
+        $products = Product::where('name','LIKE','%'.$searchValue.'%')
+        ->OrWhere('description','LIKE','%'.$searchValue.'%')->get();
+        //$results  = collect($products)->pluck(['name','id','category_id']);
+        $results = [];
+        foreach($products as $product)
+        {
+            $result = new \stdClass;
+            $result->name = $product->name;
+            $result->id = $product->id;
+            $result->category_id= $product->category_id;
+            $result->sub_category_id = $product->sub_category_id;
+            $results[] = $result;
+        }
+
+
+       foreach($results as $result){
+           $exists = DB::table('user_searches')->where([
+               'product_id' => $result->id,
+               'user_id' => auth()->user()->id
+           ])->get();
+
+        if(count($exists) > 0){
+            DB::table('user_searches')->where([
+                'product_id' => $result->id,
+                'user_id' => auth()->user()->id
+            ])->update([
+                'updated_at' => now()
+            ]);
+            continue;
+        }
+        DB::table('user_searches')->insert([
+            'user_id' => auth()->user()->id,
+            'product_name' => $result->name,
+            'product_id' => $result->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+       }
+       return $this->sendResponse($results,"your search results");
+    }
+    public function getRecentSearches()
+    {
+        $searches = DB::table('user_searches')
+        ->where('user_id', auth()->user()->id)
+        ->orderBy('updated_at','desc')
+        ->get();
+        return $this->sendResponse($searches,"Searches fetched Successfully");
     }
 }

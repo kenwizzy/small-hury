@@ -80,7 +80,7 @@ class AuthController extends BaseController
              'password'=>'nullable|string',
              'userMethod' => 'required',
              'rememberMe' => 'nullable|boolean',
-             'appToken' => 'string'
+             'appToken' => 'string|required'
          ]);
 
          $user = User::where('email',$fields['email'])->first();

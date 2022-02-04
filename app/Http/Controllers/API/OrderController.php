@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends BaseController
 {
@@ -197,6 +198,67 @@ class OrderController extends BaseController
 
 
     }
+    private function addWishlistAndInCart(Product $product){
+        $wishlist = $product->wishlists()->where('user_id',auth()->user()->id)->first();
 
 
+            // get the number of items in cart
+            $user = User::find(auth()->user()->id);
+            $quantity = 0;
+            if($user->cart){
+                $quantity = $user->cart->product_quantity($product);
+
+            }
+            $newProduct = collect($product)
+            ->merge(['wishlist'=>$wishlist?true: false,"incart" => $quantity]);
+            return $newProduct;
+
+    }
+    public function show( Order $id)
+    {
+
+        $data = $id->order_details;
+        $orderDetails =[];
+        foreach($data as $orderDetail){
+            $newDetail = (object)[];
+            $newDetail->quantity = $orderDetail->quantity;
+            $newDetail->created_at = $orderDetail->created_at;
+            $newDetail->product = $this->addWishlistAndInCart($orderDetail->product);
+            $orderDetails[] = $newDetail;
+        }
+        $delD = $id->delivery_detail;
+        $order = (object)[];
+        $order = collect($id)->except(['order_details','delivery_detail'])
+                ->merge(["time_slot" => $delD->time_interval,'delivery_date'=>$delD->delivery_date]);
+        // $order->time_slot = $delD->time_interval;
+        // $order->delivery_date = $delD->delivery_date;
+        // Log::info($delD->time_interval);
+
+        return $this->sendResponse(['order'=> $order,'products' => $orderDetails],"Order successfully fetched");
+
+    }
+
+    public function storeRating(Request $request)
+    {
+        $fields = $request->validate([
+            'orderId' => 'required|integer',
+            'comment' => 'nullable',
+            'overallRating' => 'integer|nullable',
+            'deliveryRating' => 'integer|nullable'
+
+        ]);
+
+       $id = DB::table('rate_orders')->insertGetId([
+            'user_id' => auth()->user()->id,
+            'comment' => $request->input('comment'),
+            'order_id' => $fields['orderId'],
+            'delivery_rating' => $request->input('deliveryRating'),
+            'overall_rating' => $request->input('overallRating')
+        ]);
+
+        if($id){
+            return $this->sendResponse(["id"=>$id],"Rating stored");
+        }
+        return $this->sendError("Could not store data",[],500);
+    }
 }

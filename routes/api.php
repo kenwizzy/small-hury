@@ -12,6 +12,7 @@ use App\Http\Controllers\API\DeliveryCostController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\WareHouseController;
 use App\Http\Controllers\API\WishlistController;
+use App\Http\Controllers\OrderController as ControllersOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,10 +37,7 @@ Route::group([
     'middleware' => 'auth:sanctum'
 ], function ($router) {
 
-    Route::get('/user', [UserController::class, 'getUser']);
-    Route::post('update-user',[UserController::class,'update']);
-    Route::post('/logout',[AuthController::class,'logout']);
-    Route::post('/change-password',[UserController::class,'changePassword']);
+
     //Route::get('/products', [ProductController::class, 'getProducts']);
     Route::get('/categories', [CategoryController::class, 'getCategories']);
     Route::get('/categories-parent',[CategoryController::class,'getParent']);
@@ -48,7 +46,17 @@ Route::group([
 
     /* Uzezi Jephter endpoints  */
 
+    //For working with users
+    Route::get('/user', [UserController::class, 'getUser']);
+    Route::post('update-user',[UserController::class,'update']);
+    Route::post('/logout',[AuthController::class,'logout']);
+    Route::post('/change-password',[UserController::class,'changePassword']);
+    Route::get('/unread-notification-count',[UserController::class,'getUnreadNotificationCount']);
+    Route::get('/notifications',[UserController::class,'getNotifications']);
+    Route::get('/read',[UserController::class,'readNotifications']);
+
     Route::get('/warehouses',[WareHouseController::class,'index']);
+    Route::get('/warehouses/{id}',[WareHouseController::class,'show']);
     //For managing addresses for user
     Route::get('/addresses',[AddressController::class,'index']);
     Route::get('/default-address',[AddressController::class,'getDefaultAddress']);
@@ -59,6 +67,8 @@ Route::group([
     //For managing wishing of products
     Route::patch('/wish-product/{id}',[ProductController::class,'wishProduct']);
     Route::delete('/wish-product/{id}',[ProductController::class,'removeWished']);
+    Route::get('/search',[ProductController::class,'search']);
+    Route::get('/user-searches',[ProductController::class,'getRecentSearches']);
     Route::get('/wishlists',[UserController::class,'getWishlists']);
 
     //For adding Items to cart
@@ -77,7 +87,8 @@ Route::group([
         Route::post('/store',[OrderController::class,'store']);
         Route::patch('/cancel/{id}',[OrderController::class,'cancelOrder']);
         Route::put('/re-order/{id}',[OrderController::class,'reOrder']);
-
+        Route::get('/{id}',[OrderController::class,'show']);
+        Route::post('/rating',[OrderController::class,'storeRating']);
     });
 });
 

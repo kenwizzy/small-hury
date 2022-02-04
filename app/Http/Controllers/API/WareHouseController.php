@@ -11,4 +11,9 @@ class WareHouseController extends BaseController
     public function index(Request $request){
         return $this->sendResponse(Warehouse::all(), 'Store locations fetched successfully.');
     }
+
+    public function show(Warehouse $id)
+    {
+        return $this->sendResponse($id,"Store Fetched!");
+    }
 }
