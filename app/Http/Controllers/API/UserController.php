@@ -176,6 +176,21 @@ class UserController extends BaseController
         }
         return $this->sendError("Notifications could not be gotton",[],419);
     }
+    public function sendFeedback(Request $request)
+    {
+        $field = $request->validate(["message" => 'required|string']);
 
+        //For the now let us log
+        Log::info("Sending mail to support@smallhurry.com with body of message as ".$field['message']);
+        return $this->sendResponse(['message'=>$field['message']],"Message sent to support");
+    }
+    public function sendEnquiry(Request $request)
+    {
+        $field = $request->validate(["message" => 'required|string']);
+
+        //For the now let us log
+        Log::info("Sending mail to hello@smallhurry.com with body of message as ".$field['message']);
+        return $this->sendResponse(['message'=>$field['message']],"Message sent to support");
+    }
 
 }

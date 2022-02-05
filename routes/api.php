@@ -54,6 +54,8 @@ Route::group([
     Route::get('/unread-notification-count',[UserController::class,'getUnreadNotificationCount']);
     Route::get('/notifications',[UserController::class,'getNotifications']);
     Route::get('/read',[UserController::class,'readNotifications']);
+    Route::post('/enquiry',[UserController::class,'sendEnquiry']);
+    Route::post('/feedback',[UserController::class,'sendFeedback']);
 
     Route::get('/warehouses',[WareHouseController::class,'index']);
     Route::get('/warehouses/{id}',[WareHouseController::class,'show']);
