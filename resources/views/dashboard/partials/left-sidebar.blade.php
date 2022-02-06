@@ -43,6 +43,8 @@
     <li class="nav-item"><a href="{{url('dashboard')}}" class="nav-link"><i data-feather="shopping-bag" style="color:#73ab22;"></i> <span style="color:#73ab22;">Dashboard</span></a></li>
     {{-- <li class="nav-item"><a href="{{url('dashboard/products')}}" class="nav-link"><i data-feather="globe"></i> <span>Manage Products</span></a></li> --}}
 
+    {{--Not visible to warehouse--}}
+    @if(Auth::user()->role->id != 3)
     <li class="nav-item with-sub">
       <a href="" class="nav-link"><i data-feather="setting"></i> <span>Settings</span></a>
       <ul>
@@ -50,6 +52,7 @@
         <li><a href="{{route('dashboard/attributes')}}">Manage Attributes</a></li>
       </ul>
     </li>
+    @endif
 
     <li class="nav-item with-sub">
       <a href="" class="nav-link"><i data-feather="user"></i> <span>Manage Products</span></a>
@@ -81,10 +84,10 @@
         <li><a href="{{url('dashboard/users')}}">View Users</a></li>
       </ul>
     </li>
-    @endif
-
 
     <li class="nav-item"><a href="{{route('dashboard.categories')}}" class="nav-link"><i data-feather="mail"></i> <span>Product Categories</span></a></li>
+    @endif
+
     <li class="nav-item"><a href="{{route('dashboard.orders')}}" class="nav-link"><i data-feather="mail"></i> <span>Orders</span></a></li>
     <li class="nav-item"><a href="app-mail.html" class="nav-link"><i data-feather="mail"></i> <span>Sales Report</span></a></li>
 
