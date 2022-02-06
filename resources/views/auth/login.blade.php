@@ -12,7 +12,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="https://small-hury-lvrxg.ondigitalocean.app/login">
             @csrf
 
             <!-- Email Address -->

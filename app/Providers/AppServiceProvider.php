@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Services\NotificationService;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\UrlGenerator;
 
@@ -25,12 +27,17 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(UrlGenerator $url)
+    public function boot()
     {
-         if(env('REDIRECT_HTTPS'))
-      {
-        $url->forceScheme('https');
-      }
+        if (App::environment('production')) {
+          URL::forceScheme('https');
+        }
+        
+        
+//          if(env('REDIRECT_HTTPS'))
+//       {
+//         $url->forceScheme('https');
+//       }
         
         //URL::forceScheme('https');
     }
