@@ -39,9 +39,10 @@
       align-items: center;
     }
 
-    .change{
-        color:red;
+    .change {
+      color: red;
     }
+
     .container_fields {
       width: 90%;
       display: flex;
@@ -86,9 +87,9 @@
 
   {{---LEFT SIDEBAR---}}
   <aside class="aside aside-fixed">
-      @if(!Auth::user())
-     @php return redirect('index'); @endphp
-      @endif
+    @if(!Auth::user())
+    @php return redirect('index'); @endphp
+    @endif
     @include('dashboard.partials.left-sidebar')
   </aside>
 

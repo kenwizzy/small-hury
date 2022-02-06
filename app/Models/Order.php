@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    protected $guarded = ['created_at','updated_at'];
+    protected $guarded = ['created_at', 'updated_at'];
 
     // status block
     public const AWAITING_FULFILLMENT = 1;
@@ -21,6 +21,7 @@ class Order extends Model
     public const DECLINED = 8;
     public const REFUNDED = 9;
     public const PARTIALLY_REFUNDED = 10;
+    public const PROCESSING = 11;
 
     public function warehouse()
     {
@@ -28,10 +29,19 @@ class Order extends Model
     }
     public function order_detail()
     {
-        return $this->hasOne(OrderDetail::class);
+        return $this->hasMany(OrderDetail::class);
+    }
+    public function delivery()
+    {
+        return $this->hasOne(DeliveryDetail::class);
     }
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function starus()
+    {
+        return $this->belongsTo(OrderStatus::class, 'status');
     }
 }

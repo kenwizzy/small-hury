@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('total_shipping_price', 15, 2);
             $table->decimal('total_paid', 15, 2);
             $table->foreignId('status')->constrained('order_status');
+            $table->foreignId('update_by')->constrained('users')->nullable();
             $table->foreignId('warehouse_id')->constrained('warehouses');
             $table->timestamps();
         });

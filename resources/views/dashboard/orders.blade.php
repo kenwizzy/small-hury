@@ -54,7 +54,9 @@
                                     <th>Shipping Price</th>
                                     <th>Amount Paid</th>
                                     <th>Status</th>
-                                    <th class="text-left">Date Created </th>
+                                    <th>Updated By</th>
+                                    <th class="text-left">Orde Date</th>
+                                    <th class="text-left">Date Updated</th>
                                     <th class=" text-center">Action</th>
                                 </tr>
                             </thead>
@@ -65,23 +67,62 @@
 
                                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                                     <td class="tx-medium">{{$order->id}}</td>
-                                    <td class="tx-medium">{{$order->warehouse_id}}</td>
-                                    <td class="tx-medium">{{$order->total_products_price}}</td>
-                                    <td class="text-left">{{$order->total_shipping_price}}</td>
-                                    <td class="text-left">{{$order->total_paid}}</td>
-                                    <td class="text-left">{{$order->status}}</td>
+                                    <td class="tx-medium">{{$order->warehouse->name}}</td>
+                                    <td class="tx-medium">&#8358;{{$order->total_products_price}}</td>
+                                    <td class="text-left">&#8358;{{$order->total_shipping_price}}</td>
+                                    <td class="text-left">&#8358;{{$order->total_paid}}</td>
+                                    <td class="text-left">{{$order->starus->name}}</td>
+                                    <td class="text-left">{{$order->user->first_name.' '.$order->user->last_name.' ('.$order->user->role->name.')' ?? 'Unavailable'}}</td>
                                     <td class="tx-medium">{{ Carbon\Carbon::parse($order->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
+                                    <td class="tx-medium">{{ Carbon\Carbon::parse($order->updated_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
                                     <td class=" text-center">
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="{{url('')}}" class="dropdown-item text-info"><i class="far fa-edit"></i>Order Details </a>
-                                                <a href="" class="dropdown-item text-success"><i class="far fa-user"></i>Assign to biker</a>
+                                                <a href="{{route('dashboard/order_details',$order->id)}}" class="dropdown-item text-info"><i class="far fa-edit"></i>Order Details </a>
+                                                <a href="#editService" data-toggle="modal" id="service-order" title="Order to biker" data-url="{{route('dashboard.assign_order', $order->id)}}" data-service-name="{{' $order->order_detail->product->name '}}" data-id="{{ '$order->id' }}" class="dropdown-item details text-success"><i class="far fa-user"></i> Assign to biker</a>
+                                                {{--<a href="" class="dropdown-item text-success"><i class="far fa-user"></i>Assign to biker</a>--}}
                                                 <a href="" class="dropdown-item text-danger"><i class="far fa-clipboard"></i> Decline Order </a>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
 
+
+                                <div class="modal fade" id="editService" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                                    <div class="modal-dialog modal-dialog-centered wd-sm-650" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body pd-x-25 pd-sm-x-30 pd-t-40 pd-sm-t-20 pd-b-15 pd-sm-b-20">
+                                                <a href="" role="button" class="close pos-absolute t-15 r-15" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </a>
+                                                <div class="modal-body" id="modal-order-body">
+                                                    <form method="POST" action="#" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <h5 class="mg-b-2"><strong>Assigning order to biker</strong></h5>
+                                                        <hr>
+                                                        <div class="form-row mt-4">
+                                                            <div class="form-group col-md-12">
+                                                                <label for="name">Select Biker</label>
+                                                                <select id="insert_bikers" class="form-control @error('biker') is-invalid @enderror" name="biker" autocomplete="off">
+
+                                                                </select>
+                                                                @error('biker')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Assign</button>
+
+                                                    </form>
+                                                    <!-- Modal displays here -->
+                                                    <div id="spinner-icon-3"></div>
+                                                </div>
+                                            </div><!-- modal-body -->
+                                        </div><!-- modal-content -->
+                                    </div><!-- modal-dialog -->
+                                </div><!-- modal -->
 
                                 @endforeach
 
@@ -96,5 +137,59 @@
 
     </div><!-- container -->
 </div>
+
+@endsection
+@section('script')
+<script>
+    // for addigning orders to bikers
+    $(document).on('click', '#service-order', function(event) {
+        event.preventDefault();
+
+        let route = $(this).attr('data-url');
+        let id = $(this).attr('data-id');
+        let serviceName = $(this).attr('data-service-name');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: route,
+            method: 'GET',
+            data: {
+                "id": id,
+                "serviceName": serviceName
+            },
+            // beforeSend: function() {
+            //     $("#modal-order-body").html('<div class="d-flex justify-content-center mt-4 mb-4"><span class="loadingspinner"></span></div>');
+            // },
+            success: function(result) {
+
+                $.each(result.bikers, function(key, biker) {
+                    let bike = `<option value="` + biker.id + `">` + biker.first_name + " " + biker.last_name + `</option>`;
+
+                    $('#insert_bikers').append(bike);
+                });
+
+                //$('#modal-order-body').html('show');
+                //$('#modal-order-body').html('');
+                $('#modal-order-body').html().show();
+
+            },
+            complete: function() {
+                $("#spinner-icon-3").hide();
+            },
+            error: function(jqXHR, testStatus, error) {
+                var message = error + ' An error occured while trying to assign order with ID ' + id + ' to biker';
+                var type = 'error';
+                displayMessage(message, type);
+                $("#spinner-icon-3").hide();
+            },
+            timeout: 8000
+        });
+
+    });
+</script>
 
 @endsection
