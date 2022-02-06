@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\BaseController as BaseController;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends BaseController
 {
@@ -75,12 +77,13 @@ class AuthController extends BaseController
          return response($response, 201);
      }
     public function login(Request $request){
+        Log::info($request->all());
          $fields = $request->validate([
              'email'=>'string|required',
              'password'=>'nullable|string',
              'userMethod' => 'required',
              'rememberMe' => 'nullable|boolean',
-             'appToken' => 'string|required'
+             'appToken' => 'nullable|string'
          ]);
 
          $user = User::where('email',$fields['email'])->first();
@@ -93,7 +96,7 @@ class AuthController extends BaseController
              ],401);
          }
          if(User::USER_METHOD["BASIC_AUTH"] == $fields['userMethod']){
-            $remember = isset($fields['rememberMe']) ? ($fields['rememberMe']== 0 ? false : true ): false;
+            $remember = $fields['rememberMe'];
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password],$remember)){
                 $token = $user->createToken('myapptoken')->plainTextToken;
                 $user->app_token = $fields['appToken'];
