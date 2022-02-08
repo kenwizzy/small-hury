@@ -60,13 +60,13 @@
             <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$transactions->count()}}</h3>
 
           </div>
-          {{---bEGIN OF COMMENT---}}
-          {{-- <div class="chart-three">
+
+          <div class="chart-three">
             <div id="flotChart6" class="flot-chart ht-30"></div>
           </div><!-- chart-three -->
         </div>
       </div><!-- col -->
-      <div class="col-lg-8 col-xl-7 mg-t-10">
+      {{---bEGIN OF COMMENT---}} {{-- <div class="col-lg-8 col-xl-7 mg-t-10">
         <div class="card">
           <div class="card-header pd-y-20 d-md-flex align-items-center justify-content-between">
             <h6 class="mg-b-0">Recurring Revenue Growth</h6>
@@ -424,9 +424,9 @@
           </div><!-- card-body -->
         </div>
       </div>--}}{{---END OF COMMENT---}}
-        </div><!-- row -->
-      </div><!-- container -->
-    </div>
+    </div><!-- row -->
+  </div><!-- container -->
+</div>
 
 
-    @endsection
+@endsection
