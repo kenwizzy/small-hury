@@ -83,7 +83,9 @@ class CartController extends BaseController
                $product->incart = $quantity;
                $product->default_image = $prod->default_image;
             }
-            return $this->sendResponse($products,"Product Fetched Successfully");
+            $prods['products'] = $products;
+            $prods['cartId'] = $cart->id;
+            return $this->sendResponse($prods,"Product Fetched Successfully");
 
         }
         else{

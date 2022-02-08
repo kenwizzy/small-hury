@@ -25,14 +25,15 @@ class Cart extends Model
     {
         return $this->belongsTo(Warehouse::class);
     }
-    public function add_product(Product $product,$warehouse_id)
+    public function add_product(Product $product,$warehouse_id,$quantity=1)
     {
+
       return  DB::table('cart_products')->insert([
             'product_id' => $product->id,
             'warehouse_id' => $warehouse_id,
             'cart_id' => $this->id,
             'product_name' => $product->name,
-            'quantity' => 1,
+            'quantity' => $quantity,
         ]);
     }
     public function increase_product(Product $product,$warehouse_id,$quantity=1)

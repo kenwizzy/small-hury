@@ -27,7 +27,7 @@ class Order extends Model
     {
         return $this->belongsTo(Warehouse::class);
     }
-    public function order_detail()
+    public function order_details()
     {
         return $this->hasMany(OrderDetail::class);
     }
@@ -43,5 +43,9 @@ class Order extends Model
     public function starus()
     {
         return $this->belongsTo(OrderStatus::class, 'status');
+    }
+    public function delivery_detail()
+    {
+        return $this->hasOne(DeliveryDetail::class);
     }
 }
