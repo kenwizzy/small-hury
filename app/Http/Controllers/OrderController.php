@@ -17,7 +17,12 @@ class OrderController extends Controller
      */
     public function index()
     {
+        // Auth::user()->role->name == 'Warehouse Manager' ?
+        //     $products = $this->productData()->where('warehouses.user_id', Auth::id())->get()
+        //     : $products = $this->productData()
+
         return view('dashboard.orders', [
+            // Auth::user()->role->name == 'Warehouse Manager' ?
             'orders' => Order::all()
         ]);
     }

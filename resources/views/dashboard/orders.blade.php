@@ -63,8 +63,8 @@
                             <tbody>
                                 @php $sn = 1; @endphp
                                 @foreach($orders as $order)
+                                @if(Auth::id() == $order->warehouse->user_id || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                                 <tr>
-
                                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                                     <td class="tx-medium">{{$order->id}}</td>
                                     <td class="tx-medium">{{$order->warehouse->name}}</td>
@@ -87,7 +87,7 @@
                                     </td>
                                 </tr>
 
-
+                                @endif
                                 <div class="modal fade" id="editService" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
                                     <div class="modal-dialog modal-dialog-centered wd-sm-650" role="document">
                                         <div class="modal-content">
