@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $guarded = ['created_at','updated_at'];
+    protected $guarded = ['created_at', 'updated_at'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -91,8 +91,8 @@ class User extends Authenticatable
 
     public function warehouse()
     {
-        //return $this->belongsTo(Warehouse::class);
+        return $this->belongsTo(Warehouse::class, 'user_id');
 
-        return Warehouse::where('user_id', $this->id)->first();
+        //return Warehouse::where('user_id', $this->id)->first();
     }
 }

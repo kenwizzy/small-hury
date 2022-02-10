@@ -64,6 +64,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/order_details/{order}', [OrderController::class, 'show'])->name('dashboard/order_details');
     Route::get('process_order/{order}', [OrderController::class, 'process'])->name('process_order');
     Route::get('dashboard/assign_order/{order}', [OrderController::class, 'assign'])->name('dashboard.assign_order');
+    Route::get('dashboard/assign_manager/{warehouse}', [WarehouseController::class, 'assign'])->name('dashboard.assign_manager');
+    Route::post('assign_manager', [WarehouseController::class, 'assignManager'])->name('assign_manager');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 

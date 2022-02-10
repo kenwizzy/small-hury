@@ -142,4 +142,35 @@ class WarehouseController extends Controller
     }
 
 
+    public function assign(Warehouse $warehouse)
+    {
+
+        $data = [
+            'store'  =>  $warehouse,
+            'bikers' => User::where('role_id', 3)->select('id', 'first_name', 'last_name')->get()
+        ];
+
+        return response()->json($data);
+    }
+
+    public function assignManager(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'manager'     => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $user = User::find($request->manager);
+        $store = Warehouse::find($request->store);
+        if ($store->user_id != 0) {
+            return redirect()->back()->withError($store->name . ' already has a manager');
+        }
+        $store->user_id = $request->manager;
+        $store->save();
+
+        return redirect()->back()->withSuccess($user->first_name . ' ' . $user->last_name . ' assigned a ' . $store->name . ' store manager');
+    }
 }

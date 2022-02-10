@@ -93,12 +93,12 @@
                                         <div class="modal-content">
                                             <div class="modal-body pd-x-25 pd-sm-x-30 pd-t-40 pd-sm-t-20 pd-b-15 pd-sm-b-20">
                                                 <a href="" role="button" class="close pos-absolute t-15 r-15" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
+                                                    <span class="times" aria-hidden="true">&times;</span>
                                                 </a>
                                                 <div class="modal-body" id="modal-order-body">
                                                     <form method="POST" action="#" enctype="multipart/form-data">
                                                         @csrf
-                                                        <h5 class="mg-b-2"><strong>Assigning order to biker</strong></h5>
+                                                        <h5 class="mg-b-2"><strong>Assigning order with ID <span class="mana"></span> to biker</strong></h5>
                                                         <hr>
                                                         <div class="form-row mt-4">
                                                             <div class="form-group col-md-12">
@@ -161,19 +161,15 @@
                 "id": id,
                 "serviceName": serviceName
             },
-            // beforeSend: function() {
-            //     $("#modal-order-body").html('<div class="d-flex justify-content-center mt-4 mb-4"><span class="loadingspinner"></span></div>');
-            // },
-            success: function(result) {
 
+            success: function(result) {
+                $(".mana").html(result.order.id);
                 $.each(result.bikers, function(key, biker) {
                     let bike = `<option value="` + biker.id + `">` + biker.first_name + " " + biker.last_name + `</option>`;
-
+                    console.log(biker);
                     $('#insert_bikers').append(bike);
                 });
 
-                //$('#modal-order-body').html('show');
-                //$('#modal-order-body').html('');
                 $('#modal-order-body').html().show();
 
             },
@@ -189,6 +185,11 @@
             timeout: 8000
         });
 
+    });
+
+    $(document).on('click', '.times', function(event) {
+        event.preventDefault();
+        $('#insert_manager').html('');
     });
 </script>
 

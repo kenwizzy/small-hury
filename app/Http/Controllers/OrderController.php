@@ -86,17 +86,14 @@ class OrderController extends Controller
      */
     public function assign(Order $order)
     {
-        //Get category record
-        //$order = Order::findOrFail($id);
-
         $data = [
             'order'    =>  $order,
             'bikers' => User::where('role_id', 4)->get()
         ];
 
-        return response()->json($data);
 
-        //return view('dashboard/edit_category', $data);
+
+        return response()->json($data);
     }
 
 
