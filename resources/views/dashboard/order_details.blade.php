@@ -54,7 +54,7 @@
                         <tr>
                             <td class="">Item Name</td>
                             <td class="">
-                                @foreach($order->order_detail as $item)
+                                @foreach($order->order_details as $item)
                                 {{$item->product->name}}({{$item->quantity}})&nbsp;&nbsp;
                                 @endforeach
                             </td>
@@ -62,7 +62,7 @@
                         <tr>
                             <td class="">Item Images</td>
                             <td class="tx-medium">
-                                @foreach($order->order_detail as $item)
+                                @foreach($order->order_details as $item)
                                 <img width="100" src="{{$item->product->DefaultImage->image_url}}">&nbsp;&nbsp;&nbsp;&nbsp;
                                 @endforeach
                             </td>

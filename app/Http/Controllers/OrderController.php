@@ -7,9 +7,16 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\NotificationService;
 
 class OrderController extends Controller
 {
+    private $notificationService;
+
+    // public function __contruct(NotificationService $notificationService)
+    // {
+    // 	$this->notificationService = $notificationService;
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -74,6 +81,8 @@ class OrderController extends Controller
             'status' => Order::PROCESSING,
             'update_by' => Auth::id()
         ]);
+
+        (new NotificationService())->sendNotificationToUser($order->user_id, '', 'Order Processing', 'Hi ' . $order->user->first_name . ',<br>Your order with ID ' . $order->id . ' has started processing', '', '');
 
         return response()->json('Order started processing');
     }

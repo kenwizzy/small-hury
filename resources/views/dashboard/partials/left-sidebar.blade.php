@@ -89,7 +89,7 @@
     @endif
 
     <li class="nav-item"><a href="{{route('dashboard.orders')}}" class="nav-link"><i data-feather="mail"></i> <span>Orders</span></a></li>
-    <li class="nav-item"><a href="app-mail.html" class="nav-link"><i data-feather="mail"></i> <span>Sales Report</span></a></li>
+    <li class="nav-item"><a href="#" class="nav-link"><i data-feather="mail"></i> <span>Sales Report</span></a></li>
 
 
     {{-- <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>Cryptocurrency</span></a></li>

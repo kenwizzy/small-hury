@@ -30,15 +30,13 @@ class RoleSeeder extends Seeder
         $warehouse->save();
 
         $biker = new Role();
-        $biker->name = 'Bikers';
+        $biker->name = 'Biker';
         $biker->slug = 'biker';
         $biker->save();
 
         $end_user = new Role();
-        $end_user->name = 'Customers';
+        $end_user->name = 'Customer';
         $end_user->slug = 'customer';
         $end_user->save();
-
-
     }
 }
