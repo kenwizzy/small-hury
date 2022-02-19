@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Order;
-use App\Models\Warehouse;
-use App\Models\Transaction;
+use App\Models\OrderAssignee;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class OrderAssigneeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index', [
-            'warehouses' => Warehouse::all(),
-            'orders' => Order::all(),
-            'users' => User::where('role_id', 4)->get(),
-            'transactions' => Transaction::all(),
-            'customers' => User::where('role_id', 5)->orderBy('id', 'asc')->get(),
-        ]);
+        //
     }
 
     /**
@@ -50,10 +42,10 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\OrderAssignee  $orderAssignee
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(OrderAssignee $orderAssignee)
     {
         //
     }
@@ -61,10 +53,10 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\OrderAssignee  $orderAssignee
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(OrderAssignee $orderAssignee)
     {
         //
     }
@@ -73,10 +65,10 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\OrderAssignee  $orderAssignee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, OrderAssignee $orderAssignee)
     {
         //
     }
@@ -84,10 +76,10 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\OrderAssignee  $orderAssignee
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(OrderAssignee $orderAssignee)
     {
         //
     }

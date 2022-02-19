@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="email">Email Address</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="" name="email" utocomplete="off">
                                 @error('email')
@@ -76,7 +76,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="first_name">Phone Number</label>
                                 <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="" name="phone" autocomplete="off">
                                 @error('phone')
@@ -86,15 +86,25 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="User Role">User Role</label>
-                                <select class="form-control @error('role') is-invalid @enderror" name="role" autocomplete="off">
+                                <select class="form-control @error('role') is-invalid @enderror" id='rol' name="role" autocomplete="off">
                                     <option>Select Role</option>
                                     @foreach($roles as $role)
                                     <option value="{{$role->id}}">{{$role->name}}</option>
                                     @endforeach
                                 </select>
                                 @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="first_name">User Image</label>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" id="img" name="image" autocomplete="off">
+                                @error('image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -113,6 +123,21 @@
         </div>
     </div>
 
+    @endsection
 
+    @section('script')
+    <script>
+        $(document).ready(function() {
+            $('#img').attr('disabled', true);
+            $('#rol').on('change', function() {
+                var disc = $(this).val();
+                if (disc == 4) {
+                    $('#img').attr('disabled', false);
+                } else {
+                    $('#img').attr('disabled', true);
+                }
+            });
 
+        });
+    </script>
     @endsection

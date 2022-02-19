@@ -71,6 +71,7 @@
                                 <tr>
                                     <th class="text-center">s/n</th>
                                     <th>Store Name</th>
+                                    <th>Store Email Address</th>
                                     <th>Store Street</th>
                                     <th>LGA</th>
                                     <th class="text-left">State</th>
@@ -86,20 +87,23 @@
                                 <tr>
                                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                                     <td class="tx-medium">{{$store->name}}</td>
+                                    <td class="tx-medium">{{$store->email}}</td>
                                     <td class="tx-medium">{{$store->street}}</td>
                                     <td class="tx-medium">{{$store->lga->name}}</td>
                                     <td class="text-left">{{$store->state->name}}</td>
                                     <td class="text-left">{{$store->totalItems()}}</td>
                                     <td class="text-left">
-                                        {{$store->user()}}
+                                        {{$store->user_id == 0? '':$store->user->first_name.' '.$store->user->last_name}}
                                     </td>
                                     <td class="tx-medium">{{ Carbon\Carbon::parse($store->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
                                     <td class=" text-center">
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="{{url('dashboard/store_details',$store->id)}}" class="dropdown-item moove"><i class="far fa-clipboard"></i> Details </a>
+                                                {{--<a href="{{url('dashboard/store_details',$store->id)}}" class="dropdown-item moove"><i class="far fa-clipboard"></i> Details </a>--}}
                                                 <a href="#editService" data-toggle="modal" id="service-order" title="Assign Manager" data-url="{{route('dashboard.assign_manager', $store->id)}}" data-service-name="{{' $store->name '}}" data-id="{{ '$store->id' }}" class="dropdown-item details text-success"><i class="far fa-user"></i> Assign Manager</a>
-                                                <a href="" class="dropdown-item text-success"><i class="far fa-edit"></i> Edit </a>
+                                                {{--<a href="{{url('dashboard/store_details',$store->id)}}" class="dropdown-item moove"><i class="far fa-clipboard"></i> Details </a>--}}
+                                                <a href="{{route('dashboard.districts', $store->id)}}" title="View Districts" class="dropdown-item details text-info"><i class="far fa-map"></i>View Districts</a>
+                                                <a href="{{route('dashboard.edit_store',$store->id)}}" class="dropdown-item text-success"><i class="far fa-edit"></i> Edit </a>
                                             </div>
                                         </div>
                                     </td>

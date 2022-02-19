@@ -15,7 +15,7 @@ class AddUserIdColumnToUserSearchesTable extends Migration
     {
         Schema::table('user_searches', function (Blueprint $table) {
             $table->foreignId('user_id')
-            ->constrained('users')->onDelete('cascade');
+                ->constrained('users')->onDelete('cascade');
         });
     }
 

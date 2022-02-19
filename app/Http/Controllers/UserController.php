@@ -47,6 +47,7 @@ class UserController extends Controller
             'first_name' => 'required|string',
             'middle_name' => 'nullable|string',
             'last_name' => 'required|string',
+            'image' => 'nullable|file',
             'email' => 'email|required|unique:users',
             'phone' => 'numeric|nullable',
             'role' => 'numeric|required'
@@ -55,13 +56,23 @@ class UserController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());
         }
+
+        if ($request->hasFile('image')) {
+            $filen = $request->image->getClientOriginalName();
+            $filename = time() . '.' . $filen;
+            $request->image->move('assets/images/users/', $filename);
+            $bikerImageUrl = asset('assets/images/users/' . $filename);
+        }
+
         $data = [];
+        $defaultImageUrl = asset('assets/images/users/' . 'default.png');
         $pass = $request->first_name . '@' . random_int(1000, 9999);
         $user = new User();
         $user->first_name = $request->first_name;
         $user->middle_name = $request->middle_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
+        $user->image_url = $request->image == null ? $defaultImageUrl : $bikerImageUrl;
         $user->password = Hash::make($pass);
         $user->phone = $request->phone;
         $user->role_id = $request->role;

@@ -19,7 +19,7 @@
     <div class="row row-xs">
       <div class="col-sm-6 col-lg-3">
         <div class="card card-body">
-          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Warehouses</h6>
+          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Stores</h6>
           <div class="d-flex d-lg-block d-xl-flex align-items-end">
             <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$warehouses->count()}}</h3>
 
@@ -66,7 +66,8 @@
           </div><!-- chart-three -->
         </div>
       </div><!-- col -->
-      {{---bEGIN OF COMMENT---}} {{-- <div class="col-lg-8 col-xl-7 mg-t-10">
+      {{---bEGIN OF COMMENT---}}
+      {{--<div class="col-lg-8 col-xl-7 mg-t-10">
         <div class="card">
           <div class="card-header pd-y-20 d-md-flex align-items-center justify-content-between">
             <h6 class="mg-b-0">Recurring Revenue Growth</h6>
@@ -131,7 +132,7 @@
             </div><!-- row -->
           </div><!-- card-body -->
         </div><!-- card -->
-      </div>
+      </div>--}}
       <div class="col-md-6 col-xl-4 mg-t-10 order-md-1 order-xl-0">
         <div class="card ht-lg-100p">
           <div class="card-header d-flex align-items-center justify-content-between">
@@ -423,7 +424,7 @@
             </div>
           </div><!-- card-body -->
         </div>
-      </div>--}}{{---END OF COMMENT---}}
+      </div>{{---END OF COMMENT---}}
     </div><!-- row -->
   </div><!-- container -->
 </div>

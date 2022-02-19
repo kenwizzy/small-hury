@@ -10,6 +10,7 @@ class Warehouse extends Model
 {
     use HasFactory;
 
+    protected $table = 'warehouses';
     protected $guarded = ['created_at', 'updated_at'];
     protected $hidden = ['created_at', 'updated_at'];
 
@@ -20,17 +21,17 @@ class Warehouse extends Model
 
     public function user()
     {
-        //return $this->belongsTo(User::class, 'user_id');
-        $user = DB::table('users')
-            ->join('warehouses', 'users.id', 'warehouses.user_id')
-            //->join('attributes', 'attribute_values.attribute_id', '=', 'attributes.id')
-            ->where('warehouses.id', $this->id)
-            //->where('users.id', '<>', 'manager')
-            ->get();
+        return $this->belongsTo(User::class);
+        // $user = DB::table('users')
+        //     ->join('warehouses', 'users.id', 'warehouses.user_id')
+        //     //->join('attributes', 'attribute_values.attribute_id', '=', 'attributes.id')
+        //     ->where('warehouses.id', $this->id)
+        //     //->where('users.id', '<>', 'manager')
+        //     ->get();
 
-        foreach ($user as $res) {
-            echo $res->first_name . ' ' . $res->last_name;
-        }
+        // foreach ($user as $res) {
+        //     echo $res->first_name . ' ' . $res->last_name;
+        // }
     }
 
     public function totalItems()

@@ -54,6 +54,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/get_subcategory_values/{id}', [CategoryController::class, 'FetchSubCategoryValues']);
     Route::post('submit_store', [WarehouseController::class, 'store'])->name('submit_store');
     Route::get('dashboard/stores', [WarehouseController::class, 'index'])->name('dashboard.stores');
+    Route::get('dashboard/stores/{warehouse}', [WarehouseController::class, 'edit'])->name('dashboard.edit_store');
+    Route::get('dashboard/districts/{warehouse}', [WarehouseController::class, 'district'])->name('dashboard.districts');
+    Route::patch('update_store/{warehouse}', [WarehouseController::class, 'update'])->name('update_store');
     Route::get('dashboard/store_details/{store}', [WarehouseController::class, 'show'])->name('store_details');
     Route::get('dashboard/add_user', [UserController::class, 'create'])->name('dashboard.add_user');
     Route::get('dashboard/edit_user', [UserController::class, 'edit'])->name('dashboard.edit_user');
@@ -63,7 +66,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/orders', [OrderController::class, 'index'])->name('dashboard.orders');
     Route::get('dashboard/order_details/{order}', [OrderController::class, 'show'])->name('dashboard/order_details');
     Route::get('process_order/{order}', [OrderController::class, 'process'])->name('process_order');
-    Route::get('dashboard/assign_order/{order}', [OrderController::class, 'assign'])->name('dashboard.assign_order');
+    Route::get('dashboard/declineorder/{order}', [OrderController::class, 'decline'])->name('dashboard.declineorder');
+    Route::get('dashboard/get_bikers/{order}', [OrderController::class, 'getBikers'])->name('dashboard.get_bikers');
+    Route::post('dashboard/assign_biker', [OrderController::class, 'assignBiker'])->name('dashboard.assign_biker');
     Route::get('dashboard/assign_manager/{warehouse}', [WarehouseController::class, 'assign'])->name('dashboard.assign_manager');
     Route::post('assign_manager', [WarehouseController::class, 'assignManager'])->name('assign_manager');
 

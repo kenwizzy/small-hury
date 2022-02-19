@@ -3922,5 +3922,14 @@ class LgaSeeder extends Seeder
             'name' => 'Kubwa',
             'state_id' => '37'
         ]);
+        DB::table('lgas')->insert([
+            'name' => 'Asokoro',
+            'state_id' => '37'
+        ]);
+
+        DB::table('lgas')->insert([
+            'name' => 'Jabi',
+            'state_id' => '37'
+        ]);
     }
 }

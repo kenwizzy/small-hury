@@ -95,4 +95,9 @@ class User extends Authenticatable
 
         //return Warehouse::where('user_id', $this->id)->first();
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

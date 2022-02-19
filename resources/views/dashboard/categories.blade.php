@@ -93,7 +93,7 @@
                         <div class="dropdown-menu dropdown-menu-right">
                           <a href="#editService" data-toggle="modal" id="service-edit" title="Edit {{ $category->name }}" data-url="{{route('dashboard.edit_cat', $category->id)}}" data-service-name="{{ $category->name }}" data-id="{{ '$category->id' }}" class="dropdown-item details text-info"><i class="far fa-edit"></i> Edit</a>
 
-                          <a data-url="" class="dropdown-item delete-entity text-danger" title="Delete {{ '$category->name'}}" style="cursor: pointer;"><i class="fas fa-trash"></i> Delete</a>
+                          {{--<a data-url="" class="dropdown-item delete-entity text-danger" title="Delete {{ $category->name}}" style="cursor: pointer;"><i class="fas fa-trash"></i> Delete</a>--}}
                         </div>
                       </div>
                     </td>

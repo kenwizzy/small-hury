@@ -17,6 +17,26 @@
             </div>
         </div>
 
+        @if (session('error'))
+        @section('script')
+        <script>
+            Notiflix.Notify.Failure('{{ session("error") }}', {
+                timeout: 4000,
+            }, );
+        </script>
+        @endsection
+        @endif
+
+        @if(session('success'))
+        @section('script')
+        <script>
+            Notiflix.Notify.Success('{{ session("success") }}', {
+                timeout: 4000,
+            }, );
+        </script>
+        @endsection
+        @endif
+
         <div class="row row-xs">
             <div class="col-lg-12 col-xl-12 mg-t-10">
                 <div class="card mg-b-10">
@@ -68,20 +88,22 @@
                                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                                     <td class="tx-medium">{{$order->id}}</td>
                                     <td class="tx-medium">{{$order->warehouse->name}}</td>
-                                    <td class="tx-medium">&#8358;{{$order->total_products_price}}</td>
-                                    <td class="text-left">&#8358;{{$order->total_shipping_price}}</td>
-                                    <td class="text-left">&#8358;{{$order->total_paid}}</td>
+                                    <td class="tx-medium">&#8358;{{number_format($order->total_products_price,2)}}</td>
+                                    <td class="text-left">&#8358;{{number_format($order->total_shipping_price,2)}}</td>
+                                    <td class="text-left">&#8358;{{number_format($order->total_paid,2)}}</td>
                                     <td class="text-left">{{$order->starus->name}}</td>
-                                    <td class="text-left">{{$order->user->first_name.' '.$order->user->last_name.' ('.$order->user->role->name.')' ?? 'Unavailable'}}</td>
+                                    <td class="text-left">{{$order->update_by != 0 ? $order->user->first_name.' '.$order->user->last_name.' ('.$order->user->role->name.')' : ''}}</td>
                                     <td class="tx-medium">{{ Carbon\Carbon::parse($order->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
                                     <td class="tx-medium">{{ Carbon\Carbon::parse($order->updated_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
                                     <td class=" text-center">
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="{{route('dashboard/order_details',$order->id)}}" class="dropdown-item text-info"><i class="far fa-edit"></i>Order Details </a>
-                                                <a href="#editService" data-toggle="modal" id="service-order" title="Order to biker" data-url="{{route('dashboard.assign_order', $order->id)}}" data-service-name="{{' $order->order_detail->product->name '}}" data-id="{{ '$order->id' }}" class="dropdown-item details text-success"><i class="far fa-user"></i> Assign to biker</a>
-                                                {{--<a href="" class="dropdown-item text-success"><i class="far fa-user"></i>Assign to biker</a>--}}
-                                                <a href="" class="dropdown-item text-danger"><i class="far fa-clipboard"></i> Decline Order </a>
+                                                @if($order->status !== 11 && $order->status !== 8 && $order->status !== 7)
+                                                <a href="#editService" data-toggle="modal" id="service-order" title="Assign to biker" data-url="{{route('dashboard.get_bikers', $order->id)}}" data-service-name="{{' $order->order_detail->product->name '}}" data-id="{{ '$order->id' }}" class="dropdown-item details text-success"><i class="far fa-user"></i> Assign to biker</a>
+                                                @endif
+                                                {{--<a href="" class="dropdown-item text-success"><i class="far fa-user"></i></a>--}}
+                                                <a href="{{route('dashboard.declineorder',$order->id)}}" class="dropdown-item text-danger"><i class="far fa-clipboard"></i> Decline Order </a>
                                             </div>
                                         </div>
                                     </td>
@@ -96,7 +118,7 @@
                                                     <span class="times" aria-hidden="true">&times;</span>
                                                 </a>
                                                 <div class="modal-body" id="modal-order-body">
-                                                    <form method="POST" action="#" enctype="multipart/form-data">
+                                                    <form method="POST" action="{{route('dashboard.assign_biker')}}" enctype="multipart/form-data">
                                                         @csrf
                                                         <h5 class="mg-b-2"><strong>Assigning order with ID <span class="mana"></span> to biker</strong></h5>
                                                         <hr>
@@ -112,6 +134,7 @@
                                                                 </span>
                                                                 @enderror
                                                             </div>
+                                                            <input type="hidden" name="order" class="form-control mana1" readonly>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Assign</button>
 
@@ -164,6 +187,7 @@
 
             success: function(result) {
                 $(".mana").html(result.order.id);
+                $(".mana1").val(result.order.id);
                 $.each(result.bikers, function(key, biker) {
                     let bike = `<option value="` + biker.id + `">` + biker.first_name + " " + biker.last_name + `</option>`;
                     console.log(biker);

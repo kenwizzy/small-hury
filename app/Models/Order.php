@@ -14,8 +14,8 @@ class Order extends Model
     public const AWAITING_FULFILLMENT = 1;
     public const AWAITING_SHIPMENT = 2;
     public const AWAITING_PICKUP = 3;
-    public const PARTIALLY_SHIPPED = 4;
-    public const COMPLETELY_SHIPPED = 5;
+    //public const PARTIALLY_SHIPPED = 4;
+    public const SHIPPED = 5;
     public const COMPLETED = 6;
     public const CANCELLED = 7;
     public const DECLINED = 8;

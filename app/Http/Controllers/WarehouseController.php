@@ -115,7 +115,11 @@ class WarehouseController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $warehouse = Warehouse::with('user')->where('id', $id)->first();
+        $users = User::where('role_id', 3)->get();
+        $states = State::all();
+        return view('dashboard/edit_store', compact('warehouse', 'users', 'states'));
     }
 
     /**
@@ -125,9 +129,38 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Warehouse $warehouse, Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'store_name'     => 'required|string',
+            'manager' => 'required|numeric',
+            'state' => 'required|numeric',
+            'email' => 'required|string',
+            'lga' => 'required|numeric',
+            'street' => 'required|string',
+            //'zip' => 'required|numeric',
+            //'longitude' => 'required|numeric',
+            //'latitude' => 'required|numeric',
+
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $store = Warehouse::find($warehouse->id);
+        $store->name = $request->store_name;
+        $store->user_id = $request->manager;
+        $store->state_id = $request->state;
+        $store->lga_id = $request->lga;
+        $store->slug = Str::slug($request->store_name);
+        $store->street = $request->street;
+        // $store->zipcode = $request->zip;
+        //     'longitude' => $request->longitude;
+        //     'latitude' => $request->latitude;
+        $store->save();
+
+        return redirect('dashboard/stores')->withSuccess('Warehouse updated successfully');
     }
 
     /**
@@ -172,5 +205,13 @@ class WarehouseController extends Controller
         $store->save();
 
         return redirect()->back()->withSuccess($user->first_name . ' ' . $user->last_name . ' assigned a ' . $store->name . ' store manager');
+    }
+
+    public function district(Warehouse $warehouse)
+    {
+        return view('dashboard.districts', [
+            'districts' => DB::table('warehouse_districts')->where('warehouse_id', $warehouse->id)->get(),
+            'store' => $warehouse
+        ]);
     }
 }
