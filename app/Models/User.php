@@ -76,6 +76,11 @@ class User extends Authenticatable
         return  $cart->add_product($product, $warehouse_id);
     }
 
+    public function orderAssigns()
+    {
+        return $this->hasMany(OrderAssignee::class);
+    }
+
     public function increase_product(Product $product, $warehouse_id, $quantity = 1)
     {
         return $this->cart->increase_product($product, $warehouse_id, $quantity);

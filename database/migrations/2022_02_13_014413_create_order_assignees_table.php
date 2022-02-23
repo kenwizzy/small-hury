@@ -16,8 +16,8 @@ class CreateOrderAssigneesTable extends Migration
         Schema::create('order_assignees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('order_id')->constrained('orders');
-            $table->string('status')->nullable();
+            $table->foreignId('order_id')->constrained('orders')->unique();
+            $table->string('status')->default('pending');
             $table->enum('order_accepted', ['Yes', 'No'])->nullable();
             $table->timestamp('order_acceptance_time')->nullable();
             $table->timestamp('order_rejected_time')->nullable();

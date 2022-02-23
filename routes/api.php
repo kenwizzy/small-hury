@@ -1,19 +1,21 @@
 <?php
 
-use App\Http\Controllers\API\AddressController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\API\AddressController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\CategoryController;
-use App\Http\Controllers\API\DeliveryCostController;
-use App\Http\Controllers\API\OrderController;
-use App\Http\Controllers\API\WareHouseController;
 use App\Http\Controllers\API\WishlistController;
+use App\Http\Controllers\API\WareHouseController;
+use App\Http\Controllers\API\DeliveryCostController;
+use App\Http\Controllers\API\OrderAssigneeController;
+use App\Http\Controllers\API\WarehouseDistrictController;
 use App\Http\Controllers\OrderController as ControllersOrderController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +34,11 @@ Route::post('register', [AuthController::class, 'register']);
 //     return $request->user();
 // });
 //Route::middleware(['auth:sanctum'])->group(function ($router) {
-
+Route::get('/active_orders',[OrderAssigneeController::class,'active']);
+Route::get('/pending_orders',[OrderAssigneeController::class,'pending']);
+Route::get('/accept_order/{id}',[OrderAssigneeController::class,'accept']);
+Route::get('/decline_order/{id}',[OrderAssigneeController::class,'decline']);
+Route::get('/order_histories',[OrderAssigneeController::class,'history']);
 Route::group([
     'middleware' => 'auth:sanctum'
 ], function ($router) {
@@ -43,6 +49,8 @@ Route::group([
     Route::get('/categories-parent',[CategoryController::class,'getParent']);
     Route::get('/category/{id}/{warehouse_id}', [CategoryController::class, 'show']);
     Route::get('/product/{id}', [ProductController::class, 'show']);
+    Route::get('/districts', [WarehouseDistrictController::class, 'index']);
+
 
     /* Uzezi Jephter endpoints  */
 
@@ -89,6 +97,7 @@ Route::group([
         Route::put('/re-order/{id}',[OrderController::class,'reOrder']);
         Route::get('/{id}',[OrderController::class,'show']);
         Route::post('/rating',[OrderController::class,'storeRating']);
+        // Route::get('/active_orders',[OrderAssigneeController::class,'active']);
     });
 });
 

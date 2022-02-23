@@ -10,7 +10,7 @@
           <ol class="breadcrumb breadcrumb-style1 mg-b-10">
             <li class="breadcrumb-item"><a href="">Dashboard</a></li>
             <li class="breadcrumb-item" aria-current="page">Products</li>
-            <li class="breadcrumb-item active" aria-current="page">details</li>
+            <li class="breadcrumb-item activePage" aria-current="page">details</li>
           </ol>
 
         </nav>

@@ -8,7 +8,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                         <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit Store</li>
+                        <li class="breadcrumb-item activePage" aria-current="page">Edit Store</li>
                     </ol>
                 </nav>
                 <h4 class="mg-b-0 tx-spacing--1">Edit Store</h4>

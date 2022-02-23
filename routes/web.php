@@ -27,9 +27,10 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-
+    
     Route::post('dashboard/create_product', [ProductController::class, 'store'])->name('create_product');
     Route::get('dashboard/categories', [CategoryController::class, 'index'])->name('dashboard.categories');
+    Route::get('dashboard/sub_categories/{id}', [CategoryController::class, 'getSubCategories'])->name('dashboard.sub_categories');
     Route::post('create_category', [CategoryController::class, 'store'])->name('create_category');
     Route::get('dashboard/edit_cat/{id}', [CategoryController::class, 'edit'])->name('dashboard.edit_cat');
     Route::patch('dashboard/update_category/{id}', [CategoryController::class, 'update'])->name('dashboard.update_category');

@@ -1,5 +1,5 @@
 <?php
-
+//08189741651 = MAMA UZOMA
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AssignOrderMail extends Mailable
+class AssignOrderMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

@@ -8,10 +8,10 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-style1 mg-b-10">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
-            <li class="breadcrumb-item activePage" aria-current="page">Category List</li>
+            <li class="breadcrumb-item activePage" aria-current="page">Sub Category List</li>
           </ol>
         </nav>
-        <h4 class="mg-b-0 tx-spacing--1">Category List</h4>
+        <h4 class="mg-b-0 tx-spacing--1">Sub Category List</h4>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
         <div class="card mg-b-10">
           <div class="card-header pd-t-20 d-sm-flex align-items-start justify-content-between bd-b-0 pd-b-0">
             <div>
-              <h6 class="tx-13 tx-color-03 mg-b-0">This table displays a list of all Small Hurry Categories.</h6>
+              <h6 class="tx-13 tx-color-03 mg-b-0">This table displays the child categories of.</h6>
             </div>
 
           </div><!-- card-header -->
@@ -47,7 +47,7 @@
                 </div>
                 <div class="media-body">
                   <h6 class="tx-sans tx-uppercase tx-10 tx-spacing-1 tx-color-03 tx-semibold tx-nowrap mg-b-5 mg-md-b-8">
-                    Total categories</h6>
+                    Total sub categories</h6>
                   <h4 class="tx-20 tx-sm-18 tx-md-20 tx-normal tx-rubik mg-b-0">{{$categories->count()}}</h4>
                 </div>
               </div>
@@ -91,8 +91,7 @@
                       <div class="dropdown-file">
                         <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                         <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#editService" data-toggle="modal" id="service-edit" title="Edit {{ $category->name }}" data-url="{{route('dashboard.edit_cat', $category->id)}}" data-service-name="{{ $category->name }}" data-id="{{ '$category->id' }}" class="dropdown-item details text-success"><i class="far fa-view"></i>Edit</a>
-                          <a href="{{route('dashboard.sub_categories', $category->id)}}" class="dropdown-item details text-info"><i class="far fa-edit"></i>View sub categories</a>
+                          <a href="#editService" data-toggle="modal" id="service-edit" title="Edit {{ $category->name }}" data-url="{{route('dashboard.edit_cat', $category->id)}}" data-service-name="{{ $category->name }}" data-id="{{ '$category->id' }}" class="dropdown-item details text-info"><i class="far fa-edit"></i> Edit</a>
 
                           {{--<a data-url="" class="dropdown-item delete-entity text-danger" title="Delete {{ $category->name}}" style="cursor: pointer;"><i class="fas fa-trash"></i> Delete</a>--}}
                         </div>

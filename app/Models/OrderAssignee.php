@@ -17,4 +17,14 @@ class OrderAssignee extends Model
         'order_acceptance_time',
         'order_rejected_time'
     ];
+
+    public function order_details()
+    {
+        return $this->hasOne(OrderDetail::class,'order_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

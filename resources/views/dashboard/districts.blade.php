@@ -10,7 +10,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Districts</li>
+                        <li class="breadcrumb-item activePage" aria-current="page">Districts</li>
                     </ol>
                 </nav>
                 <h4 class="mg-b-0 tx-spacing--1">{{$store->name}} Districts</h4>

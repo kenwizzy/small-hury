@@ -85,7 +85,14 @@
       </ul>
     </li>
 
-    <li class="nav-item"><a href="{{route('dashboard.categories')}}" class="nav-link"><i data-feather="mail"></i> <span>Product Categories</span></a></li>
+    <li class="nav-item with-sub">
+      <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Manage Categories</span></a>
+      <ul>
+      <li><a href="{{route('dashboard.categories')}}"><i data-feather="mail"></i> <span>Categories</span></a></li>
+      <li class=""><a href="#"><i data-feather="mail"></i> <span>Sub Categories</span></a></li>
+      </ul>
+    </li>
+
     @endif
 
     <li class="nav-item"><a href="{{route('dashboard.orders')}}" class="nav-link"><i data-feather="mail"></i> <span>Orders</span></a></li>
