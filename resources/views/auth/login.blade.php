@@ -12,12 +12,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-<<<<<<< HEAD
-        <form method="POST" action="login">
-        {{-- <form method="POST" action="https://small-hury-lvrxg.ondigitalocean.app/login"> --}}
-=======
         <form method="POST" action="{{route('login')}}">
->>>>>>> 32374ee75704e55621a5eb8b686a04b1de4fa1e5
             @csrf
 
             <!-- Email Address -->

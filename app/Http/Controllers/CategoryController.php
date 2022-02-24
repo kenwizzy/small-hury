@@ -115,9 +115,10 @@ class CategoryController extends Controller
 
     public function getSubCategories($id)
     {
+        $data = Category::where('id',$id)->select('name')->first();
         $categories = Category::where('parent_id', $id)->get();
 
-        return view('dashboard/sub_categories', compact('categories'));
+        return view('dashboard/sub_categories', compact('categories', 'data'));
     }
 
     /**
@@ -131,7 +132,7 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'     => 'required|string',
-            'image' => 'required|file'
+            'image' => 'nullable|file'
         ]);
 
         if ($validator->fails()) {
@@ -143,14 +144,15 @@ class CategoryController extends Controller
         if ($request->hasFile('image')) {
             $filename = $request->image->getClientOriginalName();
             $request->image->move('assets/images/categories', $filename);
+
+            $categorymageUrl = asset('assets/images/categories/' . $filename);
         }
 
-        $categorymageUrl = asset('assets/images/categories/' . $filename);
-
-        $updateCategory = Category::where('id', $id)->update([
+        $updateCategory = Category::where('id', $id)->first();
+        $updateCategory->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'cat_img_url' => $categorymageUrl
+            'cat_img_url' => $request->image==''? $updateCategory->cat_img_url:$categorymageUrl
         ]);
 
         return redirect('dashboard/categories')->withSuccess('Category updated successfully');

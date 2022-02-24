@@ -33,7 +33,7 @@
         <div class="card mg-b-10">
           <div class="card-header pd-t-20 d-sm-flex align-items-start justify-content-between bd-b-0 pd-b-0">
             <div>
-              <h6 class="tx-13 tx-color-03 mg-b-0">This table displays the child categories of.</h6>
+              <h6 class="tx-13 tx-color-03 mg-b-0">This table displays the child categories of {{$data->name}}.</h6>
             </div>
 
           </div><!-- card-header -->
@@ -62,9 +62,9 @@
                 <thead class="thead-primary">
                   <tr>
                     <th class="text-center">s/n</th>
-                    <th>Category Name</th>
+                    <th>Sub Category Name</th>
+                    <th>Parent Category</th>
                     <th>slug</th>
-                    <th>Category Image</th>
                     <th>Date Created</th>
                     <th>Action</th>
                   </tr>
@@ -75,14 +75,8 @@
                   <tr>
                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                     <td class="tx-medium">{{$category->name}}</td>
+                    <td class="tx-medium">{{$data->name}}</td>
                     <td>{{$category->slug}}</td>
-                    <td>
-                      @if($category->cat_img_url == null)
-                      UNAVAILABLE
-                      @else
-                      <img width="100" height="100" src="{{$category->cat_img_url}}">
-                      @endif
-                    </td>
                     <td class="tx-medium text-center">{{ Carbon\Carbon::parse($category->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
 
 
@@ -123,35 +117,37 @@
         <form method="POST" action="{{route('create_category')}}" enctype="multipart/form-data">
           @csrf
 
-          <h5 class="mg-b-2"><strong>Create New Category</strong></h5><br>
+          <h5 class="mg-b-2"><strong>Create Sub Category</strong></h5><br>
 
           <div class="form-group col-md-12">
-            <label for="name">Category Name</label>
-            <input type="text" class="form-control @error(' cat_name') is-invalid @enderror" id="cat_name" name="cat_name" placeholder="Enter Category Name" value="{{ old('name') }}" autocomplete="off" required>
-            @error('cat_name')
+            <label for="name">Sub Category Name</label>
+            <input type="text" class="form-control @error(' sub_cat') is-invalid @enderror" name="sub_cat" placeholder="Enter Sub Category Name" value="{{ old('sub_cat') }}" autocomplete="off" required>
+            @error('sub_cat')
             <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
             </span>
             @enderror
           </div>
 
-          <div id="more"></div>
+          {{-- <div id="more"></div>
 
           <div class="form-group col-md-12">
             <button type="button" id="checkMe" class="btn btn-primary btn-sm"><label>Add Sub Category</label></button>
-          </div>
+          </div> --}}
 
           <div class="form-group col-md-12">
-            <label for="Cat Img">Category Image</label>
-            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="off" required>
-            @error('image')
+            <label for="Cat Img">Select Category</label>
+            <select class="form-control @error('cat') is-invalid @enderror" name="cat" value="{{ old('cat') }}" autocomplete="off" required>
+               <option value="">option one</option>
+            </select>
+            @error('cat')
             <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
             </span>
             @enderror
           </div>
           <div class="col-md-12 mt-4">
-            <button type="submit" class="btn btn-primary">Create Category</button>
+            <button type="submit" class="btn btn-primary">Create Sub Category</button>
           </div>
 
         </form>
