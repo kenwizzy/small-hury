@@ -21,7 +21,8 @@ class DashboardController extends Controller
             'warehouses' => Warehouse::all(),
             'orders' => Order::all(),
             'users' => User::where('role_id', 4)->get(),
-            'transactions' => Transaction::all()
+            'transactions' => Transaction::all(),
+            'customers' => User::where('role_id', 5)->orderBy('id', 'asc')->get(),
         ]);
     }
 

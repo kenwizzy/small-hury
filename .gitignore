@@ -1,4 +1,11 @@
-
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+/public/assets/images/categories
+/public/assets/images/products
+/public/assets/images/users
 .env
 .env.backup
 .phpunit.result.cache
@@ -9,3 +16,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+

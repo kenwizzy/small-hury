@@ -71,10 +71,6 @@ $(document).ready(function() {
         //console.log(id);
 
         let serviceName = $(this).attr('data-service-name');
-        //console.log(serviceName);
-        // let labourMarkup = $(this).attr('data-labour-markup');
-        // let materialMarkup = $(this).attr('data-material-markup');
-
         $.ajaxSetup({
             headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -84,7 +80,6 @@ $(document).ready(function() {
         $.ajax({
         url: route,
         method: 'GET',
-        // data: {"id": id, "serviceName": serviceName, "labourMarkup": labourMarkup, "materialMarkup": materialMarkup},
         data: {"id": id, "serviceName": serviceName},
         beforeSend : function(){
             $("#modal-edit-body").html('<div class="d-flex justify-content-center mt-4 mb-4"><span class="loadingspinner"></span></div>');

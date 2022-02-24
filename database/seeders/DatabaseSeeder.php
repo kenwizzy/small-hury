@@ -77,10 +77,12 @@ class DatabaseSeeder extends Seeder
             StateSeeder::class,
             LgaSeeder::class,
             WarehouseSeeder::class,
+            WarehouseDistrictSeeder::class,
             DeliveryCostSeeder::class,
             OrderStatusSeeder::class,
+            OrderProcessSeeder::class,
             DeliveryTypeSeeder::class,
-            OrderProcessSeeder::class
+
         ]);
     }
 }

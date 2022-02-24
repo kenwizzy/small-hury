@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('dashboard/categories', [
-            'categories' => Category::all()
+            'categories' => Category::where('parent_id',0)->get()
         ]);
     }
 
@@ -111,6 +111,13 @@ class CategoryController extends Controller
         ];
 
         return view('dashboard/edit_category', $data);
+    }
+
+    public function getSubCategories($id)
+    {
+        $categories = Category::where('parent_id', $id)->get();
+
+        return view('dashboard/sub_categories', compact('categories'));
     }
 
     /**

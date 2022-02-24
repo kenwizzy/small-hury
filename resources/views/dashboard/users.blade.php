@@ -10,7 +10,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">All Users</li>
+                        <li class="breadcrumb-item activePage" aria-current="page">All Users</li>
                     </ol>
                 </nav>
                 <h4 class="mg-b-0 tx-spacing--1">All Users</h4>
@@ -62,14 +62,14 @@
                                 @php $sn = 1; @endphp
                                 @foreach($users as $user)
                                 <tr>
-
+                                    {{--- {{$user->role_id =! 3 ? 'noth' : $user->warehouse->name}} ---}}
                                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                                     <td class="tx-medium">{{$user->first_name}}</td>
                                     <td class="tx-medium">{{$user->middle_name}}</td>
                                     <td class="tx-medium">{{$user->last_name}}</td>
                                     <td class="text-left">{{$user->phone}}</td>
                                     <td class="text-left">{{$user->email}}</td>
-                                    <td class="text-left">{{$user->role->name}}{{$user->role->id == 3 ? ' ('.$user->warehouse()->name.')' :''}}</td>
+                                    <td class="text-left">{{$user->role->name}}</td>
                                     <td class="tx-medium">{{ Carbon\Carbon::parse($user->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
                                     {{--<td class=" text-center">
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>

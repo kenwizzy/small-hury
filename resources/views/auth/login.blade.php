@@ -12,8 +12,12 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+<<<<<<< HEAD
         <form method="POST" action="login">
         {{-- <form method="POST" action="https://small-hury-lvrxg.ondigitalocean.app/login"> --}}
+=======
+        <form method="POST" action="{{route('login')}}">
+>>>>>>> 32374ee75704e55621a5eb8b686a04b1de4fa1e5
             @csrf
 
             <!-- Email Address -->
@@ -27,10 +31,7 @@
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
 
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
             </div>
 
             <!-- Remember Me -->
@@ -43,9 +44,9 @@
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    {{ __('Forgot your password?') }}
+                </a>
                 @endif
 
                 <x-button class="ml-3" style="background-color:#73ab22; border-color: #73ab22;">

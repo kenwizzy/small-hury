@@ -91,9 +91,10 @@
                       <div class="dropdown-file">
                         <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                         <div class="dropdown-menu dropdown-menu-right">
-                          <a href="#editService" data-toggle="modal" id="service-edit" title="Edit {{ $category->name }}" data-url="{{route('dashboard.edit_cat', $category->id)}}" data-service-name="{{ $category->name }}" data-id="{{ '$category->id' }}" class="dropdown-item details text-info"><i class="far fa-edit"></i> Edit</a>
+                        <a href="#editService" data-toggle="modal" id="service-edit" title="Edit {{ $category->name }}" data-url="{{route('dashboard.edit_cat', $category->id)}}" data-service-name="{{ $category->name }}" data-id="{{ '$category->id' }}" class="dropdown-item details text-success"><i class="far fa-view"></i>Edit</a>
+                          <a href="{{route('dashboard.sub_categories', $category->id)}}" class="dropdown-item details text-info"><i class="far fa-edit"></i>View sub categories</a>
 
-                          <a data-url="" class="dropdown-item delete-entity text-danger" title="Delete {{ '$category->name'}}" style="cursor: pointer;"><i class="fas fa-trash"></i> Delete</a>
+                          {{--<a data-url="" class="dropdown-item delete-entity text-danger" title="Delete {{ $category->name}}" style="cursor: pointer;"><i class="fas fa-trash"></i> Delete</a>--}}
                         </div>
                       </div>
                     </td>
@@ -125,34 +126,34 @@
 
           <h5 class="mg-b-2"><strong>Create New Category</strong></h5><br>
 
-            <div class="form-group col-md-12">
-              <label for="name">Category Name</label>
-              <input type="text" class="form-control @error(' cat_name') is-invalid @enderror" id="cat_name" name="cat_name" placeholder="Enter Category Name" value="{{ old('name') }}" autocomplete="off" required>
-              @error('cat_name')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-            </div>
+          <div class="form-group col-md-12">
+            <label for="name">Category Name</label>
+            <input type="text" class="form-control @error(' cat_name') is-invalid @enderror" id="cat_name" name="cat_name" placeholder="Enter Category Name" value="{{ old('name') }}" autocomplete="off" required>
+            @error('cat_name')
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+          </div>
 
-                <div id="more"></div>
+          <div id="more"></div>
 
-                <div class="form-group col-md-12">
-                    <button type="button" id="checkMe" class="btn btn-primary btn-sm"><label>Add Sub Category</label></button>
-                </div>
+          <div class="form-group col-md-12">
+            <button type="button" id="checkMe" class="btn btn-primary btn-sm"><label>Add Sub Category</label></button>
+          </div>
 
-            <div class="form-group col-md-12">
-              <label for="Cat Img">Category Image</label>
-              <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="off" required>
-              @error('image')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-            </div>
-            <div class="col-md-12 mt-4">
+          <div class="form-group col-md-12">
+            <label for="Cat Img">Category Image</label>
+            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="off" required>
+            @error('image')
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+          </div>
+          <div class="col-md-12 mt-4">
             <button type="submit" class="btn btn-primary">Create Category</button>
-            </div>
+          </div>
 
         </form>
       </div><!-- modal-body -->
@@ -205,33 +206,6 @@
           <span aria-hidden="true">&times;</span>
         </a>
 
-        <!-- <form method="POST" action="{{route('create_category')}}" enctype="multipart/form-data">
-          @csrf
-          <h5 class="mg-b-2"><strong>Update Category</strong></h5>
-          <div class="form-row mt-4">
-            <div class="form-group col-md-12">
-              <label for="name">Name</label>
-              <input type="text" class="form-control @error('cat_name') is-invalid @enderror" id="cat_name" name="cat_name" placeholder="Enter Category Name" value="{{ old('name') }}" autocomplete="off" required>
-              @error('cat_name')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-            </div>
-            <div class="form-group col-md-12">
-              <label for="Cat Img">Category Image</label>
-              <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="off" required>
-              @error('image')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-            </div>
-
-            <button type="submit" class="btn btn-primary">Update Category</button>
-          </div>
-        </form> -->
-
         <div class="modal-body" id="modal-edit-body">
           <!-- Modal displays here -->
           <div id="spinner-icon-3"></div>
@@ -245,14 +219,14 @@
 
 @section('script')
 <script>
-$(document).ready(function() {
+  $(document).ready(function() {
 
-let count = 0;
-$("#checkMe").click(function() {
+    let count = 0;
+    $("#checkMe").click(function() {
 
-count++;
+      count++;
 
-$('#more').append(`
+      $('#more').append(`
 <div class="container_create" id="added${count}">
 
                     <div class="form-group col-md-12">
@@ -270,17 +244,15 @@ $('#more').append(`
         </div>
 `);
 
-});
+    });
 
-$(document).on("click", ".close" , function() {
-                var button_id = $(this).attr("id");
-               $('#added' + count).remove();
-               count--;
+    $(document).on("click", ".close", function() {
+      var button_id = $(this).attr("id");
+      $('#added' + count).remove();
+      count--;
+    });
 
-            });
-
-});
-
+  });
 </script>
 
 @endsection

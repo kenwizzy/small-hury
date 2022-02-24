@@ -19,7 +19,7 @@
     <div class="row row-xs">
       <div class="col-sm-6 col-lg-3">
         <div class="card card-body">
-          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Warehouses</h6>
+          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Stores</h6>
           <div class="d-flex d-lg-block d-xl-flex align-items-end">
             <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$warehouses->count()}}</h3>
 
@@ -60,12 +60,14 @@
             <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$transactions->count()}}</h3>
 
           </div>
+
           <div class="chart-three">
             <div id="flotChart6" class="flot-chart ht-30"></div>
           </div><!-- chart-three -->
         </div>
       </div><!-- col -->
-      {{-- <div class="col-lg-8 col-xl-7 mg-t-10">
+      {{---bEGIN OF COMMENT---}}
+      {{--<div class="col-lg-8 col-xl-7 mg-t-10">
         <div class="card">
           <div class="card-header pd-y-20 d-md-flex align-items-center justify-content-between">
             <h6 class="mg-b-0">Recurring Revenue Growth</h6>
@@ -130,11 +132,11 @@
             </div><!-- row -->
           </div><!-- card-body -->
         </div><!-- card -->
-      </div>
+      </div>--}}
       <div class="col-md-6 col-xl-4 mg-t-10 order-md-1 order-xl-0">
         <div class="card ht-lg-100p">
           <div class="card-header d-flex align-items-center justify-content-between">
-            <h6 class="mg-b-0">Warehouse Order Statistics</h6>
+            <h6 class="mg-b-0">Store Order Statistics</h6>
             <div class="tx-13 d-flex align-items-center">
 
             </div>
@@ -155,11 +157,6 @@
                     <td class="tx-medium">Abuja</td>
                     <td class="text-right">12,201</td>
                     <td class="text-right">#150,200.80</td>
-                  </tr>
-                  <tr>
-                    <td class="tx-medium">Kano</td>
-                    <td class="text-right">800</td>
-                    <td class="text-right">#10,200.80</td>
                   </tr>
                 </tbody>
               </table>
@@ -276,64 +273,33 @@
             </div>
           </div>
           <ul class="list-group list-group-flush tx-13">
+            @foreach($orders as $ord)
             <li class="list-group-item d-flex pd-sm-x-20">
-              <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-teal"><i class="icon ion-md-checkmark"></i></span></div>
+              <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle {{$ord->starus->name=='Cancelled' ||$ord->starus->name=='Declined'?'bg-danger':'bg-teal'}}"><i class="icon {{$ord->starus->name=='Cancelled' ||$ord->starus->name=='Declined'?'ion-md-close':'ion-md-checkmark'}}"></i></span></div>
               <div class="pd-sm-l-10">
-                <p class="tx-medium mg-b-0">Payment from #10322</p>
+                <p class="tx-medium mg-b-0">Payment from {{$ord->id}}</p>
+                <small class="tx-12 tx-color-03 mg-b-0">{{$ord->created_at}}</small>
+              </div>
+              <div class="mg-l-auto text-right">
+                <p class="tx-medium mg-b-0">&#8358;{{number_format($ord->total_paid)}}</p>
+                <small class="tx-12 {{$ord->starus->name=='Cancelled' ||$ord->starus->name=='Declined'?'tx-danger':'tx-success'}} mg-b-0">{{$ord->starus->name}}</small>
+              </div>
+            </li>
+           @endforeach 
+            {{--<li class="list-group-item d-flex pd-sm-x-20">
+              <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-danger"><i class="icon ion-md-close"></i></span></div>
+              <div class="pd-sm-l-10">
+                <p class="tx-medium mg-b-0">Payment from Ify</p>
                 <small class="tx-12 tx-color-03 mg-b-0">Mar 21, 2019, 3:30pm</small>
               </div>
               <div class="mg-l-auto text-right">
-                <p class="tx-medium mg-b-0">+ $250.00</p>
-                <small class="tx-12 tx-success mg-b-0">Completed</small>
-              </div>
-            </li>
-            <li class="list-group-item d-flex pd-sm-x-20">
-              <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-indigo op-5"><i class="icon ion-md-return-left"></i></span></div>
-              <div class="pd-sm-l-10">
-                <p class="tx-medium mg-b-2">Process refund to #00910</p>
-                <small class="tx-12 tx-color-03 mg-b-0">Mar 21, 2019, 1:00pm</small>
-              </div>
-              <div class="mg-l-auto text-right">
-                <p class="tx-medium mg-b-2">-$16.50</p>
-                <small class="tx-12 tx-success mg-b-0">Completed</small>
-              </div>
-            </li>
-            <li class="list-group-item d-flex pd-sm-x-20">
-              <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-orange op-5"><i class="icon ion-md-bus"></i></span></div>
-              <div class="pd-sm-l-10">
-                <p class="tx-medium mg-b-2">Process delivery to #44333</p>
-                <small class="tx-12 tx-color-03 mg-b-0">Mar 20, 2019, 11:40am</small>
-              </div>
-              <div class="mg-l-auto text-right">
-                <p class="tx-medium mg-b-2">3 Items</p>
-                <small class="tx-12 tx-info mg-b-0">For pickup</small>
-              </div>
-            </li>
-            <li class="list-group-item d-flex pd-sm-x-20">
-              <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-teal"><i class="icon ion-md-checkmark"></i></span></div>
-              <div class="pd-sm-l-10">
-                <p class="tx-medium mg-b-0">Payment from #023328</p>
-                <small class="tx-12 tx-color-03 mg-b-0">Mar 20, 2019, 10:30pm</small>
-              </div>
-              <div class="mg-l-auto text-right">
-                <p class="tx-medium mg-b-0">+ $129.50</p>
-                <small class="tx-12 tx-success mg-b-0">Completed</small>
-              </div>
-            </li>
-            <li class="list-group-item d-flex pd-sm-x-20">
-              <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-gray-400"><i class="icon ion-md-close"></i></span></div>
-              <div class="pd-sm-l-10">
-                <p class="tx-medium mg-b-0">Payment failed from #087651</p>
-                <small class="tx-12 tx-color-03 mg-b-0">Mar 19, 2019, 12:54pm</small>
-              </div>
-              <div class="mg-l-auto text-right">
                 <p class="tx-medium mg-b-0">$150.00</p>
-                <small class="tx-12 tx-danger mg-b-0">Declined</small>
+                <small class="tx-12 tx-danger mg-b-0">Not paid</small>
               </div>
-            </li>
+            </li>--}}
           </ul>
           <div class="card-footer text-center tx-13">
-            <a href="" class="link-03">View All Transactions <i class="icon ion-md-arrow-down mg-l-5"></i></a>
+            <a href="{{route('dashboard.orders')}}" class="link-03">View All Transactions <i class="icon ion-md-arrow-down mg-l-5"></i></a>
           </div><!-- card-footer -->
         </div><!-- card -->
       </div>
@@ -341,14 +307,14 @@
         <div class="card ht-100p">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="mg-b-0">New Customers</h6>
-
           </div>
           <ul class="list-group list-group-flush tx-13">
+        @foreach($customers as $cus)
             <li class="list-group-item d-flex pd-sm-x-20">
-              <div class="avatar"><span class="avatar-initial rounded-circle bg-gray-600">s</span></div>
+              <div class="avatar"><span class="avatar-initial rounded-circle bg-gray-600">{{substr($cus->first_name,0,1)}}</span></div>
               <div class="pd-l-10">
-                <p class="tx-medium mg-b-0">Socrates Itumay</p>
-                <small class="tx-12 tx-color-03 mg-b-0">Customer ID#00222</small>
+                <p class="tx-medium mg-b-0">{{ucfirst($cus->first_name)}} {{ucfirst($cus->last_name)}}</p>
+                <small class="tx-12 tx-color-03 mg-b-0">Registered Date {{$cus->created_at}}</small>
               </div>
               <div class="mg-l-auto d-flex align-self-center">
                 <nav class="nav nav-icon-only">
@@ -358,36 +324,11 @@
                 </nav>
               </div>
             </li>
-            <li class="list-group-item d-flex pd-x-20">
-              <div class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle" alt=""></div>
-              <div class="pd-l-10">
-                <p class="tx-medium mg-b-0">Reynante Labares</p>
-                <small class="tx-12 tx-color-03 mg-b-0">Customer ID#00221</small>
-              </div>
-              <div class="mg-l-auto d-flex align-self-center">
-                <nav class="nav nav-icon-only">
-
-                  <a href="" class="nav-link d-none d-sm-block"><i data-feather="user"></i></a>
-                  <a href="" class="nav-link d-sm-none"><i data-feather="more-vertical"></i></a>
-                </nav>
-              </div>
-            </li>
-            <li class="list-group-item d-flex pd-x-20">
-              <div class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle" alt=""></div>
-              <div class="pd-l-10">
-                <p class="tx-medium mg-b-0">Marianne Audrey</p>
-                <small class="tx-12 tx-color-03 mg-b-0">Customer ID#00220</small>
-              </div>
-              <div class="mg-l-auto d-flex align-self-center">
-                <nav class="nav nav-icon-only">
-                  <a href="" class="nav-link d-none d-sm-block"><i data-feather="user"></i></a>
-                  <a href="" class="nav-link d-sm-none"><i data-feather="more-vertical"></i></a>
-                </nav>
-              </div>
-            </li>
+        @endforeach    
+            
           </ul>
           <div class="card-footer text-center tx-13">
-            <a href="" class="link-03">View More Customers <i class="icon ion-md-arrow-down mg-l-5"></i></a>
+            <a href="{{route('dashboard.users')}}" class="link-03">View More Customers <i class="icon ion-md-arrow-down mg-l-5"></i></a>
           </div><!-- card-footer -->
         </div><!-- card -->
       </div>
@@ -422,7 +363,7 @@
             </div>
           </div><!-- card-body -->
         </div>
-      </div>--}}
+      </div>{{---END OF COMMENT---}}
     </div><!-- row -->
   </div><!-- container -->
 </div>

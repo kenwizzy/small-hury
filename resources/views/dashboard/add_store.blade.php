@@ -9,7 +9,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                         <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Store</li>
+                        <li class="breadcrumb-item activePage" aria-current="page">Add Store</li>
                     </ol>
                 </nav>
                 <h4 class="mg-b-0 tx-spacing--1">Create New Store</h4>
@@ -98,7 +98,7 @@
 
 
                             <div class="form-group col-md-3">
-                                <label for="first_name">Laditude</label>
+                                <label for="first_name">Latitude</label>
                                 <input type="text" class="form-control @error('latitude') is-invalid @enderror" id="latitude" name="latitude" value="{{ old('latitude') }}" autocomplete="off">
                                 @error('latitude')
                                 <span class="invalid-feedback" role="alert">

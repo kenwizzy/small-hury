@@ -90,7 +90,7 @@
                                     @endif
                                     </td>--}}
                                     <td class="tx-medium"><img width="100" src="{{$product->image_url}}"></td>
-                                    <td class="text-left">#{{number_format($product->real_price,2)}}</td>
+                                    <td class="text-left">&#8358;{{number_format($product->real_price,2)}}</td>
                                     {{--<td class="text-left">$product->totalItems()</td>--}}
                                     {{--<td class="text-left">In Store</td>--}}
                                     {{--<td class="tx-medium">{{$product->attribute()}}</td>--}}

@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/small-hurry.jpeg')}}">
 
   <title>Small Hurry</title>
 
@@ -39,9 +39,10 @@
       align-items: center;
     }
 
-    .change{
-        color:red;
+    .change {
+      color: red;
     }
+
     .container_fields {
       width: 90%;
       display: flex;
@@ -86,9 +87,9 @@
 
   {{---LEFT SIDEBAR---}}
   <aside class="aside aside-fixed">
-      @if(!Auth::user())
-     @php return redirect('index'); @endphp
-      @endif
+    @if(!Auth::user())
+    @php return redirect('index'); @endphp
+    @endif
     @include('dashboard.partials.left-sidebar')
   </aside>
 

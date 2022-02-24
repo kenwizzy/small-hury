@@ -11,7 +11,7 @@
       <a href="" class="avatar"><img src="{{Auth::user()->image_url == 'default-user.png'? Auth::user()->image_url: Auth::user()->image_url}}" class="rounded-circle" alt=""></a>
       <div class="aside-alert-link">
         {{-- <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a> --}}
-        <a href="" class="new" data-toggle="tooltip" title="You have 4 new notifications"><i data-feather="bell"></i></a>
+        <a href="" class="{{Auth::user()->notifications->count()>=1?'new':''}}" data-toggle="tooltip" title="You have {{Auth::user()->notifications->count()>1?Auth::user()->notifications->count().' new notifications':Auth::user()->notifications->count().' new notification'}} "><i data-feather="bell"></i></a>
         <a href="{{ route('logout') }}" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>
       </div>
     </div>
@@ -43,6 +43,8 @@
     <li class="nav-item"><a href="{{url('dashboard')}}" class="nav-link"><i data-feather="shopping-bag" style="color:#73ab22;"></i> <span style="color:#73ab22;">Dashboard</span></a></li>
     {{-- <li class="nav-item"><a href="{{url('dashboard/products')}}" class="nav-link"><i data-feather="globe"></i> <span>Manage Products</span></a></li> --}}
 
+    {{--Not visible to warehouse--}}
+    @if(Auth::user()->role->id != 3)
     <li class="nav-item with-sub">
       <a href="" class="nav-link"><i data-feather="setting"></i> <span>Settings</span></a>
       <ul>
@@ -50,11 +52,12 @@
         <li><a href="{{route('dashboard/attributes')}}">Manage Attributes</a></li>
       </ul>
     </li>
+    @endif
 
     <li class="nav-item with-sub">
       <a href="" class="nav-link"><i data-feather="user"></i> <span>Manage Products</span></a>
       <ul>
-        <li><a href="{{url('dashboard/create')}}">Add Product</a></li>
+        <li><a href="{{url('dashboard/create')}}">Add New Product</a></li>
         <li><a href="{{url('dashboard/products')}}">View Products</a></li>
       </ul>
     </li>
@@ -62,10 +65,10 @@
     {{--Not visible to warehouse--}}
     @if(Auth::user()->role->id != 3)
     <li class="nav-item with-sub">
-      <a href="" class="nav-link"><i data-feather="life-buoy"></i> <span>Manage Warehouses</span></a>
+      <a href="" class="nav-link"><i data-feather="life-buoy"></i> <span>Manage Stores</span></a>
       <ul>
-        <li><a href="{{url('dashboard/add_store')}}">Add Warehouse</a></li>
-        <li><a href="{{url('dashboard/stores')}}">View Warehouses</a></li>
+        <li><a href="{{url('dashboard/add_store')}}">Add Store</a></li>
+        <li><a href="{{url('dashboard/stores')}}">View Stores</a></li>
       </ul>
     </li>
 
@@ -78,15 +81,22 @@
       <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Manage Users</span></a>
       <ul>
         <li><a href="{{url('dashboard/add_user')}}">Create User</a></li>
-        <li><a href="{{url('dashboard/users')}}">Manage Users</a></li>
+        <li><a href="{{url('dashboard/users')}}">View Users</a></li>
       </ul>
     </li>
+
+    <li class="nav-item with-sub">
+      <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Manage Categories</span></a>
+      <ul>
+      <li><a href="{{route('dashboard.categories')}}"><i data-feather="mail"></i> <span>Categories</span></a></li>
+      <li class=""><a href="#"><i data-feather="mail"></i> <span>Sub Categories</span></a></li>
+      </ul>
+    </li>
+
     @endif
 
-
-    <li class="nav-item"><a href="{{route('dashboard.categories')}}" class="nav-link"><i data-feather="mail"></i> <span>Product Categories</span></a></li>
     <li class="nav-item"><a href="{{route('dashboard.orders')}}" class="nav-link"><i data-feather="mail"></i> <span>Orders</span></a></li>
-    <li class="nav-item"><a href="app-mail.html" class="nav-link"><i data-feather="mail"></i> <span>Sales Report</span></a></li>
+    <li class="nav-item"><a href="#" class="nav-link"><i data-feather="mail"></i> <span>Sales Report</span></a></li>
 
 
     {{-- <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>Cryptocurrency</span></a></li>

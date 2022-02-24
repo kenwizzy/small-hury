@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $guarded = ['created_at','updated_at'];
+    protected $guarded = ['created_at', 'updated_at'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -76,7 +76,13 @@ class User extends Authenticatable
         return  $cart->add_product($product);
     }
 
-    public function increase_product(Product $product, $quantity = 1)
+
+    public function orderAssigns()
+    {
+        return $this->hasMany(OrderAssignee::class);
+    }
+
+    public function increase_product(Product $product, $warehouse_id, $quantity = 1)
     {
         return $this->cart->increase_product($product, $quantity);
     }
@@ -91,8 +97,13 @@ class User extends Authenticatable
 
     public function warehouse()
     {
-        //return $this->belongsTo(Warehouse::class);
+        return $this->belongsTo(Warehouse::class, 'user_id');
 
-        return Warehouse::where('user_id', $this->id)->first();
+        //return Warehouse::where('user_id', $this->id)->first();
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }

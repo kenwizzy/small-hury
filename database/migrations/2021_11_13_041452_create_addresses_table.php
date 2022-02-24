@@ -27,7 +27,6 @@ class CreateAddressesTable extends Migration
             $table->string("city");
             $table->string("landmark")->nullable();
             $table->unsignedTinyInteger("default")->default(0);
-
             $table->timestamps();
         });
     }
