@@ -31,7 +31,7 @@ class CategoryController extends BaseController
 
         return $this->sendResponse($result, "Main Categories fetched successfully");
     }
-    public function show($id, $warehouse_id)
+    public function show($id)
     {
         $cat = Category::findOrFail($id);
         // if ($cat == null) {
@@ -44,7 +44,7 @@ class CategoryController extends BaseController
             $user = User::find(auth()->user()->id);
 
 
-            if ($product->warehouses->contains($warehouse_id)) {
+
                 $prod = (object)[];
                 if ($user->cart) {
                     $quantity = $user->cart->product_quantity($product);
@@ -62,7 +62,7 @@ class CategoryController extends BaseController
                 $prod->default_image = $product->defaultImage->image_url;
 
                 $newProducts["data"][] = $prod;
-            }
+
         }
         $products = json_decode($products->toJSON());
         $newProducts['current_page'] = $products->current_page;

@@ -25,18 +25,17 @@ class Cart extends Model
     {
         return $this->belongsTo(Warehouse::class);
     }
-    public function add_product(Product $product,$warehouse_id,$quantity=1)
+    public function add_product(Product $product,$quantity=1)
     {
 
       return  DB::table('cart_products')->insert([
             'product_id' => $product->id,
-            'warehouse_id' => $warehouse_id,
             'cart_id' => $this->id,
             'product_name' => $product->name,
             'quantity' => $quantity,
         ]);
     }
-    public function increase_product(Product $product,$warehouse_id,$quantity=1)
+    public function increase_product(Product $product,$quantity=1)
     {
        return DB::table('cart_products')
             ->where([
@@ -47,7 +46,7 @@ class Cart extends Model
             ->increment('quantity', $quantity);
     }
 
-    public function decrease_product(Product $product,$warehouse_id,$quantity = 1)
+    public function decrease_product(Product $product,$quantity = 1)
     {
         $row = DB::table('cart_products')
             ->where([

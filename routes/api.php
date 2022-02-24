@@ -41,7 +41,7 @@ Route::group([
     //Route::get('/products', [ProductController::class, 'getProducts']);
     Route::get('/categories', [CategoryController::class, 'getCategories']);
     Route::get('/categories-parent',[CategoryController::class,'getParent']);
-    Route::get('/category/{id}/{warehouse_id}', [CategoryController::class, 'show']);
+    Route::get('/category/{id}', [CategoryController::class, 'show']);
     Route::get('/product/{id}', [ProductController::class, 'show']);
 
     /* Uzezi Jephter endpoints  */

@@ -64,25 +64,25 @@ class User extends Authenticatable
     {
         return $this->hasMany(Wishlist::class);
     }
-    public function add_new_product_to_cart(Product $product, $warehouse_id)
+    public function add_new_product_to_cart(Product $product)
     {
         if ($this->cart) {
-            return $this->cart->add_product($product, $warehouse_id);
+            return $this->cart->add_product($product);
         }
         $cart = Cart::create([
             'user_id' => $this->id,
 
         ]);
-        return  $cart->add_product($product, $warehouse_id);
+        return  $cart->add_product($product);
     }
 
-    public function increase_product(Product $product, $warehouse_id, $quantity = 1)
+    public function increase_product(Product $product, $quantity = 1)
     {
-        return $this->cart->increase_product($product, $warehouse_id, $quantity);
+        return $this->cart->increase_product($product, $quantity);
     }
-    public function decrease_product(Product $product, $warehouse_id, $quantity = 1)
+    public function decrease_product(Product $product, $quantity = 1)
     {
-        return $this->cart->decrease_product($product, $warehouse_id, $quantity);
+        return $this->cart->decrease_product($product, $quantity);
     }
     public function clear_cart()
     {

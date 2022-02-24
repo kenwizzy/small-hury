@@ -13,9 +13,7 @@ class CartController extends BaseController
     // This is responsible for adding and incrementing item in a cart
     public function addProduct(Request $request,$id)
     {
-        $fields = $request->validate([
-            'warehouse_id' => 'required|integer'
-        ]);
+
         $product = Product::findOrFail($id);
 
         $user = User::find(Auth::user()->id);
@@ -27,11 +25,11 @@ class CartController extends BaseController
 
             if($products->contains($product)){
 
-                $cart = $cart->increase_product($product,$fields['warehouse_id']);
+                $cart = $cart->increase_product($product);
                 return $this->sendResponse($cart, "Product successfully incremented");
             }
             else{
-                $cart = $cart->add_product($product,$fields['warehouse_id']);
+                $cart = $cart->add_product($product);
                 if($cart)
                     return $this->sendResponse($cart, "Product successfully added");
                 else
@@ -40,15 +38,13 @@ class CartController extends BaseController
 
         }
 
-        $cart = $user->add_new_product_to_cart($product,$fields['warehouse_id']);
+        $cart = $user->add_new_product_to_cart($product);
         return $this->sendResponse($cart, "Product successfully added");
     }
 
     public function removeProduct(Request $request,$id)
     {
-        $fields = $request->validate([
-            'warehouse_id' => 'required|integer'
-        ]);
+
         $product = Product::findOrFail($id);
 
         $user = User::find(Auth::user()->id);
@@ -57,7 +53,7 @@ class CartController extends BaseController
         if ($cart) {
             $products = $cart->products;
             if($products->contains($product)){
-                $cart = $cart->decrease_product($product,$fields['warehouse_id']);
+                $cart = $cart->decrease_product($product);
                 return $this->sendResponse($cart, "Product successfully decremented");
             }
             else{
