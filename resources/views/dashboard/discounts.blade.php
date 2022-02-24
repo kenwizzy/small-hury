@@ -77,12 +77,13 @@
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="{{route('dashboard.edit_discount', $discount->id)}}" class="dropdown-item text-success"><i class="far fa-clipboard"></i> Edit </a>
-                                                <a onclick="event.preventDefault(); confirm('Are you sure you want to delete this discount?');
-          document.getElementById('delete-form').submit();" href="{{route('delete_discount', $discount->id)}}" class="dropdown-item text-danger"><i class="fas fa-trash-alt"></i> Delete </a>
+                                                <a href="{{route('delete_discount', $discount->id)}}" class="dropdown-item text-danger"><i class="fas fa-trash-alt"></i> Delete </p>
+                                                <!-- <p onclick="event.preventDefault(); confirm('Are you sure you want to delete this discount?');
+          document.getElementById('delete-form').submit();" class="dropdown-item text-danger"><i class="fas fa-trash-alt"></i> Delete </p>
                                                 <form id="delete-form" action="{{route('delete_discount', $discount->id)}}" method="POST" style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
-                                                </form>
+                                                </form> -->
                                             </div>
                                         </div>
                                     </td>

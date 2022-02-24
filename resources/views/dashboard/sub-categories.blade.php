@@ -8,17 +8,17 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-style1 mg-b-10">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
-            <li class="breadcrumb-item activePage" aria-current="page">Category List</li>
+            <li class="breadcrumb-item activePage" aria-current="page">Sub Category List</li>
           </ol>
         </nav>
-        <h4 class="mg-b-0 tx-spacing--1">Category List</h4>
+        <h4 class="mg-b-0 tx-spacing--1">Sub Category List</h4>
       </div>
     </div>
 
     <div class="row row-xs">
-      <div class="col-12 justify-content-center text-center align-items-center">
+      {{--<div class="col-12 justify-content-center text-center align-items-center">
         <a href="#addService" class="btn btn-primary float-right" data-toggle="modal"><i class="fas fa-plus"></i> Add New</a>
-      </div>
+      </div>--}}
       @if (session('success'))
       @section('script')
       <script>
@@ -32,7 +32,7 @@
         <div class="card mg-b-10">
           <div class="card-header pd-t-20 d-sm-flex align-items-start justify-content-between bd-b-0 pd-b-0">
             <div>
-              <h6 class="tx-13 tx-color-03 mg-b-0">This table displays a list of all Small Hurry Categories.</h6>
+              <h6 class="tx-13 tx-color-03 mg-b-0">This table displays all child categories has.</h6>
             </div>
 
           </div><!-- card-header -->
@@ -46,7 +46,7 @@
                 </div>
                 <div class="media-body">
                   <h6 class="tx-sans tx-uppercase tx-10 tx-spacing-1 tx-color-03 tx-semibold tx-nowrap mg-b-5 mg-md-b-8">
-                    Total categories</h6>
+                    Total sub categories</h6>
                   <h4 class="tx-20 tx-sm-18 tx-md-20 tx-normal tx-rubik mg-b-0">{{$categories->count()}}</h4>
                 </div>
               </div>
@@ -61,9 +61,9 @@
                 <thead class="thead-primary">
                   <tr>
                     <th class="text-center">s/n</th>
-                    <th>Category Name</th>
+                    <th>Sub Category Name</th>
+                    {{--<th>Parent Category</th>--}}
                     <th>slug</th>
-                    <th>Category Image</th>
                     <th>Date Created</th>
                     <th>Action</th>
                   </tr>
@@ -74,14 +74,8 @@
                   <tr>
                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                     <td class="tx-medium">{{$category->name}}</td>
+                    {{--<td class="tx-medium">{{$data->name}}</td>--}}
                     <td>{{$category->slug}}</td>
-                    <td>
-                      @if($category->cat_img_url == null)
-                      UNAVAILABLE
-                      @else
-                      <img width="100" height="100" src="{{$category->cat_img_url}}">
-                      @endif
-                    </td>
                     <td class="tx-medium text-center">{{ Carbon\Carbon::parse($category->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
 
 
@@ -90,9 +84,9 @@
                       <div class="dropdown-file">
                         <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                         <div class="dropdown-menu dropdown-menu-right">
-                          <a href="{{route('dashboard.sub_categories', $category->id)}}" class="dropdown-item details text-info"><i class="far fa-edit"></i>View Sub Categories</a>
-                           <a href="#editService" data-toggle="modal" id="service-edit" title="Edit {{ $category->name }}" data-url="{{route('dashboard.edit_cat', $category->id)}}" data-service-name="{{ $category->name }}" data-id="{{ '$category->id' }}" class="dropdown-item details text-success"><i class="far fa-view"></i>Edit Category</a>
-                          <a href="{{route('dashboard.delete_category',$category->id)}}" title="Delete {{ $category->name}}" class="dropdown-item text-danger"><i class="fas fa-trash-alt"></i> Delete Category</a>
+                          <a href="#editService" data-toggle="modal" id="service-edit" title="Edit {{ $category->name }}" data-url="{{route('dashboard.edit_cat', $category->id)}}" data-service-name="{{ $category->name }}" data-id="{{ '$category->id' }}" class="dropdown-item details text-info"><i class="far fa-edit"></i> Edit</a>
+
+                          {{--<a data-url="" class="dropdown-item delete-entity text-danger" title="Delete {{ $category->name}}" style="cursor: pointer;"><i class="fas fa-trash"></i> Delete</a>--}}
                         </div>
                       </div>
                     </td>
@@ -122,35 +116,31 @@
         <form method="POST" action="{{route('create_category')}}" enctype="multipart/form-data">
           @csrf
 
-          <h5 class="mg-b-2"><strong>Create New Category</strong></h5><br>
+          <h5 class="mg-b-2"><strong>Create Sub Category</strong></h5><br>
 
           <div class="form-group col-md-12">
-            <label for="name">Category Name</label>
-            <input type="text" class="form-control @error(' cat_name') is-invalid @enderror" id="cat_name" name="cat_name" placeholder="Enter Category Name" value="{{ old('name') }}" autocomplete="off" required>
-            @error('cat_name')
+            <label for="name">Sub Category Name</label>
+            <input type="text" class="form-control @error(' sub_cat') is-invalid @enderror" name="sub_cat" placeholder="Enter Sub Category Name" value="{{ old('sub_cat') }}" autocomplete="off" required>
+            @error('sub_cat')
             <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
             </span>
             @enderror
           </div>
 
-          <div id="more"></div>
-
           <div class="form-group col-md-12">
-            <button type="button" id="checkMe" class="btn btn-primary btn-sm"><label>Add Sub Category</label></button>
-          </div>
-
-          <div class="form-group col-md-12">
-            <label for="Cat Img">Category Image</label>
-            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="off" required>
-            @error('image')
+            <label for="Cat Img">Select Category</label>
+            <select class="form-control @error('cat') is-invalid @enderror" name="cat" value="{{ old('cat') }}" autocomplete="off" required>
+               <option value="">option one</option>
+            </select>
+            @error('cat')
             <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
             </span>
             @enderror
           </div>
           <div class="col-md-12 mt-4">
-            <button type="submit" class="btn btn-primary">Create Category</button>
+            <button type="submit" class="btn btn-primary">Create Sub Category</button>
           </div>
 
         </form>
@@ -215,42 +205,3 @@
 
 @endsection
 
-@section('script')
-<script>
-  $(document).ready(function() {
-
-    let count = 0;
-    $("#checkMe").click(function() {
-
-      count++;
-
-      $('#more').append(`
-<div class="container_create" id="added${count}">
-
-                    <div class="form-group col-md-12">
-                        <label for="name">Sub Category Name</label>
-                        <input type="text" class="form-control @error(' sub_cat_name') is-invalid @enderror" id="sub_cat_name" name="sub_cat_name[]" placeholder="Enter Sub Category Name">
-                        @error('sub_cat_name')
-                        <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-            <button type="button" id="remove${count}" class="close change" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-`);
-
-    });
-
-    $(document).on("click", ".close", function() {
-      var button_id = $(this).attr("id");
-      $('#added' + count).remove();
-      count--;
-    });
-
-  });
-</script>
-
-@endsection

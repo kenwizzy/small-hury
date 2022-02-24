@@ -121,6 +121,14 @@ class CategoryController extends Controller
         return view('dashboard/sub_categories', compact('categories', 'data'));
     }
 
+    public function getsCats() 
+    {
+        //$data = Category::where('id',$id)->select('name')->first();
+        $categories = Category::where('parent_id', '<>', 0)->get();
+
+        return view('dashboard/sub-categories', compact('categories'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -149,13 +157,21 @@ class CategoryController extends Controller
         }
 
         $updateCategory = Category::where('id', $id)->first();
-        $updateCategory->update([
+        if ($updateCategory->parent_id == 0) {
+            $updateCategory->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'cat_img_url' => $request->image==''? $updateCategory->cat_img_url:$categorymageUrl
         ]);
-
-        return redirect('dashboard/categories')->withSuccess('Category updated successfully');
+            return redirect('dashboard/categories')->withSuccess('Category updated successfully');
+        } else {
+            $updateCategory->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+            'cat_img_url' => $request->image==''? $updateCategory->cat_img_url:$categorymageUrl
+        ]);
+            return redirect('dashboard/sub-categories')->withSuccess('Sub category updated successfully');
+        }
     }
 
     /**
@@ -164,8 +180,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+         $category->delete();
+         return redirect('dashboard/categories')->withSuccess('Category deleted successfully');
     }
 }

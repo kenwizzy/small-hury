@@ -17,7 +17,7 @@
 
     <div class="row row-xs">
       <div class="col-12 justify-content-center text-center align-items-center">
-        <a href="#addService" class="btn btn-primary float-right" data-toggle="modal"><i class="fas fa-plus"></i> Add New</a>
+        {{--<a href="#addService" class="btn btn-primary float-right" data-toggle="modal"><i class="fas fa-plus"></i> Add New</a>--}}
       </div>
       @if (session('success'))
       @section('script')
@@ -129,12 +129,6 @@
             @enderror
           </div>
 
-          {{-- <div id="more"></div>
-
-          <div class="form-group col-md-12">
-            <button type="button" id="checkMe" class="btn btn-primary btn-sm"><label>Add Sub Category</label></button>
-          </div> --}}
-
           <div class="form-group col-md-12">
             <label for="Cat Img">Select Category</label>
             <select class="form-control @error('cat') is-invalid @enderror" name="cat" value="{{ old('cat') }}" autocomplete="off" required>
@@ -212,42 +206,3 @@
 
 @endsection
 
-@section('script')
-<script>
-  $(document).ready(function() {
-
-    let count = 0;
-    $("#checkMe").click(function() {
-
-      count++;
-
-      $('#more').append(`
-<div class="container_create" id="added${count}">
-
-                    <div class="form-group col-md-12">
-                        <label for="name">Sub Category Name</label>
-                        <input type="text" class="form-control @error(' sub_cat_name') is-invalid @enderror" id="sub_cat_name" name="sub_cat_name[]" placeholder="Enter Sub Category Name">
-                        @error('sub_cat_name')
-                        <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-            <button type="button" id="remove${count}" class="close change" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-`);
-
-    });
-
-    $(document).on("click", ".close", function() {
-      var button_id = $(this).attr("id");
-      $('#added' + count).remove();
-      count--;
-    });
-
-  });
-</script>
-
-@endsection

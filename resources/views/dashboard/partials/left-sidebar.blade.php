@@ -89,7 +89,7 @@
       <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Manage Categories</span></a>
       <ul>
       <li><a href="{{route('dashboard.categories')}}"><i data-feather="mail"></i> <span>Categories</span></a></li>
-      <li class=""><a href="#"><i data-feather="mail"></i> <span>Sub Categories</span></a></li>
+      <li class=""><a href="{{route('dashboard.sub-categories')}}"><i data-feather="mail"></i> <span>Sub Categories</span></a></li>
       </ul>
     </li>
 
