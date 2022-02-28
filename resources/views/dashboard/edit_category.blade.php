@@ -14,13 +14,14 @@
         </div>
 
         <div class="form-group col-md-12">
-            <label for="Cat Img">Category Image</label><br>
             @if($category->cat_img_url == null)
 
             @else
-            <img width="100" height="100" src='{{asset("assets/img/$category->cat_img_url")}}'>
+            <label for="Cat Img">Category Image</label><br>
+            <img width="100" height="100" src='{{$category->cat_img_url}}'>
+           
+            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" autocomplete="off">
             @endif
-            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" autocomplete="off" required>
             @error('image')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

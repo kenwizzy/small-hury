@@ -31,8 +31,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('dashboard/create_product', [ProductController::class, 'store'])->name('create_product');
     Route::get('dashboard/categories', [CategoryController::class, 'index'])->name('dashboard.categories');
     Route::get('dashboard/sub_categories/{id}', [CategoryController::class, 'getSubCategories'])->name('dashboard.sub_categories');
+    Route::get('dashboard/sub-categories/', [CategoryController::class, 'getsCats'])->name('dashboard.sub-categories');
     Route::post('create_category', [CategoryController::class, 'store'])->name('create_category');
     Route::get('dashboard/edit_cat/{id}', [CategoryController::class, 'edit'])->name('dashboard.edit_cat');
+    Route::get('dashboard/delete_category/{category}', [CategoryController::class, 'destroy'])->name('dashboard.delete_category');
     Route::patch('dashboard/update_category/{id}', [CategoryController::class, 'update'])->name('dashboard.update_category');
     Route::get('dashboard/view_profile', [UserController::class, 'show'])->name('dashboard.view_profile');
     Route::get('dashboard/products', [ProductController::class, 'allProducts'])->name('dashboard.products');
@@ -42,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/attributes', [AttributeController::class, 'index'])->name('dashboard/attributes');
     Route::post('add_discount', [DiscountController::class, 'addDiscount']);
     Route::patch('update_discount/{discount}', [DiscountController::class, 'update'])->name('update_discount');
-    Route::delete('delete_discount/{discount}', [DiscountController::class, 'delete'])->name('delete_discount');
+    Route::get('delete_discount/{id}', [DiscountController::class, 'delete'])->name('delete_discount');
     Route::post('add_attribute', [AttributeController::class, 'store']);
     Route::get('/dashboard/edit_attribute/{attribute}', [AttributeController::class, 'edit'])->name('dashboard.edit_attribute');
     Route::patch('update_attribute/{attribute}', [AttributeController::class, 'update'])->name('update_attribute');

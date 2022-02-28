@@ -59,9 +59,11 @@ class DiscountController extends Controller
         return redirect('dashboard/discounts')->withSuccess('Discount updated successfully');
     }
 
-    public function delete(Discount $discount)
+    public function delete($id)
     {
-        Discount::find($discount->id)->delete();
+
+        Discount::find($id)->delete();
+        
         return redirect()->back()->withSuccess('Discount deleted successfully');
     }
 }
