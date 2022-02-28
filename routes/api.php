@@ -34,11 +34,7 @@ Route::post('register', [AuthController::class, 'register']);
 //     return $request->user();
 // });
 //Route::middleware(['auth:sanctum'])->group(function ($router) {
-Route::get('/active_orders',[OrderAssigneeController::class,'active']);
-Route::get('/pending_orders',[OrderAssigneeController::class,'pending']);
-Route::get('/accept_order/{id}',[OrderAssigneeController::class,'accept']);
-Route::get('/decline_order/{id}',[OrderAssigneeController::class,'decline']);
-Route::get('/order_histories',[OrderAssigneeController::class,'history']);
+
 Route::group([
     'middleware' => 'auth:sanctum'
 ], function ($router) {
@@ -51,7 +47,11 @@ Route::group([
     Route::get('/product/{id}', [ProductController::class, 'show']);
     Route::get('/districts', [WarehouseDistrictController::class, 'index']);
 
-
+    Route::get('/active_orders',[OrderAssigneeController::class,'active']);
+    Route::get('/pending_orders',[OrderAssigneeController::class,'pending']);
+    Route::get('/accept_order/{id}',[OrderAssigneeController::class,'accept']);
+    Route::get('/decline_order/{id}',[OrderAssigneeController::class,'decline']);
+    Route::get('/order_histories',[OrderAssigneeController::class,'history']);
     /* Uzezi Jephter endpoints  */
 
     //For working with users

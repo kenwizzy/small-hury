@@ -51,7 +51,7 @@ class OrderAssigneeController extends BaseController
         return $this->acceptOrDecline($id,'Declined','No');
     }
 
-    
+
     public function active(Request $request)
     {
         return $this->getOrderStatus('active');
@@ -141,6 +141,7 @@ class OrderAssigneeController extends BaseController
 
     public function getOrderStatus($res){
         $user = User::find(auth()->user()->id);
+        //$user = User::find(4);
         $data = $user->orderAssigns()->where('status',$res)->get();
          if (empty($data)) {
               return $this->sendError('Record not found');
