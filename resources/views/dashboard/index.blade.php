@@ -19,9 +19,9 @@
     <div class="row row-xs">
       <div class="col-sm-6 col-lg-3">
         <div class="card card-body">
-          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Stores</h6>
+          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Customers</h6>
           <div class="d-flex d-lg-block d-xl-flex align-items-end">
-            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$warehouses->count()}}</h3>
+            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$customers->count()}}</h3>
 
           </div>
           <div class="chart-three">
@@ -31,9 +31,9 @@
       </div><!-- col -->
       <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
         <div class="card card-body">
-          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Bikers</h6>
+          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Orders</h6>
           <div class="d-flex d-lg-block d-xl-flex align-items-end">
-            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$users->count()}}</h3>
+            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$orders->count()}}</h3>
 
           </div>
           <div class="chart-three">
@@ -43,9 +43,9 @@
       </div><!-- col -->
       <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
         <div class="card card-body">
-          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Orders</h6>
+          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Products</h6>
           <div class="d-flex d-lg-block d-xl-flex align-items-end">
-            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$orders->count()}}</h3>
+            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$products->count()}}</h3>
 
           </div>
           <div class="chart-three">
@@ -55,9 +55,9 @@
       </div><!-- col -->
       <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
         <div class="card card-body">
-          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Transactions</h6>
+          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Completed Orders</h6>
           <div class="d-flex d-lg-block d-xl-flex align-items-end">
-            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$transactions->count()}}</h3>
+            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$orderstatus->count()}}</h3>
 
           </div>
 
@@ -273,7 +273,7 @@
 
 
       </div><!-- col -->
-      <div class="col-md-6 col-xl-4 mg-t-10">
+      <div class="col-md-6 col-xl-6 mg-t-10">
         <div class="card ht-100p">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="mg-b-0">Orders</h6>
@@ -297,24 +297,13 @@
             </li>
             
            @endforeach 
-            {{--<li class="list-group-item d-flex pd-sm-x-20">
-              <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-danger"><i class="icon ion-md-close"></i></span></div>
-              <div class="pd-sm-l-10">
-                <p class="tx-medium mg-b-0">Payment from Ify</p>
-                <small class="tx-12 tx-color-03 mg-b-0">Mar 21, 2019, 3:30pm</small>
-              </div>
-              <div class="mg-l-auto text-right">
-                <p class="tx-medium mg-b-0">$150.00</p>
-                <small class="tx-12 tx-danger mg-b-0">Not paid</small>
-              </div>
-            </li>--}}
           </ul>
           <div class="card-footer text-center tx-13">
             <a href="{{route('dashboard.orders')}}" class="link-03">View All Transactions <i class="icon ion-md-arrow-down mg-l-5"></i></a>
           </div><!-- card-footer -->
         </div><!-- card -->
       </div>
-      <div class="col-md-6 col-xl-4 mg-t-10">
+      <div class="col-md-6 col-xl-6 mg-t-10">
         <div class="card ht-100p">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="mg-b-0">New Customers</h6>
@@ -343,7 +332,7 @@
           </div><!-- card-footer -->
         </div><!-- card -->
       </div>
-      <div class="col-md-6 col-xl-4 mg-t-10">
+      {{--<div class="col-md-6 col-xl-4 mg-t-10">
         <div class="card ht-lg-100p">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="mg-b-0">Real-Time Sales</h6>
@@ -374,7 +363,7 @@
             </div>
           </div><!-- card-body -->
         </div>
-      </div>{{---END OF COMMENT---}}
+      </div>--}}
     </div><!-- row -->
   </div><!-- container -->
 </div>

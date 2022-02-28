@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Warehouse;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -22,8 +23,10 @@ class DashboardController extends Controller
         return view('dashboard.index', [
             'warehouses' => Warehouse::all(),
             'orders' => Order::all(),
+            'products'=> Product::all(),
             'users' => User::where('role_id', 4)->get(),
-            'transactions' => Transaction::all(),
+            //'transactions' => Transaction::all(),
+            'orderstatus'=>Order::where('status',5)->get(),
             'customers' => User::where('role_id', 5)->orderBy('id', 'asc')->get(),
             'charts'=> $this->storeOrderStats(),
             'jan' => $this->month('01'),
@@ -108,11 +111,13 @@ class DashboardController extends Controller
     }
 
     public function storeOrderStats(){
-        return DB::table('orders')->selectRaw('sum(orders.total_paid) as amt,orders.warehouse_id,count(orders.id) as id,warehouses.name')
-        ->join('warehouses', 'warehouses.id', 'orders.warehouse_id')
-        ->groupby('orders.warehouse_id')
-       ->where('orders.payment_status',1)
-        ->get();
+    //     return DB::table('orders')->selectRaw('sum(orders.total_paid) as amt,orders.warehouse_id,count(orders.id) as id,warehouses.name')
+    //     ->join('warehouses', 'warehouses.id', 'orders.warehouse_id')
+    //     ->groupby('orders.warehouse_id')
+    //    ->where('orders.payment_status',1)
+    //     ->get();
+        return DB::select("SELECT SUM(orders.total_paid) as amt, orders.warehouse_id, COUNT(orders.id) as id, warehouses.name FROM orders RIGHT JOIN warehouses ON orders.warehouse_id = warehouses.id WHERE orders.payment_status = 1 GROUP BY orders.warehouse_id ");
+        
     }
 
     public function month($month){
