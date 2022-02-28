@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Address;
+use App\Models\WarehouseDistrict;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AddressController extends BaseController
 {
@@ -17,27 +19,41 @@ class AddressController extends BaseController
             'default' => 'nullable|integer',
             'name' => 'string|required',
             'state' => 'string|required',
-            'city' => 'string|required',
-            'landmark' => 'string'
+            'landmark' => 'string',
+            'district' => 'required'
         ]);
+
         if($request->input('default') != null && $request->input('default') == 1){
             Address::where('default',1)
                     ->update(['default' => 0]);
 
         }
-     $add = Address::create([
-         'street' => $fields['street'],
-         'latitude' => $fields['latitude'],
-         'longitude' => $fields['longitude'],
-         'default' => $request->input('default')?$fields['default']:0,
-         'country' => $request->input('country',"Nigeria"),
-         'state' => $request->input('state',"Abuja"),
-         'city' => $request->input('city',"Abuja"),
-        'landmark' => $request->input('landmark'),
-        'name' => $request->input("name"),
-        'pincode' =>$request->input('pincode'),
-        'user_id' => auth()->user()->id,
-     ]);
+    try{
+        DB::beginTransaction();
+        $district = WarehouseDistrict::find($fields['district']);
+
+        $add = Address::create([
+            'street' => $fields['street'],
+            'latitude' => $fields['latitude'],
+            'longitude' => $fields['longitude'],
+            'default' => $request->input('default')?$fields['default']:0,
+            'country' => $request->input('country',"Nigeria"),
+            'state' => $request->input('state',"Abuja"),
+            'city' => $district->name,
+           'landmark' => $request->input('landmark'),
+           'name' => $request->input("name"),
+           'pincode' =>$request->input('pincode'),
+           'user_id' => auth()->user()->id,
+           'district_id'=> $district->id,
+           'warehouse_id' => $district->warehouse_id
+        ]);
+        Log::info($add);
+        DB::commit();
+    }
+
+     catch(\Exception $err){
+        DB::rollBack();
+     }
      return $this->sendCreateResponse($add,"Address successfully created");
     }
 
@@ -68,12 +84,12 @@ class AddressController extends BaseController
         $default = $request->input('default');
         $country = $request->input('country');
         $state = $request->input('state');
-        $city =  $request->input('city');
+
         $landmark = $request->input('landmark');
         $name= $request->input("name");
         $street = $request->input("street");
         $pincode = $request->input("pincode");
-
+        $district = $request->input('district');
 
         if($add){
             if(isset($default) && $default == 1 && $default != $add->default){
@@ -86,10 +102,16 @@ class AddressController extends BaseController
             $add->default = $default != null ? $default: $add->default;
             $add->country = $country != null ? $country: $add->country;
             $add->state = $state != null ? $state : $add->state;
-            $add->city = $city != null ? $city : $add->city;
+
            $add->landmark = $landmark != null? $request->input('landmark'): $add->landmark;
            $add->name = $name != null? $request->input("name"): $add->name;
            $add->pincode = $name != null? $pincode: $add->pincode;
+           if($district){
+               $dist = WarehouseDistrict::find($district);
+               $add->city = $dist->name;
+               $add->warehouse_id = $dist->warehouse_id;
+               $add->district_id = $dist->id;
+           }
             $add->save();
            return $this->sendCreateResponse($add,"Address was updated successfully");
         }
