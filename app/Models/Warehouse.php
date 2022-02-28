@@ -38,6 +38,7 @@ class Warehouse extends Model
     {
         return ProductWarehouse::where([
             'warehouse_id' => $this->id,
+            'deleted_at' => null
         ])->sum('total_quantity');
     }
 

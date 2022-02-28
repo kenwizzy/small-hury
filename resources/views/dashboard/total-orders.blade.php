@@ -10,10 +10,10 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item activePage" aria-current="page">All Orders</li>
+                        <li class="breadcrumb-item activePage" aria-current="page">Total Orders</li>
                     </ol>
                 </nav>
-                <h4 class="mg-b-0 tx-spacing--1">All Orders</h4>
+                <h4 class="mg-b-0 tx-spacing--1">Total Orders</h4>
             </div>
         </div>
 
@@ -75,10 +75,7 @@
                                     <th>Total Amount</th>
                                     <th>Payment Status</th>
                                     <th>Order Status</th>
-                                    <th>Updated By</th>
-                                    <th class="text-left">Orde Date</th>
-                                    <th class="text-left">Date Updated</th>
-                                    <th class=" text-center">Action</th>
+                                    <th class="text-left">Order Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,60 +91,23 @@
                                     <td class="text-left">&#8358;{{number_format($order->total_paid,2)}}</td>
                                     <td class="text-left">{{$order->payment_status==0?'Not Paid':'Paid'}}</td>
                                     <td class="text-left">{{$order->starus->name}}</td>
-                                    <td class="text-left">{{$order->update_by != 0 ? $order->user->first_name.' '.$order->user->last_name.' ('.$order->user->role->name.')' : ''}}</td>
                                     <td class="tx-medium">{{ Carbon\Carbon::parse($order->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
-                                    <td class="tx-medium">{{ Carbon\Carbon::parse($order->updated_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
-                                    <td class=" text-center">
+                                   
+                                    {{--<td class=" text-center">
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="{{route('dashboard/order_details',$order->id)}}" class="dropdown-item text-info"><i class="far fa-edit"></i>Order Details </a>
                                                 @if($order->status !== 11 && $order->status !== 8 && $order->status !== 7)
                                                 <a href="#editService" data-toggle="modal" id="service-order" title="Assign to biker" data-url="{{route('dashboard.get_bikers', $order->id)}}" data-service-name="{{' $order->order_detail->product->name '}}" data-id="{{ '$order->id' }}" class="dropdown-item details text-success"><i class="far fa-user"></i> Assign to biker</a>
                                                 @endif
-                                                {{--<a href="" class="dropdown-item text-success"><i class="far fa-user"></i></a>--}}
+                                                
                                                 <a href="{{route('dashboard.declineorder',$order->id)}}" class="dropdown-item text-danger"><i class="far fa-clipboard"></i> Decline Order </a>
                                             </div>
                                         </div>
-                                    </td>
+                                    </td>--}}
                                 </tr>
 
-                                @endif
-                                <div class="modal fade" id="editService" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-                                    <div class="modal-dialog modal-dialog-centered wd-sm-650" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body pd-x-25 pd-sm-x-30 pd-t-40 pd-sm-t-20 pd-b-15 pd-sm-b-20">
-                                                <a href="" role="button" class="close pos-absolute t-15 r-15" data-dismiss="modal" aria-label="Close">
-                                                    <span class="times" aria-hidden="true">&times;</span>
-                                                </a>
-                                                <div class="modal-body" id="modal-order-body">
-                                                    <form method="POST" action="{{route('dashboard.assign_biker')}}" enctype="multipart/form-data">
-                                                        @csrf
-                                                        <h5 class="mg-b-2"><strong>Assigning order with ID <span class="mana"></span> to biker</strong></h5>
-                                                        <hr>
-                                                        <div class="form-row mt-4">
-                                                            <div class="form-group col-md-12">
-                                                                <label for="name">Select Biker</label>
-                                                                <select id="insert_bikers" class="form-control @error('biker') is-invalid @enderror" name="biker" autocomplete="off">
-
-                                                                </select>
-                                                                @error('biker')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                                @enderror
-                                                            </div>
-                                                            <input type="hidden" name="order" class="form-control mana1" readonly>
-                                                        </div>
-                                                        <button type="submit" class="btn btn-primary">Assign</button>
-
-                                                    </form>
-                                                    <!-- Modal displays here -->
-                                                    <div id="spinner-icon-3"></div>
-                                                </div>
-                                            </div><!-- modal-body -->
-                                        </div><!-- modal-content -->
-                                    </div><!-- modal-dialog -->
-                                </div><!-- modal -->
+                                @endif 
 
                                 @endforeach
 
@@ -166,57 +126,7 @@
 @endsection
 @section('script')
 <script>
-    // for addigning orders to bikers
-    $(document).on('click', '#service-order', function(event) {
-        event.preventDefault();
-
-        let route = $(this).attr('data-url');
-        let id = $(this).attr('data-id');
-        let serviceName = $(this).attr('data-service-name');
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $.ajax({
-            url: route,
-            method: 'GET',
-            data: {
-                "id": id,
-                "serviceName": serviceName
-            },
-
-            success: function(result) {
-                $(".mana").html(result.order.id);
-                $(".mana1").val(result.order.id);
-                $.each(result.bikers, function(key, biker) {
-                    let bike = `<option value="` + biker.id + `">` + biker.first_name + " " + biker.last_name + `</option>`;
-                    console.log(biker);
-                    $('#insert_bikers').append(bike);
-                });
-
-                $('#modal-order-body').html().show();
-
-            },
-            complete: function() {
-                $("#spinner-icon-3").hide();
-            },
-            error: function(jqXHR, testStatus, error) {
-                var message = error + ' An error occured while trying to assign order with ID ' + id + ' to biker';
-                var type = 'error';
-                displayMessage(message, type);
-                $("#spinner-icon-3").hide();
-            },
-            timeout: 8000
-        });
-
-    });
-
-    $(document).on('click', '.times', function(event) {
-        event.preventDefault();
-        $('#insert_manager').html('');
-    });
+ 
 </script>
 
 @endsection

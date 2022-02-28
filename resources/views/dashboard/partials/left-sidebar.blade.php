@@ -8,7 +8,7 @@
 <div class="aside-body">
   <div class="aside-loggedin">
     <div class="d-flex align-items-center justify-content-start">
-      <a href="" class="avatar"><img src="{{Auth::user()->image_url == 'default-user.png'? Auth::user()->image_url: Auth::user()->image_url}}" class="rounded-circle" alt=""></a>
+      <a href="" class="avatar"><img src="{{Auth::user()->image_url}}" class="rounded-circle" alt=""></a>
       <div class="aside-alert-link">
         {{-- <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a> --}}
         <a href="" class="{{Auth::user()->notifications->count()>=1?'new':''}}" data-toggle="tooltip" title="You have {{Auth::user()->notifications->count()>1?Auth::user()->notifications->count().' new notifications':Auth::user()->notifications->count().' new notification'}} "><i data-feather="bell"></i></a>
@@ -44,7 +44,7 @@
     {{-- <li class="nav-item"><a href="{{url('dashboard/products')}}" class="nav-link"><i data-feather="globe"></i> <span>Manage Products</span></a></li> --}}
 
     {{--Not visible to warehouse--}}
-    @if(Auth::user()->role->id != 3)
+    @if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2)
     <li class="nav-item with-sub">
       <a href="" class="nav-link"><i data-feather="setting"></i> <span>Settings</span></a>
       <ul>
@@ -62,8 +62,8 @@
       </ul>
     </li>
 
-    {{--Not visible to warehouse--}}
-    @if(Auth::user()->role->id != 3)
+    {{--Not visible to warehouse managers--}}
+    @if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2)
     <li class="nav-item with-sub">
       <a href="" class="nav-link"><i data-feather="life-buoy"></i> <span>Manage Stores</span></a>
       <ul>
@@ -71,12 +71,6 @@
         <li><a href="{{url('dashboard/stores')}}">View Stores</a></li>
       </ul>
     </li>
-
-    @endif
-
-
-    {{--Not visible to warehouse--}}
-    @if(Auth::user()->role->id != 3)
     <li class="nav-item with-sub">
       <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Manage Users</span></a>
       <ul>
@@ -93,12 +87,20 @@
       </ul>
     </li>
 
+    <li class="nav-item with-sub">
+      <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Manage Report</span></a>
+      <ul>
+        <li><a href="{{url('dashboard/revenues')}}">Revenues</a></li>
+        <li><a href="{{url('dashboard/total-orders')}}">Total Orders</a></li>
+        <li><a href="{{url('dashboard/abandoned-cart')}}">Abandoned Cart</a></li>
+      </ul>
+    </li>
+
     @endif
 
     <li class="nav-item"><a href="{{route('dashboard.orders')}}" class="nav-link"><i data-feather="mail"></i> <span>Orders</span></a></li>
-    <li class="nav-item"><a href="#" class="nav-link"><i data-feather="mail"></i> <span>Sales Report</span></a></li>
-
-
+    
+    
     {{-- <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>Cryptocurrency</span></a></li>
       <li class="nav-item"><a href="dashboard-four.html" class="nav-link"><i data-feather="life-buoy"></i> <span>Helpdesk Management</span></a></li>
       <li class="nav-label mg-t-25">Web Apps</li>

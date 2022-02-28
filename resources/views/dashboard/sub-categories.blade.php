@@ -16,9 +16,9 @@
     </div>
 
     <div class="row row-xs">
-      {{--<div class="col-12 justify-content-center text-center align-items-center">
+      <div class="col-12 justify-content-center text-center align-items-center">
         <a href="#addService" class="btn btn-primary float-right" data-toggle="modal"><i class="fas fa-plus"></i> Add New</a>
-      </div>--}}
+      </div>
       @if (session('success'))
       @section('script')
       <script>
@@ -62,7 +62,7 @@
                   <tr>
                     <th class="text-center">s/n</th>
                     <th>Sub Category Name</th>
-                    {{--<th>Parent Category</th>--}}
+                    <th>Parent Category</th>
                     <th>slug</th>
                     <th>Date Created</th>
                     <th>Action</th>
@@ -74,7 +74,7 @@
                   <tr>
                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                     <td class="tx-medium">{{$category->name}}</td>
-                    {{--<td class="tx-medium">{{$data->name}}</td>--}}
+                    <td class="tx-medium">{{$category->parent->name}}</td>
                     <td>{{$category->slug}}</td>
                     <td class="tx-medium text-center">{{ Carbon\Carbon::parse($category->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
 
@@ -85,8 +85,7 @@
                         <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                         <div class="dropdown-menu dropdown-menu-right">
                           <a href="#editService" data-toggle="modal" id="service-edit" title="Edit {{ $category->name }}" data-url="{{route('dashboard.edit_cat', $category->id)}}" data-service-name="{{ $category->name }}" data-id="{{ '$category->id' }}" class="dropdown-item details text-info"><i class="far fa-edit"></i> Edit</a>
-
-                          {{--<a data-url="" class="dropdown-item delete-entity text-danger" title="Delete {{ $category->name}}" style="cursor: pointer;"><i class="fas fa-trash"></i> Delete</a>--}}
+                          <a href="{{route('dashboard.delete_category',$category->id)}}" title="Delete {{ $category->name}}" class="dropdown-item text-danger"><i class="fas fa-trash-alt"></i> Delete Sub Category</a>
                         </div>
                       </div>
                     </td>
@@ -113,7 +112,7 @@
         <a href="" role="button" class="close pos-absolute t-15 r-15" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </a>
-        <form method="POST" action="{{route('create_category')}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('create_sub_category')}}" enctype="multipart/form-data">
           @csrf
 
           <h5 class="mg-b-2"><strong>Create Sub Category</strong></h5><br>
@@ -131,7 +130,10 @@
           <div class="form-group col-md-12">
             <label for="Cat Img">Select Category</label>
             <select class="form-control @error('cat') is-invalid @enderror" name="cat" value="{{ old('cat') }}" autocomplete="off" required>
-               <option value="">option one</option>
+            <option>Select Parent Category</option>
+            @foreach($data as $res)
+            <option value="{{$res->id}}">{{$res->name}}</option>
+          @endforeach
             </select>
             @error('cat')
             <span class="invalid-feedback" role="alert">
@@ -203,5 +205,15 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+@endsection
+@section('script')
+<script>
+  $(document).ready(function() {
+$(document).on('click', '.close', function(event) {
+        event.preventDefault();
+        window.location.reload();
+    });
+  });
+  </script>
 @endsection
 

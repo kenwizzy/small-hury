@@ -15,7 +15,7 @@
       </div>
 
     </div>
-
+  
     <div class="row row-xs">
       <div class="col-sm-6 col-lg-3">
         <div class="card card-body">
@@ -153,11 +153,14 @@
                   </tr>
                 </thead>
                 <tbody>
+                
+                @foreach($charts as $chart)
                   <tr>
-                    <td class="tx-medium">Abuja</td>
-                    <td class="text-right">12,201</td>
-                    <td class="text-right">#150,200.80</td>
+                    <td class="tx-medium">{{$chart->name.' Store'}}</td>
+                    <td class="text-right">{{$chart->id}}</td>
+                    <td class="text-right">&#8358;{{number_format($chart->amt)}}</td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div><!-- table-responsive -->
@@ -166,7 +169,14 @@
       </div><!-- col -->
       <div class="col-lg-12 col-xl-8 mg-t-10">
         <div class="card mg-b-10">
-          <div class="card-header pd-t-20 d-sm-flex align-items-start justify-content-between bd-b-0 pd-b-0">
+
+
+
+        <canvas id="myChart"></canvas>
+
+
+
+          {{--<div class="card-header pd-t-20 d-sm-flex align-items-start justify-content-between bd-b-0 pd-b-0">
             <div>
               <h6 class="mg-b-5">Your Most Recent Earnings</h6>
               <p class="tx-13 tx-color-03 mg-b-0">Your sales and referral earnings over the last 30 days</p>
@@ -258,8 +268,8 @@
                 </tr>
               </tbody>
             </table>
-          </div><!-- table-responsive -->
-        </div><!-- card -->
+          </div>--}}
+        </div>
 
 
       </div><!-- col -->
@@ -285,6 +295,7 @@
                 <small class="tx-12 {{$ord->starus->name=='Cancelled' ||$ord->starus->name=='Declined'?'tx-danger':'tx-success'}} mg-b-0">{{$ord->starus->name}}</small>
               </div>
             </li>
+            
            @endforeach 
             {{--<li class="list-group-item d-flex pd-sm-x-20">
               <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-danger"><i class="icon ion-md-close"></i></span></div>
@@ -368,5 +379,61 @@
   </div><!-- container -->
 </div>
 
+
+@endsection
+@section('script')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June','July','August','September','October','November','December'],
+      datasets: [{
+          label: 'Revenues',
+          data: [{{$jan}}, {{$feb}}, {{$mar}}, {{$apr}}, {{$may}}, {{$jun}}, {{$jul}}, {{$aug}}, {{$sep}}, {{$oct}}, {{$nov}}, {{$dec}}],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1,
+      }]
+  },
+  options: {
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+      }
+  }
+});
+</script>
 
 @endsection

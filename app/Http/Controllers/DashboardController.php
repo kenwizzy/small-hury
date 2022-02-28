@@ -7,9 +7,11 @@ use App\Models\Order;
 use App\Models\Warehouse;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +25,19 @@ class DashboardController extends Controller
             'users' => User::where('role_id', 4)->get(),
             'transactions' => Transaction::all(),
             'customers' => User::where('role_id', 5)->orderBy('id', 'asc')->get(),
+            'charts'=> $this->storeOrderStats(),
+            'jan' => $this->month('01'),
+            'feb' => $this->month('02'),
+            'mar' => $this->month('03'),
+            'apr' => $this->month('04'),
+            'may' => $this->month('05'),
+            'jun' => $this->month('06'),
+            'jul' => $this->month('07'),
+            'aug' => $this->month('08'),
+            'sep' => $this->month('09'),
+            'oct' => $this->month('10'),
+            'nov' => $this->month('11'),
+            'dec' => $this->month('12')
         ]);
     }
 
@@ -90,5 +105,20 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function storeOrderStats(){
+        return DB::table('orders')->selectRaw('sum(orders.total_paid) as amt,orders.warehouse_id,count(orders.id) as id,warehouses.name')
+        ->join('warehouses', 'warehouses.id', 'orders.warehouse_id')
+        ->groupby('orders.warehouse_id')
+       ->where('orders.payment_status',1)
+        ->get();
+    }
+
+    public function month($month){
+        return DB::table('orders')->selectRaw('total_paid')
+       ->where('orders.payment_status',1)
+       ->whereMonth('created_at',$month) 
+        ->SUM('total_paid');
     }
 }

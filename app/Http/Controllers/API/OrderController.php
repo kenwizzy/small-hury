@@ -138,7 +138,7 @@ class OrderController extends BaseController
         $data['order'] = $newOrder;
         $store = Warehouse::where('id', $fields['warehouse_id'])->first();
         $content = 'A new order with order number ' . $newOrder->id . ' has been created';
-        return $this->notice($store->user_id, 'Order Created', $content);
+        $this->notice($store->user_id, 'Order Created', $content);
         Mail::to('orders@smallhurry.com')
             ->cc($store->email)
             ->send(new CreateOrderMail($data));

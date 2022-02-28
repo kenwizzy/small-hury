@@ -19,7 +19,8 @@ class CreateProductWarehousesTable extends Migration
             $table->foreignId('warehouse_id')->constrained('warehouses');
             $table->integer('total_quantity')->nullable()
                 ->comment('This is the total number of product in this particular warehouse');
-            $table->timestamps();
+                $table->softDeletes();
+                $table->timestamps();
         });
     }
 

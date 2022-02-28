@@ -102,7 +102,7 @@
                                                 <a href="{{route('dashboard/product_details', $product->id)}}" class="dropdown-item moove"><i class="far fa-clipboard"></i> Details </a>
                                                 <!-- <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Next Page </a> -->
                                                 <a href="{{route('dashboard/edit_product', $product->id)}}" class="dropdown-item text-success"><i class="far fa-edit"></i> Edit </a>
-                                                <a href="{{url('dashboard/delete_product', $product->id)}}" class="dropdown-item text-danger"><i class="far fa-trash-alt"></i>Disable Product</a>
+                                                <a href="{{route('delete_product', $product->id)}}" class="dropdown-item text-danger"><i class="far fa-trash-alt"></i>Delete Product</a>
                                             </div>
                                         </div>
                                     </td>
