@@ -116,7 +116,7 @@ class DashboardController extends Controller
     //     ->groupby('orders.warehouse_id')
     //    ->where('orders.payment_status',1)
     //     ->get();
-        return DB::select("SELECT SUM(orders.total_paid) as amt, orders.warehouse_id, COUNT(orders.id) as id, warehouses.name FROM orders RIGHT JOIN warehouses ON orders.warehouse_id = warehouses.id WHERE orders.payment_status = 1 GROUP BY orders.warehouse_id ");
+        return DB::select("SELECT SUM(orders.total_paid) as amt, orders.warehouse_id, COUNT(orders.id) as id FROM orders RIGHT JOIN warehouses ON orders.warehouse_id = warehouses.id WHERE orders.payment_status = 1 GROUP BY orders.warehouse_id");
         
     }
 
