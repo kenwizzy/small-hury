@@ -88,7 +88,7 @@
     </li>
 
     <li class="nav-item with-sub">
-      <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Manage Report</span></a>
+      <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Sales Report</span></a>
       <ul>
         <li><a href="{{url('dashboard/revenues')}}">Revenues</a></li>
         <li><a href="{{url('dashboard/total-orders')}}">Total Orders</a></li>
