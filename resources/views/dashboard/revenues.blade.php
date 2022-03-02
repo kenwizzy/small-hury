@@ -98,9 +98,15 @@
 
                         </div>
                     </div><!-- card-body -->
+                    
+            <div class="col-12 justify-content-center text-center align-items-center">
+                <a href="" class="btn btn-primary float-right"><i class="fas fa-file"></i>Export</a>
+            </div>
+
                     <div class="table-responsive">
 
                         <table class="table table-hover mg-b-0" id="basicExample">
+                            
                             <thead class="thead-primary">
                                 <tr>
                                     <th class="text-center">s/n</th>

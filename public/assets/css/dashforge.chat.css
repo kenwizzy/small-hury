@@ -197,7 +197,7 @@
     background-color: #f5f6fa; }
   @media (min-width: 992px) {
     .nav-chat .nav-link.active {
-      color: #0168fa;
+      color: #73ab22;
       background-color: #eef0f7; } }
   .nav-chat .nav-link + .nav-link {
     margin-top: 2px; }

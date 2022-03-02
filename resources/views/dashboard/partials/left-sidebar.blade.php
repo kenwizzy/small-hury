@@ -39,67 +39,79 @@
     </div>
   </div><!-- aside-loggedin -->
   <ul class="nav nav-aside">
-    {{-- <li class="nav-label">Dashboard</li> --}}
-    <li class="nav-item"><a href="{{url('dashboard')}}" class="nav-link"><i data-feather="shopping-bag" style="color:#73ab22;"></i> <span style="color:#73ab22;">Dashboard</span></a></li>
+    
+    <li class="nav-item {{Route::currentRouteNamed('dashboard.index')? 'active': ''}}"><a href="{{url('dashboard')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Dashboard</span></a></li>
     {{-- <li class="nav-item"><a href="{{url('dashboard/products')}}" class="nav-link"><i data-feather="globe"></i> <span>Manage Products</span></a></li> --}}
 
     {{--Not visible to warehouse--}}
     @if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2)
-    <li class="nav-item with-sub">
-      <a href="" class="nav-link"><i data-feather="setting"></i> <span>Settings</span></a>
+    <li class="nav-item with-sub {{Route::currentRouteNamed('dashboard/discounts', 'dashboard/attributes') ? 'active show': '' }}">
+      <a href="" class="nav-link"><i data-feather="globe"></i><i data-feather="setting"></i> <span>Settings</span></a>
       <ul>
-        <li><a href="{{route('dashboard/discounts')}}">Manage Discounts</a></li>
-        <li><a href="{{route('dashboard/attributes')}}">Manage Attributes</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard/discounts')? 'active': ''}}"><a href="{{route('dashboard/discounts')}}">Manage Discounts</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard/attributes')? 'active': ''}}"><a href="{{route('dashboard/attributes')}}">Manage Attributes</a></li>
       </ul>
     </li>
     @endif
 
-    <li class="nav-item with-sub">
+    <li class="nav-item with-sub {{Route::currentRouteNamed('dashboard.products', 'dashboard.create') ? 'show': ''}}">
       <a href="" class="nav-link"><i data-feather="user"></i> <span>Manage Products</span></a>
       <ul>
-        <li><a href="{{url('dashboard/create')}}">Add New Product</a></li>
-        <li><a href="{{url('dashboard/products')}}">View Products</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard.create')? 'active': ''}}"><a href="{{url('dashboard/create')}}">Add New Product</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard.products')? 'active': ''}}"><a href="{{url('dashboard/products')}}">View Products</a></li>
+      </ul>
+    </li>
+
+    <li class="nav-item with-sub {{Route::currentRouteNamed('dashboard.orders') ? 'show active': ''}}">
+      <a href="" class="nav-link"><i data-feather="life-buoy"></i> <span>Manage Orders</span></a>
+      <ul>
+      <li class="{Route::currentRouteNamed('dashboard.orders') ? 'active': ''}}"><a href="{{route('dashboard.orders')}}"><span>Orders</span></a></li>
       </ul>
     </li>
 
     {{--Not visible to warehouse managers--}}
     @if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2)
-    <li class="nav-item with-sub">
+
+    <li class="nav-item with-sub {{Route::currentRouteNamed('dashboard.stores','dashboard.add_store','dashboard.districts','dashboard.edit_store') ? 'show active': ''}}">
       <a href="" class="nav-link"><i data-feather="life-buoy"></i> <span>Manage Stores</span></a>
       <ul>
-        <li><a href="{{url('dashboard/add_store')}}">Add Store</a></li>
-        <li><a href="{{url('dashboard/stores')}}">View Stores</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard.add_store') ? 'active': ''}}"><a href="{{url('dashboard/add_store')}}">Add Store</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard.stores') ? 'active': ''}}"><a href="{{url('dashboard/stores')}}">View Stores</a></li>
       </ul>
     </li>
-    <li class="nav-item with-sub">
+    <li class="nav-item with-sub {{Route::currentRouteNamed('dashboard.users','dashboard.add_user') ? 'show active': ''}}">
       <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Manage Users</span></a>
       <ul>
-        <li><a href="{{url('dashboard/add_user')}}">Create User</a></li>
-        <li><a href="{{url('dashboard/users')}}">View Users</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard.add_user') ? 'active': ''}}"><a href="{{url('dashboard/add_user')}}">Create User</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard.users') ? 'active': ''}}"><a href="{{url('dashboard/users')}}">View Users</a></li>
       </ul>
     </li>
 
-    <li class="nav-item with-sub">
+    <li class="nav-item with-sub {{Route::currentRouteNamed('dashboard.categories','dashboard.sub-categories') ? 'show active': ''}}">
       <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Manage Categories</span></a>
       <ul>
-      <li><a href="{{route('dashboard.categories')}}"><i data-feather="mail"></i> <span>Categories</span></a></li>
-      <li class=""><a href="{{route('dashboard.sub-categories')}}"><i data-feather="mail"></i> <span>Sub Categories</span></a></li>
+      <li class="{{Route::currentRouteNamed('dashboard.categories') ? 'active': ''}}"><a href="{{route('dashboard.categories')}}"><i data-feather="mail"></i> <span>Categories</span></a></li>
+      <li class="{{Route::currentRouteNamed('dashboard.sub-categories') ? 'show active': ''}}"><a href="{{route('dashboard.sub-categories')}}"><i data-feather="mail"></i> <span>Sub Categories</span></a></li>
       </ul>
     </li>
 
-    <li class="nav-item with-sub">
-      <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Sales Report</span></a>
+    <li class="nav-item with-sub {{Route::currentRouteNamed('dashboard.revenues','dashboard.total-orders','dashboard.abandoned-cart') ? 'show active': ''}}">
+      <a class="nav-link"><i data-feather="file-text"></i> <span>Sales Report</span></a>
       <ul>
-        <li><a href="{{url('dashboard/revenues')}}">Revenues</a></li>
-        <li><a href="{{url('dashboard/total-orders')}}">Total Orders</a></li>
-        <li><a href="{{url('dashboard/abandoned-cart')}}">Abandoned Cart</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard.revenues') ? 'active': ''}}"><a href="{{url('dashboard/revenues')}}">Revenues</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard.total-orders') ? 'active': ''}}"><a href="{{url('dashboard/total-orders')}}">Total Orders</a></li>
+        <li class="{{Route::currentRouteNamed('dashboard.abandoned-cart') ? 'active': ''}}"><a href="{{url('dashboard/abandoned-cart')}}">Abandoned Cart</a></li>
       </ul>
     </li>
-
     @endif
 
-    <li class="nav-item"><a href="{{route('dashboard.orders')}}" class="nav-link"><i data-feather="mail"></i> <span>Orders</span></a></li>
-    
+    <li class="nav-item with-sub">
+      <a href="" class="nav-link"><i data-feather="life-buoy"></i> <span>Statistics</span></a>
+      <ul>
+        {{--<li><a href="#">Add Store</a></li>
+        <li><a href="#">View Stores</a></li>--}}
+      </ul>
+    </li>
     
     {{-- <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>Cryptocurrency</span></a></li>
       <li class="nav-item"><a href="dashboard-four.html" class="nav-link"><i data-feather="life-buoy"></i> <span>Helpdesk Management</span></a></li>
