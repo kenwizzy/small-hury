@@ -7,7 +7,8 @@
 /public/assets/images/users/*
 !/public/assets/images/users/default1.png
 !/public/assets/images/users/default.jpg
-!/public/storage/assets
+!/public/storage/assets/*
+!/public/storage/assets/css/*
 .env
 .env.backup
 .phpunit.result.cache
