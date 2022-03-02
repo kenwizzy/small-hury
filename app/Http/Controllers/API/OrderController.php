@@ -128,7 +128,7 @@ class OrderController extends BaseController
             $user->app_token,
             "Order Successfully Created",
             "Your Order with order no " . $newOrder->id . " has been created, we will reach out to you!",
-            asset('assets/images/users/default.png'),
+            asset('assets/images/users/default1.png'),
             "Thank you!"
         );
         ########## SEND MAIL TO ADMIN AND CONCERNED STORE ######

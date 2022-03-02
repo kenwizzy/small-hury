@@ -1,8 +1,13 @@
 /node_modules
 /public/hot
-/public/storage
 /storage/*.key
 /vendor
+/public/assets/images/categories/*
+/public/assets/images/products/*
+/public/assets/images/users/*
+!/public/assets/images/users/default1.png
+!/public/assets/images/users/default.jpg
+!/public/storage/assets
 .env
 .env.backup
 .phpunit.result.cache
