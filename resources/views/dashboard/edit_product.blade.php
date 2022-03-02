@@ -27,8 +27,9 @@
         </div>
         <div class="row row-xs">
             <div class="col-lg-12 col-xl-12">
-                <form method="POST" action="{{route('create_product')}}" enctype="multipart/form-data">
+                <form method="POST" action="{{route('update_product',$product->id)}}" enctype="multipart/form-data">
                     @csrf
+                    @method('PATCH')
                     <div class="col-md-12">
                         <div class="form-row">
                             <div class="form-group col-md-3">
@@ -101,19 +102,17 @@
                                 </span>
                                 @enderror
                             </div>
-
+                        
                             <div class="form-group col-md-4">
                                 <label for="on_sale">Warehouse</label>
                                 <select class="custom-select @error('store') is-invalid @enderror" id="store" name="store">
-                                    {{--<option>Select Warehouse</option>--}}
-                                    {{--<option value="{{$warehouses->id}}">{{$warehouses->name}}</option>--}}
-                                    {{--@if($warehouses->count() > 0)--}}
-                                    {{--<option value="">All Warehouses</option>--}}
+                                    
                                     @if(Auth::user()->role->name == 'Warehouse Manager')
 
                                     <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
 
                                     @else
+                                   
                                     <option value="all">All Warehouses</option>
                                     @foreach ($warehouses as $store)
                                     <option value="{{$store->id}}">{{$store->name}}</option>
@@ -130,18 +129,18 @@
 
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-3">
+                            {{--<div class="form-group col-md-4">
                                 <label for="inputEmail4">Default Image</label><br>
-                                <img src="{{$product->DefaultImage->image_url}}" width="100"><br>
-                                <input type="file" class="form-control @error('default_image') is-invalid @enderror" id="default_image" name="default_image">
+                                
+                                <input type="file" class="form-control @error('default_image') is-invalid @enderror" value="{{$product->DefaultImage->image_url}}" id="default_image" name="default_image">
                                 @error('default_image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div>
+                            </div>--}}
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="phone_number">Quantity</label>
                                 <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" value="{{Auth::user()->role->name == 'Warehouse Manager'? $product->productStoreQty()->total_quantity : $product->totalItems()}}" name="quantity">
                                 @error('quantity')
@@ -151,7 +150,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="middle_name">Select Category</label>
                                 <select class="form-control" id="cat_id" name="product_category" autocomplete="off">
                                     <option value="{{$product->category->id}}">{{Str::title($product->category->name)}}</option>
@@ -162,7 +161,7 @@
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="middle_name">Select Sub Category</label>
                                 <select class="form-control" id="subcat_id" name="sub_category">
                                     <option value="{{$product->subCat->id}}">{{$product->subCat->name}}</option>
@@ -172,12 +171,13 @@
 
                         </div>
 
-                        @foreach($product->attrs() as $opt)
+                       {{--@foreach($product->attrs() as $opt)
+                        
                         <div class="form-row default">
                             <div class="form-group col-md-4">
                                 <label for="on_sale">Attribute</label>
                                 <select class="custom-select @error('attr_id') is-invalid @enderror" id="attr_id" name="attribute[]">
-                                    <option value="">{{$opt->name}}</option>
+                                    <option value="{{$opt->id}}">{{$opt->name}}</option>
                                     <option>Select</option>
                                     @foreach($attributes as $attribute)
                                     <option value="{{$attribute->id}}">{{$attribute->name}}</option>
@@ -193,7 +193,7 @@
                             <div class="form-group col-md-4">
                                 <label for="password">Attribute Values</label>
                                 <select class="form-control @error('attribute_value') is-invalid @enderror" id="attr_val" name="attribute_value[]">
-                                    <option value="">{{$opt->attribute_val_name}}</option>
+                                    <option value="{{$opt->value_id}}">{{$opt->attribute_val_name}}</option>
                                     <option value=''>Select Values</option>
                                 </select>
                                 @error('attribute_value')
@@ -205,7 +205,7 @@
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">Attribute Image</label><br>
                                 <img src="{{$opt->image_url}}" width="100"><br>
-                                <input type="file" class="form-control @error('attribute_image') is-invalid @enderror" id="default_image" name="attribute_image[]">
+                                <input type="file" class="form-control @error('attribute_image') is-invalid @enderror" value="{{$opt->image_url}}" id="default_image" name="attribute_image[]">
                                 @error('attribute_image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -214,13 +214,7 @@
                             </div>
                         </div>
 
-                        @endforeach
-
-
-                        <div id="more"></div><br>
-                        <div class="form-group col-md-4">
-                            <button type="button" id="checkMe" class="btn btn-primary btn-sm">Add more</button>
-                        </div>
+                        @endforeach--}}
 
                         <div class="form-row">
                             <div class="form-group col-md-12" style="margin:auto;">

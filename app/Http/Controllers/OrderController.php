@@ -209,4 +209,25 @@ class OrderController extends Controller
             'body' => $body
         ]);
     }
+
+    public function getRevenues(){
+        $orders = Order::where('payment_status',1)->get();
+        $onlineOrders =  DB::table('orders')
+                         ->join('delivery_details', 'delivery_details.order_id', 'orders.id')->where('payment_status',1)
+                         ->where('delivery_details.payment_method', '=', 'card')->SUM('orders.total_paid');
+        $podOrders    =  DB::table('orders')
+                         ->join('delivery_details', 'delivery_details.order_id', 'orders.id')->where('payment_status',1)
+                         ->where('delivery_details.payment_method', '<>', 'card')->SUM('orders.total_paid');
+
+        return view('dashboard/revenues',compact('orders','onlineOrders','podOrders'));
+    }
+    public function totalOrders(){
+        $orders= Order::all();
+        return view('dashboard/total-orders',compact('orders'));
+    }
+
+    public function abandonedCart(){
+        $orders= Order::all();
+        return view('dashboard/abandoned-cart',compact('orders'));
+    }
 }

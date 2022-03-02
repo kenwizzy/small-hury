@@ -85,6 +85,25 @@ class CategoryController extends Controller
         //
     }
 
+    public function createSubCategory(Request $request){
+        $validator = Validator::make($request->all(), [
+            'cat'     => 'required|numeric',
+            'sub_cat'     => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        Category::create([
+            'parent_id'=>$request->cat,
+            'name'=>$request->sub_cat,
+            'slug'=>Str::slug($request->sub_cat)
+        ]);
+
+        return redirect()->back()->withSuccess($request->sub_cat.' created successfully');
+    }
+
     public function FetchSubCategoryValues($id)
     {
         $values = Category::where('parent_id', $id)->get();
@@ -124,9 +143,9 @@ class CategoryController extends Controller
     public function getsCats() 
     {
         //$data = Category::where('id',$id)->select('name')->first();
-        $categories = Category::where('parent_id', '<>', 0)->get();
-
-        return view('dashboard/sub-categories', compact('categories'));
+        $categories = Category::with('parent')->where('parent_id', '<>', 0)->orderBy('id','desc')->get();
+        $data = Category::where('parent_id',0)->get();
+        return view('dashboard/sub-categories', compact('categories','data'));
     }
 
     /**
@@ -182,7 +201,14 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-         $category->delete();
-         return redirect('dashboard/categories')->withSuccess('Category deleted successfully');
+        if ($category->parent_id==0) {
+            $category->subCats()->delete();
+            Category::where('id',$category->id)->delete();
+         return redirect()->back()->withSuccess(ucfirst($category->name).' and it"s Sub Sategories Deleted Successfully');
+        }else{
+            Category::where('id',$category->id)->delete();
+         return redirect()->back()->withSuccess('Sub Category '.ucfirst($category->name).' Deleted Successfully');
+        }
+        
     }
 }

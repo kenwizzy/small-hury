@@ -100,6 +100,10 @@
                         <div class="divider-text">Delivery Details</div>
 
                         <tr>
+                            <td>Customer Name</td>
+                            <td class="">{{$order->customer->first_name.' '.$order->customer->last_name}}</td>
+                        </tr>
+                        <tr>
                             <td class="">Delivery Contact:</td>
                             <td class="">{{$order->delivery->delivery_contact}}</td>
                         </tr>

@@ -26,6 +26,7 @@ class CreateProductImagesTable extends Migration
             $table->string('image_url');
             $table->tinyInteger('status')->unsigned()->default(1);
             $table->boolean('default');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

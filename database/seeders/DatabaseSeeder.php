@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
             WarehouseDistrictSeeder::class,
             DeliveryCostSeeder::class,
             OrderStatusSeeder::class,
-            OrderProcessSeeder::class,
+            //OrderProcessSeeder::class,
             DeliveryTypeSeeder::class,
 
         ]);

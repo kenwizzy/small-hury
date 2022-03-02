@@ -35,10 +35,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('create_category', [CategoryController::class, 'store'])->name('create_category');
     Route::get('dashboard/edit_cat/{id}', [CategoryController::class, 'edit'])->name('dashboard.edit_cat');
     Route::get('dashboard/delete_category/{category}', [CategoryController::class, 'destroy'])->name('dashboard.delete_category');
+    Route::post('create_sub_category', [CategoryController::class, 'createSubCategory'])->name('create_sub_category');
     Route::patch('dashboard/update_category/{id}', [CategoryController::class, 'update'])->name('dashboard.update_category');
     Route::get('dashboard/view_profile', [UserController::class, 'show'])->name('dashboard.view_profile');
     Route::get('dashboard/products', [ProductController::class, 'allProducts'])->name('dashboard.products');
     Route::get('dashboard/create', [ProductController::class, 'create'])->name('dashboard.create');
+    Route::get('delete_product/{product}', [ProductController::class, 'destroy'])->name('delete_product');
     Route::get('dashboard/discounts', [DiscountController::class, 'index'])->name('dashboard/discounts');
     Route::get('dashboard/edit_discount/{discount}', [DiscountController::class, 'edit'])->name('dashboard.edit_discount');
     Route::get('dashboard/attributes', [AttributeController::class, 'index'])->name('dashboard/attributes');
@@ -51,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('delete_attribute/{attribute}', [AttributeController::class, 'destroy'])->name('delete_attribute');
     Route::get('dashboard/product_details/{product}', [ProductController::class, 'show'])->name('dashboard/product_details');
     Route::get('dashboard/edit_product/{product}', [ProductController::class, 'edit'])->name('dashboard/edit_product');
+    Route::patch('update_product/{product}', [ProductController::class, 'update'])->name('update_product');
     Route::get('dashboard/add_store', [WarehouseController::class, 'create']);
     Route::get('/get_state_lgas/{id}', [WarehouseController::class, 'FetchStateLgas']);
     Route::get('/get_attr_values/{id}', [AttributeController::class, 'FetchAttributeValues']);
@@ -74,6 +77,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('dashboard/assign_biker', [OrderController::class, 'assignBiker'])->name('dashboard.assign_biker');
     Route::get('dashboard/assign_manager/{warehouse}', [WarehouseController::class, 'assign'])->name('dashboard.assign_manager');
     Route::post('assign_manager', [WarehouseController::class, 'assignManager'])->name('assign_manager');
+    Route::get('dashboard/revenues', [OrderController::class, 'getRevenues'])->name('dashboard.revenues');
+    Route::get('dashboard/total-orders', [OrderController::class, 'totalOrders'])->name('dashboard.total-orders');
+    Route::get('dashboard/abandoned-cart', [OrderController::class, 'abandonedCart'])->name('dashboard.abandoned-cart');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 

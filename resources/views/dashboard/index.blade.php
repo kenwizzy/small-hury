@@ -15,13 +15,13 @@
       </div>
 
     </div>
-
+  
     <div class="row row-xs">
       <div class="col-sm-6 col-lg-3">
         <div class="card card-body">
-          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Stores</h6>
+          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Customers</h6>
           <div class="d-flex d-lg-block d-xl-flex align-items-end">
-            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$warehouses->count()}}</h3>
+            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$customers->count()}}</h3>
 
           </div>
           <div class="chart-three">
@@ -31,9 +31,9 @@
       </div><!-- col -->
       <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
         <div class="card card-body">
-          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Bikers</h6>
+          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Orders</h6>
           <div class="d-flex d-lg-block d-xl-flex align-items-end">
-            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$users->count()}}</h3>
+            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$orders->count()}}</h3>
 
           </div>
           <div class="chart-three">
@@ -43,9 +43,9 @@
       </div><!-- col -->
       <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
         <div class="card card-body">
-          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Orders</h6>
+          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Products</h6>
           <div class="d-flex d-lg-block d-xl-flex align-items-end">
-            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$orders->count()}}</h3>
+            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$products->count()}}</h3>
 
           </div>
           <div class="chart-three">
@@ -55,9 +55,9 @@
       </div><!-- col -->
       <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
         <div class="card card-body">
-          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Transactions</h6>
+          <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Completed Orders</h6>
           <div class="d-flex d-lg-block d-xl-flex align-items-end">
-            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$transactions->count()}}</h3>
+            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$orderstatus->count()}}</h3>
 
           </div>
 
@@ -153,11 +153,14 @@
                   </tr>
                 </thead>
                 <tbody>
+                
+                @foreach($charts as $chart)
                   <tr>
-                    <td class="tx-medium">Abuja</td>
-                    <td class="text-right">12,201</td>
-                    <td class="text-right">#150,200.80</td>
+                    <td class="tx-medium">{{$chart->name.' Store'}}</td>
+                    <td class="text-right">{{$chart->id}}</td>
+                    <td class="text-right">&#8358;{{number_format($chart->amt)}}</td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div><!-- table-responsive -->
@@ -166,7 +169,14 @@
       </div><!-- col -->
       <div class="col-lg-12 col-xl-8 mg-t-10">
         <div class="card mg-b-10">
-          <div class="card-header pd-t-20 d-sm-flex align-items-start justify-content-between bd-b-0 pd-b-0">
+
+
+
+        <canvas id="myChart"></canvas>
+
+
+
+          {{--<div class="card-header pd-t-20 d-sm-flex align-items-start justify-content-between bd-b-0 pd-b-0">
             <div>
               <h6 class="mg-b-5">Your Most Recent Earnings</h6>
               <p class="tx-13 tx-color-03 mg-b-0">Your sales and referral earnings over the last 30 days</p>
@@ -258,12 +268,12 @@
                 </tr>
               </tbody>
             </table>
-          </div><!-- table-responsive -->
-        </div><!-- card -->
+          </div>--}}
+        </div>
 
 
       </div><!-- col -->
-      <div class="col-md-6 col-xl-4 mg-t-10">
+      <div class="col-md-6 col-xl-6 mg-t-10">
         <div class="card ht-100p">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="mg-b-0">Orders</h6>
@@ -285,25 +295,15 @@
                 <small class="tx-12 {{$ord->starus->name=='Cancelled' ||$ord->starus->name=='Declined'?'tx-danger':'tx-success'}} mg-b-0">{{$ord->starus->name}}</small>
               </div>
             </li>
+            
            @endforeach 
-            {{--<li class="list-group-item d-flex pd-sm-x-20">
-              <div class="avatar d-none d-sm-block"><span class="avatar-initial rounded-circle bg-danger"><i class="icon ion-md-close"></i></span></div>
-              <div class="pd-sm-l-10">
-                <p class="tx-medium mg-b-0">Payment from Ify</p>
-                <small class="tx-12 tx-color-03 mg-b-0">Mar 21, 2019, 3:30pm</small>
-              </div>
-              <div class="mg-l-auto text-right">
-                <p class="tx-medium mg-b-0">$150.00</p>
-                <small class="tx-12 tx-danger mg-b-0">Not paid</small>
-              </div>
-            </li>--}}
           </ul>
           <div class="card-footer text-center tx-13">
             <a href="{{route('dashboard.orders')}}" class="link-03">View All Transactions <i class="icon ion-md-arrow-down mg-l-5"></i></a>
           </div><!-- card-footer -->
         </div><!-- card -->
       </div>
-      <div class="col-md-6 col-xl-4 mg-t-10">
+      <div class="col-md-6 col-xl-6 mg-t-10">
         <div class="card ht-100p">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="mg-b-0">New Customers</h6>
@@ -332,7 +332,7 @@
           </div><!-- card-footer -->
         </div><!-- card -->
       </div>
-      <div class="col-md-6 col-xl-4 mg-t-10">
+      {{--<div class="col-md-6 col-xl-4 mg-t-10">
         <div class="card ht-lg-100p">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="mg-b-0">Real-Time Sales</h6>
@@ -363,10 +363,66 @@
             </div>
           </div><!-- card-body -->
         </div>
-      </div>{{---END OF COMMENT---}}
+      </div>--}}
     </div><!-- row -->
   </div><!-- container -->
 </div>
 
+
+@endsection
+@section('script')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June','July','August','September','October','November','December'],
+      datasets: [{
+          label: 'Revenues',
+          data: [{{$jan}}, {{$feb}}, {{$mar}}, {{$apr}}, {{$may}}, {{$jun}}, {{$jul}}, {{$aug}}, {{$sep}}, {{$oct}}, {{$nov}}, {{$dec}}],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1,
+      }]
+  },
+  options: {
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+      }
+  }
+});
+</script>
 
 @endsection

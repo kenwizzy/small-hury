@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $guarded = ['created_at', 'updated_at'];
 
@@ -99,7 +101,7 @@ class Product extends Model
 
     private function output()
     {
-        return DB::table('product_images')->select('name', 'attribute_val_name', 'image_url')
+        return DB::table('product_images')->select('attributes.id','attribute_values.id AS value_id','name', 'attribute_val_name', 'image_url')
             ->join('attribute_values', 'attribute_values.id', 'product_images.attribute_value_id')
             ->join('attributes', 'attribute_values.attribute_id', '=', 'attributes.id')
             ->where('attributes.id', '!=', 1)
