@@ -214,7 +214,7 @@
 <div style="font-family: sans-serif">
 <div style="font-size: 14px; mso-line-height-alt: 25.2px; color: #555555; line-height: 1.8; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
 <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 28.8px;"><span style="font-size:16px;color:#969696;">An order with order number {{$output['order']['id']}} has been assigned to you for delivery.</span></p>
-<p>Kindly open the app and accept the order</p>
+<p>Kindly open the app to accept the order</p>
 <p>Thank you</p><br>
 </div>
 </div>

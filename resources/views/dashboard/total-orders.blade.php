@@ -64,7 +64,7 @@
                     </div><!-- card-body -->
 
             <div class="col-12 justify-content-center text-center align-items-center">
-                <a href="" class="btn btn-primary float-right"><i class="fas fa-file"></i>Export</a>
+                <a href="{{route('dashboard/export-order')}}" class="btn btn-primary float-right"><i class="fas fa-file"></i>Export</a>
             </div>
 
                     <div class="table-responsive">

@@ -111,12 +111,12 @@ class DashboardController extends Controller
     }
 
     public function storeOrderStats(){
-    //     return DB::table('orders')->selectRaw('sum(orders.total_paid) as amt,orders.warehouse_id,count(orders.id) as id,warehouses.name')
-    //     ->join('warehouses', 'warehouses.id', 'orders.warehouse_id')
-    //     ->groupby('orders.warehouse_id')
-    //    ->where('orders.payment_status',1)
-    //     ->get();
-        return $result = DB::select("SELECT SUM(orders.total_paid) as amt, orders.warehouse_id, COUNT(orders.id) as orders_count FROM orders RIGHT JOIN warehouses ON orders.warehouse_id = warehouses.id WHERE orders.payment_status = 1 GROUP BY orders.warehouse_id");
+        return DB::table('orders')->selectRaw('sum(orders.total_paid) as amt,orders.warehouse_id,count(orders.id) as id,warehouses.name')
+        ->join('warehouses', 'warehouses.id', 'orders.warehouse_id')
+        ->groupby('orders.warehouse_id')
+       ->where('orders.payment_status',1)
+        ->get();
+        //return $result = DB::select("SELECT SUM(orders.total_paid) as amt, orders.warehouse_id, COUNT(orders.id) as orders_count FROM orders RIGHT JOIN warehouses ON orders.warehouse_id = warehouses.id WHERE orders.payment_status = 1 GROUP BY orders.warehouse_id");
         // $ids = collect($result)->map(fn($item) => $item->warehouse_id);
         // $warehouses = DB::select("SELECT name, id FROM warehouse WHERE id IN ?",[$ids]);
         // collect($result)->merge()

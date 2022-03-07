@@ -12,6 +12,30 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+        @if (session('error'))
+        @section('script')
+        <script>
+            Notiflix.Notify.Failure('{{ session("error") }}', {
+                timeout: 4000,
+            }, );
+        </script>
+        @endsection
+        {{--<div class="alert alert-danger">
+          <strong>Warning</strong>  {{ session("error") }}
+        </div><br>--}}
+
+        @endif
+
+        @if(session('success'))
+        @section('script')
+        <script>
+            Notiflix.Notify.Success('{{ session("success") }}', {
+                timeout: 4000,
+            }, );
+        </script>
+        @endsection
+        @endif
+
         <form method="POST" action="{{route('login')}}">
             @csrf
 

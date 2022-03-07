@@ -156,9 +156,9 @@
                 
                 @foreach($charts as $chart)
                   <tr>
-                    <td class="tx-medium">{{$chart->name.' Store'}}</td>
-                    <td class="text-right">{{$chart->id}}</td>
-                    <td class="text-right">&#8358;{{number_format($chart->amt)}}</td>
+                    <td class="tx-medium">{{$chart->name.' Store'??''}}</td>
+                    <td class="text-right">{{$chart->id??''}}</td>
+                    <td class="text-right">&#8358;{{number_format($chart->amt??'')}}</td>
                   </tr>
                   @endforeach
                 </tbody>

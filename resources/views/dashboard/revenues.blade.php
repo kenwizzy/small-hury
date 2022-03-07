@@ -100,7 +100,7 @@
                     </div><!-- card-body -->
                     
             <div class="col-12 justify-content-center text-center align-items-center">
-                <a href="" class="btn btn-primary float-right"><i class="fas fa-file"></i>Export</a>
+                <a href="{{route('dashboard/export')}}" class="btn btn-primary float-right"><i class="fas fa-file"></i>Export</a>
             </div>
 
                     <div class="table-responsive">
@@ -126,7 +126,7 @@
                             <tbody>
                                 @php $sn = 1; @endphp
                                 @foreach($orders as $order)
-                            
+                    
                                 <tr>
                                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                                     <td class="tx-medium">{{$order->id}}</td>
@@ -137,7 +137,7 @@
                                     @endforeach
                                     </td>
                                     <td class="text-left">&#8358;{{number_format($order->total_paid,2)}}</td>
-                                    <td class="text-left">{{$order->delivery->payment_method}}</td>
+                                    <td class="text-left">{{$order->delivery->payment_method??''}}</td>
                                     <td class="text-left">{{$order->payment_status==0?'Not Paid':'Paid'}}</td>
                                     {{--<td class="text-left">{{$order->starus->name}}</td>
                                     <td class="text-left">{{$order->update_by != 0 ? $order->user->first_name.' '.$order->user->last_name.' ('.$order->user->role->name.')' : ''}}</td>

@@ -15,8 +15,8 @@ class AddWarehouseAndDistrictToAddressesTable extends Migration
     {
         Schema::table('addresses', function (Blueprint $table) {
 
-            $table->foreignId('district_id')->constrained('warehouse_districts');
-            $table->foreignId('warehouse_id')->constrained('warehouses');
+            $table->integer('district_id')->constrained('warehouse_districts');
+            $table->integer('warehouse_id')->constrained('warehouses');
         });
     }
 

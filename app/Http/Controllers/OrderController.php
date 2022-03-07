@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Exports\RevenueExport;
+use App\Exports\OrderExport;
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\AssignOrderMail;
 use App\Models\OrderAssignee;
 use App\Mail\ProcessOrderMail;
@@ -140,13 +143,14 @@ class OrderController extends Controller
         }
 
         $order = Order::where('id', $request->order)->first();
-        if ($order->status == Order::PROCESSING) {
-            return redirect()->back()->withErrors('Order is still processing');
-        }
+        // if ($order->status == Order::PROCESSING) {
+        //     return redirect()->back()->withError('Order is still processing');
+        // }
 
         if ($order->status == Order::AWAITING_FULFILLMENT) {
-            return redirect()->back()->withErrors('Order processing not started');
+            return redirect()->back()->withError('Order processing not started');
         }
+          
         try {
             DB::beginTransaction();
             $data = new OrderAssignee();
@@ -162,16 +166,18 @@ class OrderController extends Controller
         } catch (\Exception $err) {
             DB::rollBack();
         }
+        
+        $biker = User::where('id', $data->user_id)->first();
         $content = 'An order with ID ' . $order->id . ' has been assigned to ' . $order->user->first_name . ' ' . $order->user->last_name . ' for delivery.';
         $output = [];
         $output['order'] = $order;
-        $output['biker'] = User::where('id', $data->user_id)->first();
+        $output['biker'] = $biker;
         if ($data->id !== null) {
             (new NotificationService())->sendNotificationToUser($order->user_id, $order->user->token, 'Order Assigned', 'Hi ' . $order->user->first_name . ',<br>An order with ID ' . $order->id . ' has been assigned to you for delivery<br>Kindly login to the app to accept the order', $this->orderImgUrl, '');
-            Mail::to($data->user->email)
+            Mail::to($biker->email)
                 ->cc($order->warehouse->email)
                 ->send(new AssignOrderMail($output));
-            return $this->notice(Auth::id(), 'Order Assigned', $content);
+            $this->notice(Auth::id(), 'Order Assigned', $content);
         }
 
         return redirect()->back()->withSuccess('Order assigned to biker successfully');
@@ -211,7 +217,7 @@ class OrderController extends Controller
     }
 
     public function getRevenues(){
-        $orders = Order::where('payment_status',1)->get();
+        $orders = Order::with('order_details')->where('payment_status',1)->get();
         $onlineOrders =  DB::table('orders')
                          ->join('delivery_details', 'delivery_details.order_id', 'orders.id')->where('payment_status',1)
                          ->where('delivery_details.payment_method', '=', 'card')->SUM('orders.total_paid');
@@ -226,8 +232,13 @@ class OrderController extends Controller
         return view('dashboard/total-orders',compact('orders'));
     }
 
-    public function abandonedCart(){
-        $orders= Order::all();
-        return view('dashboard/abandoned-cart',compact('orders'));
+    public function exportData(){
+        $revenues = Order::with('order_details')->where('payment_status',1)->get();
+        return Excel::download(new RevenueExport($revenues), 'revenues.xlsx');
+    }
+
+    public function orderData(){
+        $orders = Order::all();
+        return Excel::download(new OrderExport($orders), 'orders.xlsx');
     }
 }

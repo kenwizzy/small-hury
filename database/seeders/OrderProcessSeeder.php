@@ -23,8 +23,8 @@ class OrderProcessSeeder extends Seeder
      */
     public function run()
     {
-        try {
-            DB::beginTransaction();
+        // try {
+        //     DB::beginTransaction();
             $newOrder = Order::create([
                 'user_id' => 1,
                 'total_products_price' => 9500,
@@ -58,8 +58,8 @@ class OrderProcessSeeder extends Seeder
                     'delivery_contact' => '08076884964',
                     'address_id' => $add->id,
                     'payment_method' => "CARD",
-                    'delivery_date' => Carbon::create($year, $month, $day, 0)->toDateTimeString(),
-                    'time_interval' => "8AM - 12AM",
+                    //'delivery_date' => Carbon::create($year, $month, $day, 0)->toDateTimeString(),
+                    //'time_interval' => "8AM - 12AM",
                     'delivery_phone' => '08076884964',
                     'delivery_note' => "Please Call me when coming",
 
@@ -129,9 +129,9 @@ class OrderProcessSeeder extends Seeder
                     'delivery_detail_id' => $delDetailId
                 ]);
             }
-            DB::commit();
-        } catch (\Exception $err) {
-            DB::rollBack();
-        }
+        //     DB::commit();
+        // } catch (\Exception $err) {
+        //     DB::rollBack();
+        // }
     }
 }

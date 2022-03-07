@@ -82,6 +82,13 @@ class Product extends Model
         return $data = $this->output();
     }
 
+    public function warehouse()
+    {
+        return ProductWarehouse::where([
+            'product_id' => $this->id,
+        ])->get();
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'added_by');

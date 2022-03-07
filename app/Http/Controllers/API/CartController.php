@@ -15,11 +15,8 @@ class CartController extends BaseController
     {
 
         $product = Product::findOrFail($id);
-
         $user = User::find(Auth::user()->id);
-
         $cart = $user->cart;
-
         if ($cart) {
             $products = $cart->products;
 

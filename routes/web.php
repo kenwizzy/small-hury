@@ -1,14 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\AttributeController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\WarehouseController;
 
 
 /*
@@ -79,7 +80,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('assign_manager', [WarehouseController::class, 'assignManager'])->name('assign_manager');
     Route::get('dashboard/revenues', [OrderController::class, 'getRevenues'])->name('dashboard.revenues');
     Route::get('dashboard/total-orders', [OrderController::class, 'totalOrders'])->name('dashboard.total-orders');
-    Route::get('dashboard/abandoned-cart', [OrderController::class, 'abandonedCart'])->name('dashboard.abandoned-cart');
+    Route::get('dashboard/abandoned-cart', [CartController::class, 'index'])->name('dashboard.abandoned-cart');
+    Route::get('dashboard/export', [OrderController::class, 'exportData'])->name('dashboard/export');
+    Route::get('dashboard/export-order', [OrderController::class, 'orderData'])->name('dashboard/export-order');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 

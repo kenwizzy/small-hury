@@ -12,7 +12,11 @@
       <div class="aside-alert-link">
         {{-- <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a> --}}
         <a href="" class="{{Auth::user()->notifications->count()>=1?'new':''}}" data-toggle="tooltip" title="You have {{Auth::user()->notifications->count()>1?Auth::user()->notifications->count().' new notifications':Auth::user()->notifications->count().' new notification'}} "><i data-feather="bell"></i></a>
-        <a href="{{ route('logout') }}" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>
+        <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="{{ route('logout') }}" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>
+
+        <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
+          @csrf
+        </form>
       </div>
     </div>
     <div class="aside-loggedin-user">
@@ -20,7 +24,7 @@
         <h6 class="tx-semibold mg-b-0">{{Auth::user()->first_name." ".Auth::user()->last_name}}</h6>
         <i data-feather="chevron-down"></i>
       </a>
-      <p class="tx-color-03 tx-12 mg-b-0">{{Auth::user()->role->id == 3 ? Auth::user()->warehouse()->name :''}} {{Auth::user()->role->name}}</p>
+      <p class="tx-color-03 tx-12 mg-b-0">{{Auth::user()->role->id == 3 ? Auth::user()->warehouse()->name??'' :''}} {{Auth::user()->role->name}}</p>
     </div>
     <div class="collapse" id="loggedinMenu">
       <ul class="nav nav-aside mg-b-0">

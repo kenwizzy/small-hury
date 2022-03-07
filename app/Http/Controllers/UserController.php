@@ -65,7 +65,7 @@ class UserController extends Controller
         }
 
         $data = [];
-        $defaultImageUrl = asset('assets/images/users/' . 'default.png');
+        $defaultImageUrl = asset('assets/images/users/' . 'default1.png');
         $pass = $request->first_name . '@' . random_int(1000, 9999);
         $user = new User();
         $user->first_name = $request->first_name;

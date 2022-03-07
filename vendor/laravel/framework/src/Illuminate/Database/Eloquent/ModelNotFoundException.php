@@ -33,8 +33,7 @@ class ModelNotFoundException extends RecordsNotFoundException
         $this->model = $model;
         $this->ids = Arr::wrap($ids);
 
-        // $this->message = "No query results for model [{$model}]";
-        $this->message = "No query results for";
+        $this->message = "No query results for model [{$model}]";
 
         if (count($this->ids) > 0) {
             $this->message .= ' '.implode(', ', $this->ids);
