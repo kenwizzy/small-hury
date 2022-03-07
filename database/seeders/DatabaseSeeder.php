@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $user->last_name = 'Doe';
         $user->phone = '09087645233';
         $user->email = 'admin@admin.com';
+        $user->image_url = url('assets/images/users/' . 'default1.png');
         $user->role_id = 1;
         $user->password = Hash::make('password');
         $user->save();
