@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/product_details/{product}', [ProductController::class, 'show'])->name('dashboard/product_details');
     Route::get('dashboard/edit_product/{product}', [ProductController::class, 'edit'])->name('dashboard/edit_product');
     Route::patch('update_product/{product}', [ProductController::class, 'update'])->name('update_product');
-    Route::get('dashboard/add_store', [WarehouseController::class, 'create']);
+    Route::get('dashboard/add_store', [WarehouseController::class, 'create'])->name('dashboard.add_store');
     Route::get('/get_state_lgas/{id}', [WarehouseController::class, 'FetchStateLgas']);
     Route::get('/get_attr_values/{id}', [AttributeController::class, 'FetchAttributeValues']);
     Route::get('/get_subcategory_values/{id}', [CategoryController::class, 'FetchSubCategoryValues']);
