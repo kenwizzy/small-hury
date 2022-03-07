@@ -52,6 +52,8 @@ Route::group([
     Route::get('/accept_order/{id}',[OrderAssigneeController::class,'accept']);
     Route::get('/decline_order/{id}',[OrderAssigneeController::class,'decline']);
     Route::get('/order_histories',[OrderAssigneeController::class,'history']);
+
+    Route::get('/order-details/{id}',[OrderAssigneeController::class,'show']);
     /* Uzezi Jephter endpoints  */
 
     //For working with users
@@ -98,8 +100,10 @@ Route::group([
         Route::patch('/cancel/{id}',[OrderController::class,'cancelOrder']);
         Route::put('/re-order/{id}',[OrderController::class,'reOrder']);
         Route::get('/{id}',[OrderController::class,'show']);
+
         Route::post('/rating',[OrderController::class,'storeRating']);
-        // Route::get('/active_orders',[OrderAssigneeController::class,'active']);
+        //This is a biker route
+        Route::get('/complete/{id}',[OrderController::class,'complete']);
     });
 });
 

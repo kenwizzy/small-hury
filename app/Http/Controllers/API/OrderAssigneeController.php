@@ -7,6 +7,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\OrderAssignee;
+use Illuminate\Support\Facades\Log;
 
 class OrderAssigneeController extends BaseController
 {
@@ -65,7 +66,23 @@ class OrderAssigneeController extends BaseController
      */
     public function show($id)
     {
-        //
+        $user = User::find(auth()->user()->id);
+        //$user = User::find(4);
+        $data = $user->orderAssigns()->where('order_id',$id)->get();
+         if (empty($data)) {
+              return $this->sendError('Record not found');
+         }
+             $output= [];
+             foreach ($data as $order) {
+                 $output['customer'] =  $order->order->customer;
+                 $output['payment_status'] = $order->order->payment_status;
+                 $output['order_details'] =  $order->order->order_details;
+                 $output['delivery'] =  $order->order->delivery;
+                 $output['address'] =  $order->order->delivery->address;
+             }
+             Log::info($output);
+             return $this->sendResponse($output, "Orders fetched successfully");
+
     }
 
     /**

@@ -250,6 +250,13 @@ class OrderController extends BaseController
         return $this->sendResponse(['order' => $order, 'products' => $orderDetails], "Order successfully fetched");
     }
 
+    public function complete(Order $id)
+    {
+        $id->payment_status = 1;
+        $id->status = Order::COMPLETED;
+        $id->save();
+        return $this->sendResponse($id,"Order Succesfully created");
+    }
     public function storeRating(Request $request)
     {
         $fields = $request->validate([
