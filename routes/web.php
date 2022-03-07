@@ -86,9 +86,5 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard.index');
-    // })->middleware(['auth'])->name('dashboard');
-
 });
 require __DIR__ . '/auth.php';

@@ -6,10 +6,10 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Exports\RevenueExport;
-//use App\Exports\OrderExport;
+use App\Exports\OrderExport;
 use App\Models\Notification;
 use Illuminate\Http\Request;
-//use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\AssignOrderMail;
 use App\Models\OrderAssignee;
 use App\Mail\ProcessOrderMail;
@@ -24,10 +24,10 @@ class OrderController extends Controller
     public $orderImgUrl = "asset('assets/imag/small-hurry-cart.jpg')";
     private $notificationService;
 
-    // public function __contruct(NotificationService $notificationService)
-    // {
-    // 	$this->notificationService = $notificationService;
-    // }
+    public function __contruct(NotificationService $notificationService)
+    {
+    	$this->notificationService = $notificationService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -112,7 +112,7 @@ class OrderController extends Controller
             'update_by' => Auth::id()
         ]);
         $msg = 'Order with ID ' . $order->id . ' has been declined by ' . Auth::user()->first_name . ' ' . Auth::user()->first_name . '(' . Auth::user()->role->name . ')';
-        //(new NotificationService())->sendNotificationToUser($order->user_id, $order->user->token, 'Order Processing', 'Hi ' . $order->user->first_name . ',<br>Your order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
+        (new NotificationService())->sendNotificationToUser($order->user_id, $order->user->token, 'Order Processing', 'Hi ' . $order->user->first_name . ',<br>Your order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
         $this->notice(Auth::id(), 'Order Declined', $msg, $this->orderImgUrl, '');
         return redirect()->back()->withSuccess('Order Declined Successfully');
     }
