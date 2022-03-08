@@ -107,8 +107,7 @@
         <li class="{{Route::currentRouteNamed('dashboard.abandoned-cart') ? 'active': ''}}"><a href="{{url('dashboard/abandoned-cart')}}">Abandoned Cart</a></li>
       </ul>
     </li>
-    @endif
-
+   
     <li class="nav-item with-sub">
       <a href="" class="nav-link"><i data-feather="life-buoy"></i> <span>Statistics</span></a>
       <ul>
@@ -119,6 +118,8 @@
 
     <li class="{{Route::currentRouteNamed('dashboard.invoice-archive')? 'active': ''}}"><a href="{{route('dashboard.invoice-archive')}}">Invoice Archive</a></li>
     
+
+    @endif
     {{-- <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>Cryptocurrency</span></a></li>
       <li class="nav-item"><a href="dashboard-four.html" class="nav-link"><i data-feather="life-buoy"></i> <span>Helpdesk Management</span></a></li>
       <li class="nav-label mg-t-25">Web Apps</li>

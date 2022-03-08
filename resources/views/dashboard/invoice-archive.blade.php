@@ -59,7 +59,7 @@
                             <tbody>
                                 @php $sn = 1; @endphp
                                 @foreach($orders as $order)
-                                @if(Auth::id() == $order->warehouse->user_id || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                {{--@if(Auth::id() == $order->warehouse->user_id || Auth::user()->role_id == 1 || Auth::user()->role_id == 2)--}}
                                 <tr>
                                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                                     <td class="tx-medium">{{$order->id}}</td>
@@ -78,17 +78,17 @@
                                     <td class=" text-center">
                                     
                                 
-                                    <a class="" data-toggle="modal" data-target="#myModal"></i><i class="far fa-file"></i></a>                 
+                                    <a class="" data-toggle="modal" data-target="#myModal"></i><i class="far fa-file text-success"></i></a>                 
                                                 
                 
                                     </td>
                                 </tr>
 
-                                @endif
+                                {{--@endif--}}
                                 
 
 
-<div id="myModal" class="modal fade" role="dialog">
+{{--<div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
 
     <!-- Modal content-->
@@ -107,7 +107,7 @@
     </div>
 
   </div>
-</div>
+</div>--}}
 
 
     @endforeach

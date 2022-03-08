@@ -108,6 +108,7 @@
                                                     <div class="avatar avatar-xxl">
                                                         <div class="user-img">
                                                             <img class="rounded-circle" src="{{$user->image_url == 'default-user.png'? asset('assets/images/users/'.$user->image_url): $user->image_url}}" alt="user-image">
+                                                            <!-- <img class="rounded-circle" src="{{asset('storae/app/public/assets/images/users/default1.png')}}" alt="user-image"> -->
                                                         </div>
                                                     </div>
                                                 </a>
