@@ -116,6 +116,8 @@
         <li><a href="#">View Stores</a></li>--}}
       </ul>
     </li>
+
+    <li class="{{Route::currentRouteNamed('dashboard.invoice-archive')? 'active': ''}}"><a href="{{route('dashboard.invoice-archive')}}">Invoice Archive</a></li>
     
     {{-- <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>Cryptocurrency</span></a></li>
       <li class="nav-item"><a href="dashboard-four.html" class="nav-link"><i data-feather="life-buoy"></i> <span>Helpdesk Management</span></a></li>

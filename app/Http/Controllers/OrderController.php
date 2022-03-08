@@ -241,4 +241,10 @@ class OrderController extends Controller
         $orders = Order::all();
         return Excel::download(new OrderExport($orders), 'orders.xlsx');
     }
+
+    public function getInvoice(){
+        return view('dashboard.invoice-archive', [
+            'orders' => Order::all()
+        ]);
+    }
 }

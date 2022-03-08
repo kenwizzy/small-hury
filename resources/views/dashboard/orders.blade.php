@@ -76,7 +76,7 @@
                                     <th>Payment Status</th>
                                     <th>Order Status</th>
                                     <th>Updated By</th>
-                                    <th class="text-left">Orde Date</th>
+                                    <th class="text-left">Order Date</th>
                                     <th class="text-left">Date Updated</th>
                                     <th class=" text-center">Action</th>
                                 </tr>
@@ -127,7 +127,7 @@
                                                         <div class="form-row mt-4">
                                                             <div class="form-group col-md-12">
                                                                 <label for="name">Select Biker</label>
-                                                                <select id="insert_bikers" class="form-control @error('biker') is-invalid @enderror" name="biker" autocomplete="off">
+                                                                <select id="insert_bikers" class="form-control @error('biker') is-invalid @enderror" name="biker" autocomplete="off" required>
 
                                                                 </select>
                                                                 @error('biker')

@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/abandoned-cart', [CartController::class, 'index'])->name('dashboard.abandoned-cart');
     Route::get('dashboard/export', [OrderController::class, 'exportData'])->name('dashboard/export');
     Route::get('dashboard/export-order', [OrderController::class, 'orderData'])->name('dashboard/export-order');
+    Route::get('dashboard/invoice-archive', [OrderController::class, 'getInvoice'])->name('dashboard.invoice-archive');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 

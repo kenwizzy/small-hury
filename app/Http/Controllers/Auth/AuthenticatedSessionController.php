@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,6 +34,9 @@ class AuthenticatedSessionController extends Controller
         if($data->role_id == 4 || $data->role_id == 5){
             return redirect()->back()->withError('Unauthorized, Please contact administrator');
         }
+        $data->update([
+            'lastlogin'=>Carbon::now()
+        ]);
         $request->authenticate();
 
         $request->session()->regenerate();
