@@ -21,6 +21,7 @@ use App\Services\NotificationService;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Address;
 use App\Models\DeliveryDetail;
+use App\Models\OrderAssignee;
 
 class OrderController extends BaseController
 {
@@ -254,6 +255,13 @@ class OrderController extends BaseController
     {
         $id->payment_status = 1;
         $id->status = Order::COMPLETED;
+       $assigned = OrderAssignee::where("order_id",$id->id)->get();
+
+       if(count($assigned) > 0){
+        $assigned[0]->processed = 1;
+        $assigned[0]->save();
+       }
+
         $id->save();
         return $this->sendResponse($id,"Order Succesfully created");
     }

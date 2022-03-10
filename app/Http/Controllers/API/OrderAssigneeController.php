@@ -55,7 +55,22 @@ class OrderAssigneeController extends BaseController
 
     public function active(Request $request)
     {
-        return $this->getOrderStatus('active');
+        $user = User::find(auth()->user()->id);
+        //$user = User::find(4);
+        $data = $user->orderAssigns()->where('status',"Accepted")->where("processed",0)->get();
+         if (empty($data)) {
+              return $this->sendError('Record not found');
+         }
+             $output= [];
+             $outputs = [];
+             foreach ($data as $order) {
+
+                 $output['order_details'] =  $order->order->order_details;
+                 $output['delivery'] =  $order->order->delivery;
+                 $output['address'] =  $order->order->delivery->address;
+                 $outputs[] = $output;
+             }
+        return $this->sendResponse($outputs, "Orders fetched successfully");
     }
 
     /**
@@ -74,13 +89,18 @@ class OrderAssigneeController extends BaseController
          }
              $output= [];
              foreach ($data as $order) {
-                 $output['customer'] =  $order->order->customer;
+                 $order->order->customer;
                  $output['payment_status'] = $order->order->payment_status;
-                 $output['order_details'] =  $order->order->order_details;
-                 $output['delivery'] =  $order->order->delivery;
-                 $output['address'] =  $order->order->delivery->address;
+                    $details=$order->order->order_details;
+                foreach($details as $detail){
+                    $detail->product;
+                }
+
+                 $order->order->delivery;
+                 $order->order->delivery->address;
+                 $output['order'] = $order->order;
              }
-             Log::info($output);
+
              return $this->sendResponse($output, "Orders fetched successfully");
 
     }
@@ -101,6 +121,9 @@ class OrderAssigneeController extends BaseController
         $orders=OrderAssignee::with('order')->where('user_id',auth()->user()->id)->get();
         if (empty($orders)) {
             return $this->sendError('Records not found');
+       }
+       foreach($orders as $order){
+           $order['address'] = $order->order->delivery->address;
        }
         return $this->sendResponse($orders, "Orders fetched successfully");
     }
@@ -164,13 +187,15 @@ class OrderAssigneeController extends BaseController
               return $this->sendError('Record not found');
          }
              $output= [];
+             $outputs = [];
              foreach ($data as $order) {
-                 $output['customer'] =  $order->order->customer;
+
                  $output['order_details'] =  $order->order->order_details;
                  $output['delivery'] =  $order->order->delivery;
                  $output['address'] =  $order->order->delivery->address;
+                 $outputs[] = $output;
              }
 
-             return $this->sendResponse($output, "Orders fetched successfully");
+             return $this->sendResponse($outputs, "Orders fetched successfully");
     }
 }

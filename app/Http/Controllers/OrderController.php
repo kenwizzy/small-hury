@@ -94,7 +94,7 @@ class OrderController extends Controller
             'update_by' => Auth::id()
         ]);
 
-        (new NotificationService())->sendNotificationToUser($order->user_id, $order->user->token, 'Order Processing', 'Hi ' . $order->user->first_name . ',<br>Your order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
+        (new NotificationService())->sendNotificationToUser($order->user_id, $order->user->app_token, 'Order Processing', 'Hi ' . $order->user->first_name . ',<br>Your order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
         Mail::to($order->user->email)->send(new ProcessOrderMail($order));
         return $this->notice(Auth::id(), 'Order Processing', 'Order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
         return response()->json('Order started processing');
@@ -150,7 +150,7 @@ class OrderController extends Controller
         if ($order->status == Order::AWAITING_FULFILLMENT) {
             return redirect()->back()->withError('Order processing not started');
         }
-          
+
         try {
             DB::beginTransaction();
             $data = new OrderAssignee();
@@ -166,7 +166,7 @@ class OrderController extends Controller
         } catch (\Exception $err) {
             DB::rollBack();
         }
-        
+
         $biker = User::where('id', $data->user_id)->first();
         $content = 'An order with ID ' . $order->id . ' has been assigned to ' . $order->user->first_name . ' ' . $order->user->last_name . ' for delivery.';
         $output = [];
