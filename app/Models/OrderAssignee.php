@@ -15,7 +15,8 @@ class OrderAssignee extends Model
         'status',
         'order_accepted',
         'order_acceptance_time',
-        'order_rejected_time'
+        'order_rejected_time',
+        'processed'
     ];
 
     public function order_details()
