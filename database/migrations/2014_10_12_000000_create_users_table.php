@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('social_id')->nullable();
             $table->rememberToken();
             $table->timestamp('lastlogin')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
