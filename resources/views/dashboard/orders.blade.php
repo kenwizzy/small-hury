@@ -101,7 +101,7 @@
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="{{route('dashboard/order_details',$order->id)}}" class="dropdown-item text-info"><i class="far fa-edit"></i>Order Details </a>
-                                                @if($order->status !== 11 && $order->status !== 8 && $order->status !== 7)
+                                                @if($order->status == 1 || $order->status == 10)
                                                 <a href="#editService" data-toggle="modal" id="service-order" title="Assign to biker" data-url="{{route('dashboard.get_bikers', $order->id)}}" data-service-name="{{' $order->order_detail->product->name '}}" data-id="{{ '$order->id' }}" class="dropdown-item details text-success"><i class="far fa-user"></i> Assign to biker</a>
                                                 @endif
                                                 {{--<a href="" class="dropdown-item text-success"><i class="far fa-user"></i></a>--}}

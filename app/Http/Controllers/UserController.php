@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -161,8 +162,45 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $authenticatedUser = User::where('id',Auth::id())->first();
+        if($authenticatedUser->role_id !== 1){
+            return redirect()->back()->withError('Access Denied! Please contact administrator');
+        }
+        $user->delete();
+        return redirect()->back()->withSuccess('User Deleted Successfully');
+    }
+
+    public function updateUserStatus(User $user){
+        $authenticatedUser = User::where('id',Auth::id())->first();
+        if($authenticatedUser->role_id !== 1){
+            return redirect()->back()->withError('Access Denied! Please contact administrator');
+        }
+        if($user->status==1){
+         $user->update([
+             'status' => 0
+         ]);
+        
+         return redirect()->back()->withSuccess('User Deactivated Successfully');
+
+        }else{
+
+            $user->update([
+                'status' => 1
+            ]);
+           
+            return redirect()->back()->withSuccess('User Activated Successfully');
+        }
+    }
+
+    public function getNotifications(){
+        $userID = Auth::id();
+        $notify = Notification::where('user_id',$userID);
+        $notify->update([
+            'status'=>'read'
+        ]);
+        $notifications = $notify->get();
+        return view('dashboard.notifications',compact('notifications'));
     }
 }

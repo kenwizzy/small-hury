@@ -78,7 +78,7 @@
                                     <td class=" text-center">
                                     
                                 
-                                    <a class="" data-toggle="modal" data-target="#myModal"></i><i class="far fa-file text-success"></i></a>                 
+                                    <a href="{{route('dashboard.view-invoice',$order->id)}}"><i class="far fa-file text-success"></i>View</a>                 
                                                 
                 
                                     </td>
@@ -86,29 +86,6 @@
 
                                 {{--@endif--}}
                                 
-
-
-{{--<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"></h4>
-      </div>
-      <div class="modal-body">
-        
-    <h1></h1>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>--}}
-
 
     @endforeach
 

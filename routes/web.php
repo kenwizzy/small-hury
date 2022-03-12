@@ -70,6 +70,8 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('update_user', [UserController::class, 'update'])->name('update_user');
     Route::post('create_user', [UserController::class, 'store'])->name('create_user');
     Route::get('dashboard/users', [UserController::class, 'index'])->name('dashboard.users');
+    Route::get('dashboard/update_user/{user}', [UserController::class, 'updateUserStatus'])->name('dashboard.update_status');
+    Route::get('dashboard/delete_user/{user}', [UserController::class, 'destroy'])->name('dashboard.delete_user');
     Route::get('dashboard/orders', [OrderController::class, 'index'])->name('dashboard.orders');
     Route::get('dashboard/order_details/{order}', [OrderController::class, 'show'])->name('dashboard/order_details');
     Route::get('process_order/{order}', [OrderController::class, 'process'])->name('process_order');
@@ -84,6 +86,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('dashboard/export', [OrderController::class, 'exportData'])->name('dashboard/export');
     Route::get('dashboard/export-order', [OrderController::class, 'orderData'])->name('dashboard/export-order');
     Route::get('dashboard/invoice-archive', [OrderController::class, 'getInvoice'])->name('dashboard.invoice-archive');
+    Route::get('dashboard/view-invoice/{order}', [OrderController::class, 'viewInvoice'])->name('dashboard.view-invoice');
+    Route::get('dashboard/notifications', [UserController::class, 'getNotifications'])->name('dashboard.notifications');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 

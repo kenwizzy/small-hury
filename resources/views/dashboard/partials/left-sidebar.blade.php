@@ -11,7 +11,7 @@
       <a href="" class="avatar"><img src="{{Auth::user()->image_url}}" class="rounded-circle" alt=""></a>
       <div class="aside-alert-link">
         {{-- <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a> --}}
-        <a href="" class="{{Auth::user()->notifications->count()>=1?'new':''}}" data-toggle="tooltip" title="You have {{Auth::user()->notifications->count()>1?Auth::user()->notifications->count().' new notifications':Auth::user()->notifications->count().' new notification'}} "><i data-feather="bell"></i></a>
+        <a href="{{route('dashboard.notifications')}}" class="{{Auth::user()->notifications->count()>=1?'new':''}}" data-toggle="tooltip" title="You have {{Auth::user()->notifications->count()>1?Auth::user()->notifications->count().' new notifications':Auth::user()->notifications->count().' new notification'}} "><i data-feather="bell"></i></a>
         <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="{{ route('logout') }}" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>
 
         <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
@@ -116,9 +116,12 @@
       </ul>
     </li>
 
+    <li class="nav-item with-sub {{Route::currentRouteNamed('dashboard.invoice-archive')? 'show active': ''}}">
+    <a href="" class="nav-link"><i data-feather="life-buoy"></i> <span>Manage Invoice</span></a>
+    <ul>
     <li class="{{Route::currentRouteNamed('dashboard.invoice-archive')? 'active': ''}}"><a href="{{route('dashboard.invoice-archive')}}">Invoice Archive</a></li>
-    
-
+    </ul>  
+  </li>
     @endif
     {{-- <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>Cryptocurrency</span></a></li>
       <li class="nav-item"><a href="dashboard-four.html" class="nav-link"><i data-feather="life-buoy"></i> <span>Helpdesk Management</span></a></li>

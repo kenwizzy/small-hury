@@ -159,10 +159,17 @@
                             let order_id = $('#order').html();
                             axios.get('{{url("process_order")}}/' + order_id)
                                 .then(response => {
-                                    if (response.status == 200) {
-                                        Notiflix.Notify.Success(response.data, {
+                                    console.log(response.data.message);
+                                    if (response.data.status == 'success') {
+                                        Notiflix.Notify.Success(response.data.message, {
                                             timeout: 6000,
                                         }, );
+                                    }else{
+
+                                    Notiflix.Notify.Failure(response.data.message, {
+                                            timeout: 6000,
+                                        }, );
+
                                     }
 
                                 });

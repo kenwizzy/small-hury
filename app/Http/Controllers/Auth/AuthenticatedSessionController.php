@@ -30,11 +30,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $data = User::where('email',$request->email)->first();
-        if($data->role_id == 4 || $data->role_id == 5){
-            return redirect()->back()->withError('Unauthorized, Please contact administrator');
+        $user = User::where('email',$request->email)->first();
+        if($user->role_id == 4 || $user->role_id == 5){
+            return redirect()->back()->withError('Unauthorized! Please contact administrator');
         }
-        $data->update([
+
+        if($user->status == 0){
+            return redirect()->back()->withError('Unauthorized! Your Account is Deactivated. Please contact administrator');
+        }
+        $user->update([
             'lastlogin'=>Carbon::now()
         ]);
         $request->authenticate();

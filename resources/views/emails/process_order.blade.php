@@ -195,7 +195,7 @@
 <td style="padding-bottom:40px;padding-left:35px;padding-right:35px;padding-top:20px;">
 <div style="font-family: sans-serif">
 <div style="font-size: 14px; mso-line-height-alt: 25.2px; color: #555555; line-height: 1.8; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 28.8px;"><span style="font-size:16px;color:#969696;">Your order with order number {{$order['id']}} from small hurry has been processing. You will hear from us soon..</span></p>
+<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 28.8px;"><span style="font-size:16px;color:#969696;">Your order with order number {{$order['id']}} from small hurry has started been processing. You will hear from us soon..</span></p>
 <p>Thank you</p><br>
 </div>
 </div>
@@ -205,9 +205,9 @@
 <table border="0" cellpadding="0" cellspacing="0" class="button_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
 <tr>
 <td style="padding-bottom:85px;padding-left:10px;padding-right:5px;padding-top:10px;text-align:center;">
-{}{--<div align="center">
+{{--<div align="center">
 <a href="{{$data['link']}}" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#181f53;border-radius:30px;width:auto;border-top:1px solid #181f53;border-right:1px solid #181f53;border-bottom:1px solid #181f53;border-left:1px solid #181f53;padding-top:10px;padding-bottom:10px;font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:40px;padding-right:40px;font-size:13px;display:inline-block;letter-spacing:normal;"><span style="font-size: 12px; line-height: 1.8; word-break: break-word; mso-line-height-alt: 22px;"><strong><span data-mce-style="font-size: 13px; line-height: 23px;" style="font-size: 13px; line-height: 23px;">LOGIN</span></strong></span></span></a>
-</div>--}
+</div>--}}
 </td>
 </tr>
 </table>

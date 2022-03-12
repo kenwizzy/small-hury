@@ -17,6 +17,26 @@
             </div>
         </div>
 
+        @if (session('success'))
+            @section('script')
+            <script>
+                Notiflix.Notify.Success('{{ session("success") }}', {
+                    timeout: 6000,
+                }, );
+            </script>
+            @endsection
+            @endif
+
+            @if (session('error'))
+        @section('script')
+        <script>
+            Notiflix.Notify.Failure('{{ session("error") }}', {
+                timeout: 4000,
+            }, );
+        </script>
+        @endsection
+        @endif
+
         <div class="row row-xs">
             <div class="col-lg-12 col-xl-12 mg-t-10">
                 <div class="card mg-b-10">
@@ -54,15 +74,16 @@
                                     <th>Phone Number</th>
                                     <th>Email Address</th>
                                     <th>User Role</th>
+                                    <th>User Status</th>
                                     <th class="text-left">Date Created </th>
-                                    {{--<th class=" text-center">Action</th>--}}
+                                    <th class=" text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $sn = 1; @endphp
                                 @foreach($users as $user)
                                 <tr>
-                                    {{--- {{$user->role_id =! 3 ? 'noth' : $user->warehouse->name}} ---}}
+                                    
                                     <td class="tx-color-03 tx-center">{{$sn++}}</td>
                                     <td class="tx-medium">{{$user->first_name}}</td>
                                     <td class="tx-medium">{{$user->middle_name}}</td>
@@ -70,16 +91,17 @@
                                     <td class="text-left">{{$user->phone}}</td>
                                     <td class="text-left">{{$user->email}}</td>
                                     <td class="text-left">{{$user->role->name}}</td>
+                                    <td class="text-left">{{$user->status==1?'Activated':'Deactivated'}}</td>
                                     <td class="tx-medium">{{ Carbon\Carbon::parse($user->created_at, 'UTC')->isoFormat('MMMM Do YYYY, h:mm:ssa') }}</td>
-                                    {{--<td class=" text-center">
+                                    <td class=" text-center">
                                         <div class="dropdown-file"> <a href="" class="dropdown-link" data-toggle="dropdown"><i class="fas fa-plus moove"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="{{url('dashboard/products/details')}}" class="dropdown-item details"><i class="far fa-clipboard"></i> Details </a>
-                                    <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Next Page </a>
-                                    <a href="" class="dropdown-item details"><i class="far fa-clipboard"></i> Edit </a>
+                                                {{--<a href="{{url('dashboard/products/details')}}" class="dropdown-item details"><i class="far fa-clipboard"></i> Details </a>--}}
+                                    <a href="{{route('dashboard.update_status',$user->id)}}" class="dropdown-item details moove"><i class="far fa-clipboard"></i> {{$user->status==1?'Deactivate User':'Activate User'}}</a>
+                                    <a href="{{route('dashboard.delete_user',$user->id)}}" class="dropdown-item details text-danger"><i class="far fa-trash-alt"></i> Delete User</a>
                     </div>
                 </div>
-                </td>--}}
+                </td>
                 </tr>
 
 

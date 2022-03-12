@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item activePage" aria-current="page">All Products</li>
                     </ol>
                 </nav>
-                <h4 class="mg-b-0 tx-spacing--1">{{--\Request::get('status')--}} All Products</h4>
+                <h4 class="mg-b-0 tx-spacing--1"> All Products</h4>
             </div>
         </div>
 

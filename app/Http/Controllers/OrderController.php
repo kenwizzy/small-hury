@@ -88,16 +88,21 @@ class OrderController extends Controller
      */
     public function process(Order $order)
     {
+        $order = Order::where('id', $order->id)->first();
+    if($order->status == Order::PROCESSING){
+        return response()->json(['status'=>'error','message'=>'Order processing already in progress']);
+    }
+
 
         Order::where('id', $order->id)->update([
             'status' => Order::PROCESSING,
             'update_by' => Auth::id()
         ]);
 
-        (new NotificationService())->sendNotificationToUser($order->user_id, $order->user->token, 'Order Processing', 'Hi ' . $order->user->first_name . ',<br>Your order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
-        Mail::to($order->user->email)->send(new ProcessOrderMail($order));
-        return $this->notice(Auth::id(), 'Order Processing', 'Order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
-        return response()->json('Order started processing');
+        (new NotificationService())->sendNotificationToUser($order->user_id, $order->customer->app_token, 'Order Processing', 'Hi ' . $order->customer->first_name . ',<br>Your order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
+        Mail::to($order->customer->email)->send(new ProcessOrderMail($order));
+        $this->notice(Auth::id(), 'Order Processing', 'Order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
+        return response()->json(['status'=>'success','message'=>'Order started processing']);
     }
 
 
@@ -112,7 +117,7 @@ class OrderController extends Controller
             'update_by' => Auth::id()
         ]);
         $msg = 'Order with ID ' . $order->id . ' has been declined by ' . Auth::user()->first_name . ' ' . Auth::user()->first_name . '(' . Auth::user()->role->name . ')';
-        (new NotificationService())->sendNotificationToUser($order->user_id, $order->user->token, 'Order Processing', 'Hi ' . $order->user->first_name . ',<br>Your order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
+        (new NotificationService())->sendNotificationToUser($order->user_id, $order->user->app_token, 'Order Processing', 'Hi ' . $order->user->first_name . ',<br>Your order with ID ' . $order->id . ' has started processing', $this->orderImgUrl, '');
         $this->notice(Auth::id(), 'Order Declined', $msg, $this->orderImgUrl, '');
         return redirect()->back()->withSuccess('Order Declined Successfully');
     }
@@ -173,7 +178,7 @@ class OrderController extends Controller
         $output['order'] = $order;
         $output['biker'] = $biker;
         if ($data->id !== null) {
-            (new NotificationService())->sendNotificationToUser($order->user_id, $order->user->token, 'Order Assigned', 'Hi ' . $order->user->first_name . ',<br>An order with ID ' . $order->id . ' has been assigned to you for delivery<br>Kindly login to the app to accept the order', $this->orderImgUrl, '');
+            (new NotificationService())->sendNotificationToUser($order->user_id, $order->user->app_token, 'Order Assigned', 'Hi ' . $order->user->first_name . ',<br>An order with ID ' . $order->id . ' has been assigned to you for delivery<br>Kindly login to the app to accept the order', $this->orderImgUrl, '');
             Mail::to($biker->email)
                 ->cc($order->warehouse->email)
                 ->send(new AssignOrderMail($output));
@@ -245,6 +250,12 @@ class OrderController extends Controller
     public function getInvoice(){
         return view('dashboard.invoice-archive', [
             'orders' => Order::all()
+        ]);
+    }
+
+    public function viewInvoice(Order $order){
+        return view('dashboard.view-invoice', [
+            'order' => $order
         ]);
     }
 }
